@@ -49,16 +49,9 @@ class Personal implements ISettings {
         $clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
         $clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
 
-        $useProtocolRedirect = $this->config->getAppValue(Application::APP_ID, 'use_protocol_redirect', '0') === '1';
-        $redirectUri = $useProtocolRedirect
-            ? 'web+nextclouddropbox://oauth-protocol-redirect'
-            : $this->urlGenerator->linkToRouteAbsolute('integration_dropbox.config.oauthRedirect');
-
         $userConfig = [
             'client_id' => $clientID,
             'user_name' => $userName,
-            'redirect_uri' => $redirectUri,
-            'use_protocol_redirect' => $useProtocolRedirect,
         ];
         $this->initialStateService->provideInitialState($this->appName, 'user-config', $userConfig);
         $response = new TemplateResponse(Application::APP_ID, 'personalSettings');

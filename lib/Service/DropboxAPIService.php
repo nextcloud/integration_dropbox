@@ -160,9 +160,17 @@ class DropboxAPIService {
 			} else {
 				return json_decode($body, true);
 			}
-		} catch (\Throwable $e) {
+		} catch (ClientException $e) {
 			$this->logger->warning('Dropbox OAuth error : '.$e->getMessage(), ['app' => $this->appName]);
-			return ['error' => $e->getMessage()];
+			$result = ['error' => $e->getMessage()];
+
+			$response = $e->getResponse();
+			$body = $response->getBody();
+			$decodedBody = json_decode($body, true);
+			if (isset($decodedBody['error_description'])) {
+				$result['error_description'] = $decodedBody['error_description'];
+			}
+			return $result;
 		}
 	}
 }

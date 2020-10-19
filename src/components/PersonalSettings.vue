@@ -11,33 +11,30 @@
 						<span class="icon icon-details" />
 						{{ t('integration_dropbox', 'If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings.') }}
 					</span>
-					<span v-if="state.use_protocol_redirect">
-						{{ t('integration_dropbox', 'Make sure to accept the protocol registration on top of this page to allow authentication to Dropbox.') }}
-						<span v-if="isChromium">
-							<br>
-							{{ t('integration_dropbox', 'With Chrome/Chromium, you should see a popup on browser top-left to authorize this page to open "web+nextclouddropbox" links.') }}
-							<br>
-							{{ t('integration_dropbox', 'If you don\'t see the popup, you can still click on this icon in the address bar.') }}
-							<br>
-							<img :src="chromiumImagePath">
-							<br>
-							{{ t('integration_dropbox', 'Then authorize this page to open "web+nextclouddropbox" links.') }}
-							<br>
-							{{ t('integration_dropbox', 'If you still don\'t manage to get the protocol registered, check your settings on this page:') }}
-							<b>chrome://settings/handlers</b>
-						</span>
-						<span v-else-if="isFirefox">
-							<br>
-							{{ t('integration_dropbox', 'With Firefox, you should see a bar on top of this page to authorize this page to open "web+nextclouddropbox" links.') }}
-							<br><br>
-							<img :src="firefoxImagePath">
-						</span>
-					</span>
 				</p>
-				<button id="dropbox-oauth" @click="onOAuthClick">
+				<br>
+				<a class="button"
+					target="_blank"
+					:href="oauthUrl"
+					:class="{ loading: codeLoading }"
+					:disabled="codeLoading === true">
 					<span class="icon icon-external" />
-					{{ t('integration_dropbox', 'Connect to Dropbox') }}
-				</button>
+					{{ t('integration_dropbox', 'Connect to Dropbox to get an access code') }}
+				</a>
+				<br><br>
+				<div class="dropbox-grid-form">
+					<label for="dropbox-code">
+						<a class="icon icon-category-auth" />
+						{{ t('integration_dropbox', 'Dropbox access code') }}
+					</label>
+					<input id="dropbox-code"
+						v-model="accessCode"
+						type="text"
+						:class="{ loading: codeLoading }"
+						:disabled="codeLoading === true"
+						:placeholder="t('integration_dropbox', 'Access code')"
+						@input="onAccessCodeInput">
+				</div>
 			</div>
 			<div v-else class="dropbox-grid-form">
 				<label>
@@ -74,7 +71,8 @@ export default {
 	data() {
 		return {
 			state: loadState('integration_dropbox', 'user-config'),
-			readonly: true,
+			accessCode: '',
+			codeLoading: false,
 			chromiumImagePath: imagePath('integration_dropbox', 'chromium.png'),
 			firefoxImagePath: imagePath('integration_dropbox', 'firefox.png'),
 			isChromium: detectBrowser() === 'chrome',
@@ -95,6 +93,11 @@ export default {
 		connected() {
 			return this.state.user_name && this.state.user_name !== ''
 		},
+		oauthUrl() {
+			return 'https://www.dropbox.com/oauth2/authorize?client_id=' + encodeURIComponent(this.state.client_id)
+				+ '&response_type=code'
+				+ '&token_access_type=offline'
+		},
 	},
 
 	watch: {
@@ -110,18 +113,6 @@ export default {
 		} else if (rdToken === 'error') {
 			showError(t('integration_dropbox', 'Dropbox OAuth error:') + ' ' + urlParams.get('message'))
 		}
-
-		// register protocol handler
-		if (this.state.use_protocol_redirect && window.isSecureContext && window.navigator.registerProtocolHandler) {
-			const ncUrl = window.location.protocol
-				+ '//' + window.location.hostname
-				+ window.location.pathname.replace('settings/user/migration', '').replace('/index.php/', '')
-			window.navigator.registerProtocolHandler(
-				'web+nextclouddropbox',
-				generateUrl('/apps/integration_dropbox/oauth-protocol-redirect') + '?url=%s',
-				t('integration_dropbox', 'Nextcloud Dropbox integration on {ncUrl}', { ncUrl })
-			)
-		}
 	},
 
 	methods: {
@@ -129,10 +120,9 @@ export default {
 			this.state.user_name = ''
 			this.saveOptions()
 		},
-		onInput() {
-			const that = this
+		onAccessCodeInput() {
 			delay(() => {
-				that.saveOptions()
+				this.saveAccessCode()
 			}, 2000)()
 		},
 		saveOptions() {
@@ -155,31 +145,29 @@ export default {
 				.then(() => {
 				})
 		},
-		onOAuthClick() {
-			const oauthState = Math.random().toString(36).substring(3)
-			const requestUrl = 'https://www.dropbox.com/oauth2/authorize?client_id=' + encodeURIComponent(this.state.client_id)
-				+ '&redirect_uri=' + encodeURIComponent(this.state.redirect_uri)
-				+ '&state=' + encodeURIComponent(oauthState)
-				+ '&response_type=code'
-				+ '&token_access_type=offline'
-
-			const req = {
-				values: {
-					oauth_state: oauthState,
-				},
+		saveAccessCode() {
+			if (this.accessCode === '') {
+				return
 			}
-			const url = generateUrl('/apps/integration_dropbox/config')
+			this.codeLoading = true
+			const req = {
+				code: this.accessCode,
+			}
+			const url = generateUrl('/apps/integration_dropbox/access-code')
 			axios.put(url, req)
 				.then((response) => {
-					window.location.replace(requestUrl)
+					showSuccess(t('integration_dropbox', 'Successfully connected to Dropbox!'))
+					this.state.user_name = response.data.user_name
+					this.accessCode = ''
 				})
 				.catch((error) => {
 					showError(
-						t('integration_dropbox', 'Failed to save Dropbox OAuth state')
-						+ ': ' + error.response.request.responseText
+						t('integration_dropbox', 'Failed to connect to Dropbox')
+						+ ': ' + error.response?.request?.responseText
 					)
 				})
 				.then(() => {
+					this.codeLoading = false
 				})
 		},
 	},
@@ -213,6 +201,9 @@ body.theme--dark .icon-dropbox {
 	grid-template: 1fr / 1fr 1fr;
 	button .icon {
 		margin-bottom: -1px;
+	}
+	input {
+		width: 100%;
 	}
 }
 

@@ -118,66 +118,25 @@ class ConfigController extends Controller {
     }
 
     /**
-     * receive oauth payload with protocol handler redirect
      * @NoAdminRequired
-     * @NoCSRFRequired
-     *
-     * @param string $url
-     * @return RedirectResponse
-     */
-    public function oauthProtocolRedirect(string $url = ''): RedirectResponse {
-        if ($url === '') {
-            $message = $this->l->t('Error during OAuth exchanges');
-            return new RedirectResponse(
-                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'migration']) .
-                '?dropboxToken=error&message=' . urlencode($message)
-            );
-        }
-        $parts = parse_url($url);
-        parse_str($parts['query'], $params);
-        return $this->oauthRedirect($params['code'], $params['state'], $params['error']);
-    }
-
-    /**
-     * receive oauth code and get oauth access token
-     * @NoAdminRequired
-     * @NoCSRFRequired
      *
      * @param string $code
-     * @param string $state
-     * @param string $error
-     * @return RedirectResponse
+     * @return array
      */
-    public function oauthRedirect(?string $code = '', ?string $state = '', ?string $error = ''): RedirectResponse {
-        if ($code === '' || $state === '') {
-            $message = $this->l->t('Error during OAuth exchanges');
-			$this->logger->warning('Dropbox OAuth error : Code='.$code.' State='.$state, ['app' => $this->appName]);
-            return new RedirectResponse(
-                $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'migration']) .
-                '?dropboxToken=error&message=' . urlencode($message)
-            );
+    public function submitAccessCode(string $code = ''): DataResponse {
+        if ($code === '') {
+            $message = $this->l->t('Invalid access code');
+            return new DataResponse($message, 400);
         }
-        $configState = $this->config->getUserValue($this->userId, Application::APP_ID, 'oauth_state', '');
         $clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
         $clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
         $clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', DEFAULT_DROPBOX_CLIENT_SECRET);
         $clientSecret = $clientSecret ?: DEFAULT_DROPBOX_CLIENT_SECRET;
-        $useProtocolRedirect = $this->config->getAppValue(Application::APP_ID, 'use_protocol_redirect', '0') === '1';
 
-        // anyway, reset state
-        $this->config->deleteUserValue($this->userId, Application::APP_ID, 'oauth_state');
-
-        if ($clientID && $configState !== '' && $configState === $state) {
-            // if there is a client secret, then the app should be a 'classic' one redirecting to a web page
-            if ($useProtocolRedirect) {
-                $redirect_uri = 'web+nextclouddropbox://oauth-protocol-redirect';
-            } else {
-                $redirect_uri = $this->urlGenerator->linkToRouteAbsolute('integration_dropbox.config.oauthRedirect');
-            }
+        if ($clientID) {
             $result = $this->dropboxAPIService->requestOAuthAccessToken($clientID, $clientSecret, [
                 'grant_type' => 'authorization_code',
                 'code' => $code,
-                'redirect_uri' => $redirect_uri,
             ], 'POST');
             if (isset($result['access_token'], $result['refresh_token'])) {
                 $accessToken = $result['access_token'];
@@ -189,28 +148,24 @@ class ConfigController extends Controller {
                     $this->config->setUserValue($this->userId, Application::APP_ID, 'account_id', $result['account_id']);
                 }
                 // get user information
+                $data = [];
                 $info = $this->dropboxAPIService->request(
                     $accessToken, $refreshToken, $clientID, $clientSecret, 'users/get_current_account', [], 'POST'
                 );
                 if (isset($info['name'], $info['name']['display_name'])) {
                     $this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', $info['name']['display_name']);
+                    $data['user_name'] = $info['name']['display_name'];
                 } else {
                     $this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', '??');
+                    $data['user_name'] = '??';
                 }
-                return new RedirectResponse(
-                    $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'migration']) .
-                    '?dropboxToken=success'
-                );
+                return new DataResponse($data);
             } else {
-                $message = $this->l->t('Error getting OAuth access token') . ' ' . ($result['error'] ?? 'missing token or refresh token');
+                $message = $result['error_description'] ?? $result['error'] ?? 'missing token or refresh token';
             }
         } else {
             $message = $this->l->t('Error during OAuth exchanges');
-			$this->logger->warning('Dropbox OAuth error : CID '.$clientID.' configstate '.$configState.' state '.$state, ['app' => $this->appName]);
         }
-        return new RedirectResponse(
-            $this->urlGenerator->linkToRoute('settings.PersonalSettings.index', ['section' => 'migration']) .
-            '?dropboxToken=error&message=' . urlencode($message)
-        );
+        return new DataResponse($message, 400);
     }
 }
