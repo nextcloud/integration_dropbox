@@ -7,11 +7,11 @@
 		<div v-if="showOAuth" class="dropbox-content">
 			<div v-if="!connected">
 				<p class="settings-hint">
-					<span class="icon icon-details" />
 					<span v-if="usingCustomApp">
+						<span class="icon icon-details" />
 						{{ t('integration_dropbox', 'If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings.') }}
 					</span>
-					<span v-else>
+					<span v-if="state.use_protocol_redirect">
 						{{ t('integration_dropbox', 'Make sure to accept the protocol registration on top of this page to allow authentication to Dropbox.') }}
 						<span v-if="isChromium">
 							<br>
@@ -112,10 +112,10 @@ export default {
 		}
 
 		// register protocol handler
-		if (window.isSecureContext && window.navigator.registerProtocolHandler) {
+		if (this.state.use_protocol_redirect && window.isSecureContext && window.navigator.registerProtocolHandler) {
 			const ncUrl = window.location.protocol
 				+ '//' + window.location.hostname
-				+ window.location.pathname.replace('settings/user/connected-accounts', '').replace('/index.php/', '')
+				+ window.location.pathname.replace('settings/user/migration', '').replace('/index.php/', '')
 			window.navigator.registerProtocolHandler(
 				'web+nextclouddropbox',
 				generateUrl('/apps/integration_dropbox/oauth-protocol-redirect') + '?url=%s',
@@ -156,20 +156,12 @@ export default {
 				})
 		},
 		onOAuthClick() {
-			let redirectUri
-			if (this.state.client_secret) {
-				const redirectEndpoint = generateUrl('/apps/integration_dropbox/oauth-redirect')
-				redirectUri = window.location.protocol + '//' + window.location.protocol + redirectEndpoint
-			} else {
-				redirectUri = 'web+nextclouddropbox://oauth-protocol-redirect'
-			}
 			const oauthState = Math.random().toString(36).substring(3)
-			const requestUrl = 'https://www.dropbox.com/api/v1/authorize?client_id=' + encodeURIComponent(this.state.client_id)
-				+ '&redirect_uri=' + encodeURIComponent(redirectUri)
+			const requestUrl = 'https://www.dropbox.com/oauth2/authorize?client_id=' + encodeURIComponent(this.state.client_id)
+				+ '&redirect_uri=' + encodeURIComponent(this.state.redirect_uri)
 				+ '&state=' + encodeURIComponent(oauthState)
 				+ '&response_type=code'
-				+ '&duration=permanent'
-				+ '&scope=' + encodeURIComponent('identity history mysubdropboxs privatemessages read wikiread')
+				+ '&token_access_type=offline'
 
 			const req = {
 				values: {

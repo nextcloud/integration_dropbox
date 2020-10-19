@@ -58,10 +58,10 @@ class DropboxAPIService {
 	public function request(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
 							string $endPoint, array $params = [], string $method = 'GET'): array {
 		try {
-			$url = 'https://oauth.dropbox.com/' . $endPoint;
+			$url = 'https://api.dropboxapi.com/2/' . $endPoint;
 			$options = [
 				'headers' => [
-					'Authorization' => 'bearer ' . $accessToken,
+					'Authorization' => 'Bearer ' . $accessToken,
 					'User-Agent' => 'Nextcloud Dropbox integration'
 				],
 			];
@@ -126,7 +126,7 @@ class DropboxAPIService {
 	 */
 	public function requestOAuthAccessToken(string $clientID, string $clientSecret, array $params = [], string $method = 'GET'): array {
 		try {
-			$url = 'https://www.dropbox.com/api/v1/access_token';
+			$url = 'https://api.dropboxapi.com/oauth2/token';
 			$options = [
 				'headers' => [
 					'Authorization' => 'Basic '. base64_encode($clientID. ':' . $clientSecret),
