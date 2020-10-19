@@ -50,8 +50,8 @@ class DropboxAPIService {
 	 * @return array
 	 */
 	public function getStorageSize(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId): array {
-		$params = [
-		];
+		// dropbox storage size
+		$params = [];
 		$result = $this->request($accessToken, $refreshToken, $clientID, $clientSecret, $userId, 'users/get_space_usage', $params, 'POST');
 		if (isset($result['error']) || !isset($result['used'])) {
 			return $result;
@@ -59,8 +59,51 @@ class DropboxAPIService {
 		$info = [
 			'usageInStorage' => $result['used'],
 		];
+
 		// count files
-		$info['nbFiles'] = 2;
+		$nbFiles = 0;
+		$params = [
+			// 'limit' => 1,
+			'path' => '',
+			'recursive' => true,
+			'include_media_info' => false,
+			'include_deleted' => false,
+			'include_has_explicit_shared_members' => false,
+			'include_mounted_folders' => true,
+			'include_non_downloadable_files' => false,
+		];
+		$result = $this->request(
+			$accessToken, $refreshToken, $clientID, $clientSecret, $userId, 'files/list_folder', $params, 'POST'
+		);
+		file_put_contents('/tmp/a', json_encode($result));
+		if (isset($result['entries']) && is_array($result['entries'])) {
+			foreach ($result['entries'] as $entry) {
+				if (isset($entry['.tag']) && $entry['.tag'] === 'file') {
+					$nbFiles++;
+				}
+			}
+		}
+		while (isset($result['has_more'], $result['cursor']) && $result['has_more']) {
+			error_log('YEYEYEYEEYEYEYEY');
+			$params = [
+				'cursor' => $result['cursor'],
+			];
+			$result = $this->request(
+				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, 'files/list_folder/continue', $params, 'POST'
+			);
+			if (isset($result['error'])) {
+				return $result;
+			}
+			if (isset($result['entries']) && is_array($result['entries'])) {
+				foreach ($result['entries'] as $entry) {
+					if (isset($entry['.tag']) && $entry['.tag'] === 'file') {
+						$nbFiles++;
+					}
+				}
+			}
+		}
+		$info['nbFiles'] = $nbFiles;
+
 		// free space
         $userFolder = $this->root->getUserFolder($userId);
         $freeSpace = $userFolder->getStorage()->free_space('/');
@@ -85,7 +128,7 @@ class DropboxAPIService {
 			$options = [
 				'headers' => [
 					'Authorization' => 'Bearer ' . $accessToken,
-					'User-Agent' => 'Nextcloud Dropbox integration'
+					'User-Agent' => 'Nextcloud Dropbox integration',
 				],
 			];
 
@@ -94,6 +137,7 @@ class DropboxAPIService {
 					$paramsContent = http_build_query($params);
 					$url .= '?' . $paramsContent;
 				} else {
+					$options['headers']['Content-Type'] = 'application/json';
 					$options['body'] = json_encode($params);
 				}
 			}
