@@ -5,47 +5,29 @@
 			{{ t('integration_dropbox', 'Dropbox integration') }}
 		</h2>
 		<p class="settings-hint">
-			{{ t('integration_dropbox', 'There are 2 ways to allow your Nextcloud users to use OAuth to authenticate to Dropbox:') }}
-			<br><br>
-			<ul>
-				<li>
-					<b>1. </b>{{ t('integration_dropbox', 'Leave all fields empty to use default Nextcloud Dropbox OAuth app.') }}
-					<br><br>
-				</li>
-				<li>
-					<b>2. </b>{{ t('integration_dropbox', 'Create your own Dropbox "web application" in Dropbox preferences and put the application ID and secret below.') }}
-					<a href="https://www.dropbox.com/prefs/apps" target="_blank" class="external">{{ t('integration_dropbox', 'Dropbox app settings') }}</a>
-					<br><br>
-					<span class="icon icon-details" />
-					{{ t('integration_dropbox', 'Make sure you set the "Redirection uri" to one of the following URLs:') }}
-					<b> {{ redirect_uri }} </b>
-					<br>
-					<b> {{ redirect_uri_protocol }} </b>
-					<br><br>
-				</li>
-			</ul>
+			{{ t('integration_dropbox', 'Leave all fields empty to use default Nextcloud Dropbox OAuth app.') }}
 		</p>
 		<div class="grid-form">
 			<label for="dropbox-client-id">
 				<a class="icon icon-category-auth" />
-				{{ t('integration_dropbox', 'Application ID') }}
+				{{ t('integration_dropbox', 'App key') }}
 			</label>
 			<input id="dropbox-client-id"
 				v-model="state.client_id"
 				type="password"
 				:readonly="readonly"
-				:placeholder="t('integration_dropbox', 'Client ID of your Dropbox application')"
+				:placeholder="t('integration_dropbox', 'Your Dropbox application key')"
 				@input="onInput"
 				@focus="readonly = false">
 			<label for="dropbox-client-secret">
 				<a class="icon icon-category-auth" />
-				{{ t('integration_dropbox', 'Application secret') }}
+				{{ t('integration_dropbox', 'App secret') }}
 			</label>
 			<input id="dropbox-client-secret"
 				v-model="state.client_secret"
 				type="password"
 				:readonly="readonly"
-				:placeholder="t('integration_dropbox', 'Client secret of your Dropbox application')"
+				:placeholder="t('integration_dropbox', 'Your Dropbox application secret')"
 				@input="onInput"
 				@focus="readonly = false">
 		</div>
@@ -72,8 +54,6 @@ export default {
 			state: loadState('integration_dropbox', 'admin-config'),
 			// to prevent some browsers to fill fields with remembered passwords
 			readonly: true,
-			redirect_uri: window.location.protocol + '//' + window.location.host + generateUrl('/apps/integration_dropbox/oauth-redirect'),
-			redirect_uri_protocol: 'web+nextclouddropbox://oauth-protocol-redirect',
 		}
 	},
 
@@ -85,9 +65,8 @@ export default {
 
 	methods: {
 		onInput() {
-			const that = this
 			delay(() => {
-				that.saveOptions()
+				this.saveOptions()
 			}, 2000)()
 		},
 		saveOptions() {
@@ -105,7 +84,7 @@ export default {
 				.catch((error) => {
 					showError(
 						t('integration_dropbox', 'Failed to save Dropbox admin options')
-						+ ': ' + error.response.request.responseText
+						+ ': ' + error.response?.request?.responseText
 					)
 					console.debug(error)
 				})

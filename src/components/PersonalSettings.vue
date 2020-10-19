@@ -4,10 +4,10 @@
 			<a class="icon icon-dropbox" />
 			{{ t('integration_dropbox', 'Dropbox data migration') }}
 		</h2>
-		<div v-if="showOAuth" class="dropbox-content">
+		<div class="dropbox-content">
 			<div v-if="!connected">
 				<p class="settings-hint">
-					<span v-if="usingCustomApp">
+					<span v-if="codeFailed">
 						<span class="icon icon-details" />
 						{{ t('integration_dropbox', 'If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings.') }}
 					</span>
@@ -47,9 +47,6 @@
 				</button>
 			</div>
 		</div>
-		<p v-else class="settings-hint">
-			{{ t('integration_dropbox', 'You must access this page with HTTPS to be able to authenticate to Dropbox.') }}
-		</p>
 	</div>
 </template>
 
@@ -73,6 +70,7 @@ export default {
 			state: loadState('integration_dropbox', 'user-config'),
 			accessCode: '',
 			codeLoading: false,
+			codeFailed: false,
 			chromiumImagePath: imagePath('integration_dropbox', 'chromium.png'),
 			firefoxImagePath: imagePath('integration_dropbox', 'firefox.png'),
 			isChromium: detectBrowser() === 'chrome',
@@ -81,12 +79,6 @@ export default {
 	},
 
 	computed: {
-		showOAuth() {
-			// 2 cases, no client secret means the default app is used => https required
-			// if there is a client secret, redirect URL is probably correctly defined by NC admin in Dropbox OAuth app
-			return this.state.client_id
-				&& (this.state.client_secret || window.location.protocol === 'https:')
-		},
 		usingCustomApp() {
 			return this.state.client_id && this.state.client_secret
 		},
@@ -94,25 +86,11 @@ export default {
 			return this.state.user_name && this.state.user_name !== ''
 		},
 		oauthUrl() {
-			return 'https://www.dropbox.com/oauth2/authorize?client_id=' + encodeURIComponent(this.state.client_id)
+			return 'https://www.dropbox.com/oauth2/authorize?'
+				+ 'client_id=' + encodeURIComponent(this.state.client_id)
 				+ '&response_type=code'
 				+ '&token_access_type=offline'
 		},
-	},
-
-	watch: {
-	},
-
-	mounted() {
-		const paramString = window.location.search.substr(1)
-		// eslint-disable-next-line
-		const urlParams = new URLSearchParams(paramString)
-		const rdToken = urlParams.get('dropboxToken')
-		if (rdToken === 'success') {
-			showSuccess(t('integration_dropbox', 'Successfully connected to Dropbox!'))
-		} else if (rdToken === 'error') {
-			showError(t('integration_dropbox', 'Dropbox OAuth error:') + ' ' + urlParams.get('message'))
-		}
 	},
 
 	methods: {
@@ -159,8 +137,10 @@ export default {
 					showSuccess(t('integration_dropbox', 'Successfully connected to Dropbox!'))
 					this.state.user_name = response.data.user_name
 					this.accessCode = ''
+					this.codeFailed = false
 				})
 				.catch((error) => {
+					this.codeFailed = true
 					showError(
 						t('integration_dropbox', 'Failed to connect to Dropbox')
 						+ ': ' + error.response?.request?.responseText
