@@ -36,15 +36,45 @@
 						@input="onAccessCodeInput">
 				</div>
 			</div>
-			<div v-else class="dropbox-grid-form">
-				<label>
-					<a class="icon icon-checkmark-color" />
-					{{ t('integration_dropbox', 'Connected as {user}', { user: state.user_name }) }}
-				</label>
-				<button id="dropbox-rm-cred" @click="onLogoutClick">
-					<span class="icon icon-close" />
-					{{ t('integration_dropbox', 'Disconnect from Dropbox') }}
-				</button>
+			<div v-else>
+				<div class="dropbox-grid-form">
+					<label>
+						<a class="icon icon-checkmark-color" />
+						{{ t('integration_dropbox', 'Connected as {user}', { user: state.user_name }) }}
+					</label>
+					<button id="dropbox-rm-cred" @click="onLogoutClick">
+						<span class="icon icon-close" />
+						{{ t('integration_dropbox', 'Disconnect from Dropbox') }}
+					</button>
+				</div>
+				<br>
+				<div v-if="nbFiles > 0" id="import-storage">
+					<h3>{{ t('integration_dropbox', 'Dropbox storage') }}</h3>
+					<label>
+						<span class="icon icon-folder" />
+						{{ n('integration_google', '{nbFiles} file in your Dropbox storage ({formSize})', '{nbFiles} files in your Dropbox storage ({formSize})', nbFiles, { nbFiles, formSize: humanFileSize(storageSize, true) }) }}
+					</label>
+					<button v-if="enoughSpaceForDropbox && !importingDropbox"
+						id="dropbox-import-files"
+						@click="onImportDropbox">
+						<span class="icon icon-files-dark" />
+						{{ t('integration_dropbox', 'Import Dropbox files') }}
+					</button>
+					<span v-else-if="!enoughSpaceForDropbox">
+						{{ t('integration_dropbox', 'Your Dropbox storage is bigger than your remaining space left ({formSpace})', { formSpace: humanFileSize(freeSpace) }) }}
+					</span>
+					<!--div v-else>
+						<br>
+						{{ n('integration_dropbox', '{amount} file imported ({progress}%)', '{amount} files imported ({progress}%)', nbImportedFiles, { amount: nbImportedFiles, progress: dropboxImportProgress }) }}
+						<br>
+						{{ lastDriveImportDate }}
+						<br>
+						<button @click="onCancelDriveImport">
+							<span class="icon icon-close" />
+							{{ t('integration_dropbox', 'Cancel Dropbox files import') }}
+						</button>
+					</div-->
+				</div>
 			</div>
 		</div>
 	</div>
@@ -56,6 +86,7 @@ import { generateUrl, imagePath } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { delay, detectBrowser } from '../utils'
 import { showSuccess, showError } from '@nextcloud/dialogs'
+import moment from '@nextcloud/moment'
 
 export default {
 	name: 'PersonalSettings',
@@ -75,13 +106,19 @@ export default {
 			firefoxImagePath: imagePath('integration_dropbox', 'firefox.png'),
 			isChromium: detectBrowser() === 'chrome',
 			isFirefox: detectBrowser() === 'firefox',
+			// dropbox import stuff
+			nbFiles: 0,
+			storageSize: 0,
+			importingDropbox: false,
+			lastDropboxImportTimestamp: 0,
+			nbImportedFiles: 0,
+			dropboxImportLoop: null,
+			// local
+			freeSpace: 0,
 		}
 	},
 
 	computed: {
-		usingCustomApp() {
-			return this.state.client_id && this.state.client_secret
-		},
 		connected() {
 			return this.state.user_name && this.state.user_name !== ''
 		},
@@ -91,6 +128,27 @@ export default {
 				+ '&response_type=code'
 				+ '&token_access_type=offline'
 		},
+		enoughSpaceForDropbox() {
+			return this.storageSize === 0 || this.storageSize < this.freeSpace
+		},
+		lastDropboxImportDate() {
+			return this.lastDropboxImportTimestamp !== 0
+				? t('integration_dropbox', 'Last Dropbox import job at {date}', { date: moment.unix(this.lastDropboxImportTimestamp).format('LLL') })
+				: t('integration_dropbox', 'Google Dropbox process will begin soon')
+		},
+		dropboxImportProgress() {
+			return this.storageSize > 0 && this.nbImportedFiles > 0
+				? parseInt(this.nbImportedFiles / this.nbFiles * 100)
+				: 0
+		},
+	},
+
+	mounted() {
+		// get informations if we are connected
+		if (this.connected) {
+			this.getStorageInfo()
+			// this.getStorageImportValues(true)
+		}
 	},
 
 	methods: {
@@ -150,6 +208,114 @@ export default {
 					this.codeLoading = false
 				})
 		},
+		getStorageInfo() {
+			const url = generateUrl('/apps/integration_dropbox/storage-size')
+			axios.get(url)
+				.then((response) => {
+					if (response.data?.usageInStorage && response.data?.nbFiles) {
+						this.storageSize = response.data.usageInStorage
+						this.nbFiles = response.data.nbFiles
+						this.freeSpace = response.data.freeSpace
+					}
+				})
+				.catch((error) => {
+					showError(
+						t('integration_dropbox', 'Failed to get Dropbox storage information')
+						+ ': ' + error.response.request.responseText
+					)
+				})
+				.then(() => {
+				})
+		},
+		humanFileSize(bytes, approx = false, si = false, dp = 1) {
+			const thresh = si ? 1000 : 1024
+
+			if (Math.abs(bytes) < thresh) {
+				return bytes + ' B'
+			}
+
+			const units = si
+				? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+				: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+			let u = -1
+			const r = 10 ** dp
+
+			do {
+				bytes /= thresh
+				++u
+			} while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1)
+
+			if (approx) {
+				return Math.floor(bytes) + ' ' + units[u]
+			} else {
+				return bytes.toFixed(dp) + ' ' + units[u]
+			}
+		},
+		getDropboxImportValues(launchLoop = false) {
+			const url = generateUrl('/apps/integration_google/import-files-info')
+			axios.get(url)
+				.then((response) => {
+					if (response.data && Object.keys(response.data).length > 0) {
+						this.lastDriveImportTimestamp = response.data.last_drive_import_timestamp
+						this.nbImportedFiles = response.data.nb_imported_files
+						this.importingDrive = response.data.importing_drive
+						if (!this.importingDrive) {
+							clearInterval(this.driveImportLoop)
+						} else if (launchLoop) {
+							// launch loop if we are currently importing AND it's the first time we call getDriveImportValues
+							this.driveImportLoop = setInterval(() => this.getDriveImportValues(), 10000)
+						}
+					}
+				})
+				.catch((error) => {
+					console.debug(error)
+				})
+				.then(() => {
+				})
+		},
+		onImportDropbox() {
+			const req = {
+				params: {
+				},
+			}
+			const url = generateUrl('/apps/integration_google/import-files')
+			axios.get(url, req)
+				.then((response) => {
+					const targetPath = response.data.targetPath
+					showSuccess(
+						t('integration_google', 'Starting importing files in {targetPath} directory', { targetPath })
+					)
+					this.getDriveImportValues(true)
+				})
+				.catch((error) => {
+					showError(
+						t('integration_google', 'Failed to start importing Google Drive')
+						+ ': ' + error.response.request.responseText
+					)
+				})
+				.then(() => {
+				})
+		},
+		onCancelDropboxImport() {
+			this.importingDrive = false
+			clearInterval(this.driveImportLoop)
+			const req = {
+				values: {
+					importing_drive: '0',
+					last_drive_import_timestamp: '0',
+					nb_imported_files: '0',
+				},
+			}
+			const url = generateUrl('/apps/integration_google/config')
+			axios.put(url, req)
+				.then((response) => {
+				})
+				.catch((error) => {
+					console.debug(error)
+				})
+				.then(() => {
+				})
+		},
 	},
 }
 </script>
@@ -173,6 +339,23 @@ body.theme--dark .icon-dropbox {
 
 .dropbox-content {
 	margin-left: 40px;
+
+	h3 {
+		font-weight: bold;
+	}
+
+	#import-storage > button {
+		width: 300px;
+	}
+
+	#import-storage > label {
+		width: 300px;
+		display: inline-block;
+
+		span {
+			margin-bottom: -2px;
+		}
+	}
 }
 
 .dropbox-grid-form {

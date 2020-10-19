@@ -150,7 +150,7 @@ class ConfigController extends Controller {
                 // get user information
                 $data = [];
                 $info = $this->dropboxAPIService->request(
-                    $accessToken, $refreshToken, $clientID, $clientSecret, 'users/get_current_account', [], 'POST'
+                    $accessToken, $refreshToken, $clientID, $clientSecret, $this->userId, 'users/get_current_account', [], 'POST'
                 );
                 if (isset($info['name'], $info['name']['display_name'])) {
                     $this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', $info['name']['display_name']);

@@ -10,9 +10,12 @@
  */
 
 return [
-    'routes' => [
-        ['name' => 'config#setConfig', 'url' => '/config', 'verb' => 'PUT'],
-        ['name' => 'config#submitAccessCode', 'url' => '/access-code', 'verb' => 'PUT'],
-        ['name' => 'config#setAdminConfig', 'url' => '/admin-config', 'verb' => 'PUT'],
-    ]
+	'routes' => [
+		['name' => 'config#setConfig', 'url' => '/config', 'verb' => 'PUT'],
+		['name' => 'config#submitAccessCode', 'url' => '/access-code', 'verb' => 'PUT'],
+		['name' => 'config#setAdminConfig', 'url' => '/admin-config', 'verb' => 'PUT'],
+		['name' => 'dropboxAPI#getStorageSize', 'url' => '/storage-size', 'verb' => 'GET'],
+		['name' => 'dropboxAPI#importStorage', 'url' => '/import-files', 'verb' => 'GET'],
+		['name' => 'dropboxAPI#getImportStorageInformation', 'url' => '/import-files-info', 'verb' => 'GET'],
+	]
 ];

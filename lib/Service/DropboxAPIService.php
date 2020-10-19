@@ -14,6 +14,7 @@ namespace OCA\Dropbox\Service;
 use OCP\IL10N;
 use Psr\Log\LoggerInterface;
 use OCP\IConfig;
+use OCP\Files\IRootFolder;
 use OCP\Http\Client\IClientService;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
@@ -28,21 +29,43 @@ class DropboxAPIService {
 	/**
 	 * Service to make requests to Dropbox API
 	 */
-	public function __construct (
-		string $appName,
-		LoggerInterface $logger,
-		IL10N $l10n,
-		IConfig $config,
-		IClientService $clientService,
-		$userId
-	) {
+	public function __construct (string $appName,
+								LoggerInterface $logger,
+								IL10N $l10n,
+								IRootFolder $root,
+								IConfig $config,
+								IClientService $clientService) {
 		$this->appName = $appName;
 		$this->l10n = $l10n;
 		$this->logger = $logger;
 		$this->config = $config;
-		$this->userId = $userId;
+		$this->root = $root;
 		$this->clientService = $clientService;
 		$this->client = $clientService->newClient();
+	}
+
+	/**
+	 * @param string $accessToken
+	 * @param string $userId
+	 * @return array
+	 */
+	public function getStorageSize(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId): array {
+		$params = [
+		];
+		$result = $this->request($accessToken, $refreshToken, $clientID, $clientSecret, $userId, 'users/get_space_usage', $params, 'POST');
+		if (isset($result['error']) || !isset($result['used'])) {
+			return $result;
+		}
+		$info = [
+			'usageInStorage' => $result['used'],
+		];
+		// count files
+		$info['nbFiles'] = 2;
+		// free space
+        $userFolder = $this->root->getUserFolder($userId);
+        $freeSpace = $userFolder->getStorage()->free_space('/');
+		$info['freeSpace'] = $freeSpace;
+		return $info;
 	}
 
 	/**
@@ -55,7 +78,7 @@ class DropboxAPIService {
 	 * @param string $method
 	 * @return array
 	 */
-	public function request(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
+	public function request(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
 							string $endPoint, array $params = [], string $method = 'GET'): array {
 		try {
 			$url = 'https://api.dropboxapi.com/2/' . $endPoint;
@@ -104,7 +127,7 @@ class DropboxAPIService {
 				if (isset($result['access_token'])) {
 					$this->logger->info('Dropbox access token successfully refreshed', ['app' => $this->appName]);
 					$accessToken = $result['access_token'];
-					$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $accessToken);
+					$this->config->setUserValue($userId, Application::APP_ID, 'token', $accessToken);
 					// retry the request with new access token
 					return $this->request($accessToken, $refreshToken, $clientID, $clientSecret, $endPoint, $params, $method);
 				} else {
