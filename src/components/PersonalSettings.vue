@@ -5,6 +5,7 @@
 			{{ t('integration_dropbox', 'Dropbox data migration') }}
 		</h2>
 		<div class="dropbox-content">
+			<h3>{{ t('integration_dropbox', 'Authentication') }}</h3>
 			<div v-if="!connected">
 				<p class="settings-hint">
 					<span v-if="codeFailed">
