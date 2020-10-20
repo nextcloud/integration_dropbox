@@ -6,6 +6,19 @@
 		</h2>
 		<p class="settings-hint">
 			{{ t('integration_dropbox', 'Leave all fields empty to use default Nextcloud Dropbox OAuth app.') }}
+			<br><br>
+			{{ t('integration_dropbox', 'If you want your Nextcloud users to authenticate to Dropbox using your own Dropbox OAuth app, create one in Dropbox.') }}
+			<a href="https://www.dropbox.com/developers/apps" class="external" target="_blank">
+				{{ t('integration_dropbox', 'Dropbox developer settings') }}
+			</a>
+			<br>
+			{{ t('integration_dropbox', 'Make sure your give those permissions to your app:') }}
+			<br>
+			<b>account_info.read - files.metadata.read - files.content.read</b>
+			<br>
+			{{ t('integration_dropbox', 'No need to add any redirect URI.') }}
+			<br>
+			{{ t('integration_dropbox', 'Then set the app key and app secret below.') }}
 		</p>
 		<div class="grid-form">
 			<label for="dropbox-client-id">
