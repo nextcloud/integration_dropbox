@@ -89,4 +89,38 @@ class DropboxAPIController extends Controller {
 		return $response;
 	}
 
+	/**
+     * @NoAdminRequired
+     *
+     * @return DataResponse
+     */
+    public function importDropbox(): DataResponse {
+        if ($this->accessToken === '') {
+            return new DataResponse(null, 400);
+        }
+        $result = $this->dropboxAPIService->startImportDropbox($this->accessToken, $this->userId);
+        if (isset($result['error'])) {
+            $response = new DataResponse($result['error'], 401);
+        } else {
+            $response = new DataResponse($result);
+        }
+        return $response;
+	}
+
+	/**
+     * @NoAdminRequired
+     *
+     * @return DataResponse
+     */
+    public function getImportDropboxInformation(): DataResponse {
+        if ($this->accessToken === '') {
+            return new DataResponse(null, 400);
+        }
+        $response = new DataResponse([
+            'importing_dropbox' => $this->config->getUserValue($this->userId, Application::APP_ID, 'importing_dropbox', '') === '1',
+            'last_dropbox_import_timestamp' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0'),
+            'nb_imported_files' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'nb_imported_files', '0'),
+        ]);
+        return $response;
+    }
 }

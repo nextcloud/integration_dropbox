@@ -63,17 +63,17 @@
 					<span v-else-if="!enoughSpaceForDropbox">
 						{{ t('integration_dropbox', 'Your Dropbox storage is bigger than your remaining space left ({formSpace})', { formSpace: humanFileSize(freeSpace) }) }}
 					</span>
-					<!--div v-else>
+					<div v-else>
 						<br>
 						{{ n('integration_dropbox', '{amount} file imported ({progress}%)', '{amount} files imported ({progress}%)', nbImportedFiles, { amount: nbImportedFiles, progress: dropboxImportProgress }) }}
 						<br>
-						{{ lastDriveImportDate }}
+						{{ lastDropboxImportDate }}
 						<br>
-						<button @click="onCancelDriveImport">
+						<button @click="onCancelDropboxImport">
 							<span class="icon icon-close" />
 							{{ t('integration_dropbox', 'Cancel Dropbox files import') }}
 						</button>
-					</div-->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -134,7 +134,7 @@ export default {
 		lastDropboxImportDate() {
 			return this.lastDropboxImportTimestamp !== 0
 				? t('integration_dropbox', 'Last Dropbox import job at {date}', { date: moment.unix(this.lastDropboxImportTimestamp).format('LLL') })
-				: t('integration_dropbox', 'Google Dropbox process will begin soon')
+				: t('integration_dropbox', 'Dropbox import process will begin soon')
 		},
 		dropboxImportProgress() {
 			return this.storageSize > 0 && this.nbImportedFiles > 0
@@ -147,7 +147,7 @@ export default {
 		// get informations if we are connected
 		if (this.connected) {
 			this.getStorageInfo()
-			// this.getStorageImportValues(true)
+			this.getDropboxImportValues(true)
 		}
 	},
 
@@ -252,18 +252,18 @@ export default {
 			}
 		},
 		getDropboxImportValues(launchLoop = false) {
-			const url = generateUrl('/apps/integration_google/import-files-info')
+			const url = generateUrl('/apps/integration_dropbox/import-files-info')
 			axios.get(url)
 				.then((response) => {
 					if (response.data && Object.keys(response.data).length > 0) {
-						this.lastDriveImportTimestamp = response.data.last_drive_import_timestamp
+						this.lastDropboxImportTimestamp = response.data.last_dropbox_import_timestamp
 						this.nbImportedFiles = response.data.nb_imported_files
-						this.importingDrive = response.data.importing_drive
-						if (!this.importingDrive) {
-							clearInterval(this.driveImportLoop)
+						this.importingDropbox = response.data.importing_dropbox
+						if (!this.importingDropbox) {
+							clearInterval(this.dropboxImportLoop)
 						} else if (launchLoop) {
-							// launch loop if we are currently importing AND it's the first time we call getDriveImportValues
-							this.driveImportLoop = setInterval(() => this.getDriveImportValues(), 10000)
+							// launch loop if we are currently importing AND it's the first time we call getDropboxImportValues
+							this.dropboxImportLoop = setInterval(() => this.getDropboxImportValues(), 10000)
 						}
 					}
 				})
@@ -278,18 +278,18 @@ export default {
 				params: {
 				},
 			}
-			const url = generateUrl('/apps/integration_google/import-files')
+			const url = generateUrl('/apps/integration_dropbox/import-files')
 			axios.get(url, req)
 				.then((response) => {
 					const targetPath = response.data.targetPath
 					showSuccess(
-						t('integration_google', 'Starting importing files in {targetPath} directory', { targetPath })
+						t('integration_dropbox', 'Starting importing files in {targetPath} directory', { targetPath })
 					)
-					this.getDriveImportValues(true)
+					this.getDropboxImportValues(true)
 				})
 				.catch((error) => {
 					showError(
-						t('integration_google', 'Failed to start importing Google Drive')
+						t('integration_dropbox', 'Failed to start importing Dropbox storage')
 						+ ': ' + error.response.request.responseText
 					)
 				})
@@ -297,16 +297,16 @@ export default {
 				})
 		},
 		onCancelDropboxImport() {
-			this.importingDrive = false
+			this.importingDropbox = false
 			clearInterval(this.driveImportLoop)
 			const req = {
 				values: {
-					importing_drive: '0',
-					last_drive_import_timestamp: '0',
+					importing_dropbox: '0',
+					last_dropbox_import_timestamp: '0',
 					nb_imported_files: '0',
 				},
 			}
-			const url = generateUrl('/apps/integration_google/config')
+			const url = generateUrl('/apps/integration_dropbox/config')
 			axios.put(url, req)
 				.then((response) => {
 				})
