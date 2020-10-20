@@ -30,7 +30,7 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
 
-use OCA\Dropbox\Service\DropboxAPIService;
+use OCA\Dropbox\Service\DropboxStorageAPIService;
 use OCA\Dropbox\AppInfo\Application;
 
 require_once __DIR__ . '/../constants.php';
@@ -43,7 +43,7 @@ class DropboxAPIController extends Controller {
 	private $dbconnection;
 	private $dbtype;
 
-	public function __construct($AppName,
+	public function __construct(string $AppName,
 								IRequest $request,
 								IServerContainer $serverContainer,
 								IConfig $config,
@@ -51,8 +51,8 @@ class DropboxAPIController extends Controller {
 								IAppManager $appManager,
 								IAppData $appData,
 								LoggerInterface $logger,
-								DropboxAPIService $dropboxAPIService,
-								$userId) {
+								DropboxStorageAPIService $dropboxStorageApiService,
+								string $userId) {
 		parent::__construct($AppName, $request);
 		$this->userId = $userId;
 		$this->l10n = $l10n;
@@ -60,7 +60,7 @@ class DropboxAPIController extends Controller {
 		$this->serverContainer = $serverContainer;
 		$this->config = $config;
 		$this->logger = $logger;
-		$this->dropboxAPIService = $dropboxAPIService;
+		$this->dropboxStorageApiService = $dropboxStorageApiService;
 		$this->accessToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'token', '');
 		$this->refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token', '');
 		$this->clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
@@ -78,7 +78,7 @@ class DropboxAPIController extends Controller {
 		if ($this->accessToken === '') {
 			return new DataResponse(null, 400);
 		}
-		$result = $this->dropboxAPIService->getStorageSize(
+		$result = $this->dropboxStorageApiService->getStorageSize(
 			$this->accessToken, $this->refreshToken, $this->clientID, $this->clientSecret, $this->userId
 		);
 		if (isset($result['error'])) {
@@ -98,7 +98,7 @@ class DropboxAPIController extends Controller {
         if ($this->accessToken === '') {
             return new DataResponse(null, 400);
         }
-        $result = $this->dropboxAPIService->startImportDropbox($this->accessToken, $this->userId);
+        $result = $this->dropboxStorageApiService->startImportDropbox($this->accessToken, $this->userId);
         if (isset($result['error'])) {
             $response = new DataResponse($result['error'], 401);
         } else {

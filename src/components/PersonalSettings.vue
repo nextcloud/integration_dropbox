@@ -52,7 +52,7 @@
 					<h3>{{ t('integration_dropbox', 'Dropbox storage') }}</h3>
 					<label>
 						<span class="icon icon-folder" />
-						{{ n('integration_google', '{nbFiles} file in your Dropbox storage ({formSize})', '{nbFiles} files in your Dropbox storage ({formSize})', nbFiles, { nbFiles, formSize: humanFileSize(storageSize, true) }) }}
+						{{ n('integration_dropbox', '{nbFiles} file in your Dropbox storage ({formSize})', '{nbFiles} files in your Dropbox storage ({formSize})', nbFiles, { nbFiles, formSize: myHumanFileSize(storageSize, true) }) }}
 					</label>
 					<button v-if="enoughSpaceForDropbox && !importingDropbox"
 						id="dropbox-import-files"
@@ -61,7 +61,7 @@
 						{{ t('integration_dropbox', 'Import Dropbox files') }}
 					</button>
 					<span v-else-if="!enoughSpaceForDropbox">
-						{{ t('integration_dropbox', 'Your Dropbox storage is bigger than your remaining space left ({formSpace})', { formSpace: humanFileSize(freeSpace) }) }}
+						{{ t('integration_dropbox', 'Your Dropbox storage is bigger than your remaining space left ({formSpace})', { formSpace: myHumanFileSize(freeSpace) }) }}
 					</span>
 					<div v-else>
 						<br>
@@ -84,7 +84,7 @@
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl, imagePath } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
-import { delay, detectBrowser } from '../utils'
+import { delay, detectBrowser, humanFileSize } from '../utils'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 
@@ -227,30 +227,6 @@ export default {
 				.then(() => {
 				})
 		},
-		humanFileSize(bytes, approx = false, si = false, dp = 1) {
-			const thresh = si ? 1000 : 1024
-
-			if (Math.abs(bytes) < thresh) {
-				return bytes + ' B'
-			}
-
-			const units = si
-				? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-				: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
-			let u = -1
-			const r = 10 ** dp
-
-			do {
-				bytes /= thresh
-				++u
-			} while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1)
-
-			if (approx) {
-				return Math.floor(bytes) + ' ' + units[u]
-			} else {
-				return bytes.toFixed(dp) + ' ' + units[u]
-			}
-		},
 		getDropboxImportValues(launchLoop = false) {
 			const url = generateUrl('/apps/integration_dropbox/import-files-info')
 			axios.get(url)
@@ -290,7 +266,7 @@ export default {
 				.catch((error) => {
 					showError(
 						t('integration_dropbox', 'Failed to start importing Dropbox storage')
-						+ ': ' + error.response.request.responseText
+						+ ': ' + error.response?.request?.responseText
 					)
 				})
 				.then(() => {
@@ -298,7 +274,7 @@ export default {
 		},
 		onCancelDropboxImport() {
 			this.importingDropbox = false
-			clearInterval(this.driveImportLoop)
+			clearInterval(this.dropboxImportLoop)
 			const req = {
 				values: {
 					importing_dropbox: '0',
@@ -315,6 +291,9 @@ export default {
 				})
 				.then(() => {
 				})
+		},
+		myHumanFileSize(bytes, approx = false, si = false, dp = 1) {
+			return humanFileSize(bytes, approx, si, dp)
 		},
 	},
 }
