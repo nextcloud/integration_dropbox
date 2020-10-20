@@ -16,6 +16,9 @@ use OCP\AppFramework\IAppContainer;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\Notification\IManager as INotificationManager;
+
+use OCA\Dropbox\Notification\Notifier;
 
 /**
  * Class Application
@@ -34,7 +37,9 @@ class Application extends App implements IBootstrap {
     public function __construct(array $urlParams = []) {
         parent::__construct(self::APP_ID, $urlParams);
 
-        $this->container = $this->getContainer();
+        $container = $this->getContainer();
+        $manager = $container->query(INotificationManager::class);
+        $manager->registerNotifierService(Notifier::class);
     }
 
     public function register(IRegistrationContext $context): void {
