@@ -70,6 +70,7 @@ class DropboxAPIService {
 	 * @param string $refreshToken
 	 * @param string $clientID
 	 * @param string $clientSecret
+	 * @param string $userId
 	 * @param string $endPoint
 	 * @param array $params
 	 * @param string $method
@@ -138,6 +139,15 @@ class DropboxAPIService {
 		}
 	}
 
+	/**
+	 * @param string $accessToken
+	 * @param string $refreshToken
+	 * @param string $clientID
+	 * @param string $clientSecret
+	 * @param string $userId
+	 * @param string $fileId
+	 * @return array
+	 */
 	public function fileRequest(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
 							string $fileId): array {
 		try {

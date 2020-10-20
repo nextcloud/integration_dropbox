@@ -52,6 +52,9 @@ class DropboxStorageAPIService {
 
 	/**
 	 * @param string $accessToken
+	 * @param string $refreshToken
+	 * @param string $clientID
+	 * @param string $clientSecret
 	 * @param string $userId
 	 * @return array
 	 */
@@ -173,9 +176,12 @@ class DropboxStorageAPIService {
 
 	/**
 	 * @param string $accessToken
+	 * @param string $refreshToken
+	 * @param string $clientID
+	 * @param string $clientSecret
 	 * @param string $userId
 	 * @param string $targetPath
-	 * @param ?int $maxDownloadNumber
+	 * @param ?int $maxDownloadSize
 	 * @param int $alreadyImported
 	 * @return array
 	 */
@@ -256,10 +262,13 @@ class DropboxStorageAPIService {
 
 	/**
 	 * @param string $accessToken
+	 * @param string $refreshToken
+	 * @param string $clientID
+	 * @param string $clientSecret
 	 * @param string $userId
 	 * @param array $fileItem
 	 * @param Node $topFolder
-	 * @return ?int downloaded size, null if already existing
+	 * @return ?int downloaded size, null if already existing or network error
 	 */
 	private function getFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
 							string $userId, array $fileItem, Node $topFolder): ?int {
@@ -282,6 +291,11 @@ class DropboxStorageAPIService {
 		return null;
 	}
 
+	/**
+	 * @param string $dirName
+	 * @param Node $topFolder
+	 * @return ?Node
+	 */
 	private function createAndGetFolder(string $dirName, Node $topFolder): ?Node {
 		$dirs = explode('/', $dirName);
 		$seenDirs = [];
