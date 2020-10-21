@@ -62,7 +62,7 @@
 						{{ t('integration_dropbox', 'Import Dropbox files') }}
 					</button>
 					<span v-else-if="!enoughSpaceForDropbox">
-						{{ t('integration_dropbox', 'Your Dropbox storage is bigger than your remaining space left ({formSpace})', { formSpace: myHumanFileSize(freeSpace) }) }}
+						{{ t('integration_dropbox', 'Your Dropbox storage is bigger than your remaining space left ({formSpace})', { formSpace: myHumanFileSize(state.free_space) }) }}
 					</span>
 					<div v-else>
 						<br>
@@ -114,8 +114,6 @@ export default {
 			lastDropboxImportTimestamp: 0,
 			nbImportedFiles: 0,
 			dropboxImportLoop: null,
-			// local
-			freeSpace: 0,
 		}
 	},
 
@@ -130,7 +128,7 @@ export default {
 				+ '&token_access_type=offline'
 		},
 		enoughSpaceForDropbox() {
-			return this.storageSize === 0 || this.storageSize < this.freeSpace
+			return this.storageSize === 0 || this.storageSize < this.state.free_space
 		},
 		lastDropboxImportDate() {
 			return this.lastDropboxImportTimestamp !== 0
@@ -216,13 +214,12 @@ export default {
 					if (response.data?.usageInStorage && response.data?.nbFiles) {
 						this.storageSize = response.data.usageInStorage
 						this.nbFiles = response.data.nbFiles
-						this.freeSpace = response.data.freeSpace
 					}
 				})
 				.catch((error) => {
 					showError(
 						t('integration_dropbox', 'Failed to get Dropbox storage information')
-						+ ': ' + error.response.request.responseText
+						+ ': ' + error.response?.request?.responseText
 					)
 				})
 				.then(() => {

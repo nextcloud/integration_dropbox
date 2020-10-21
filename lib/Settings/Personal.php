@@ -8,6 +8,7 @@ use OCP\IConfig;
 use OCP\Settings\ISettings;
 use OCP\Util;
 use OCP\IURLGenerator;
+use OCP\Files\IRootFolder;
 use OCP\IInitialStateService;
 
 use OCA\Dropbox\AppInfo\Application;
@@ -22,19 +23,20 @@ class Personal implements ISettings {
 	private $urlGenerator;
 	private $l;
 
-	public function __construct(
-						string $appName,
-						IL10N $l,
-						IRequest $request,
-						IConfig $config,
-						IURLGenerator $urlGenerator,
-						IInitialStateService $initialStateService,
-						$userId) {
+	public function __construct(string $appName,
+								IL10N $l,
+								IRequest $request,
+								IConfig $config,
+								IURLGenerator $urlGenerator,
+								IRootFolder $root,
+								IInitialStateService $initialStateService,
+								string $userId) {
 		$this->appName = $appName;
 		$this->urlGenerator = $urlGenerator;
 		$this->request = $request;
 		$this->l = $l;
 		$this->config = $config;
+		$this->root = $root;
 		$this->initialStateService = $initialStateService;
 		$this->userId = $userId;
 	}
@@ -49,9 +51,14 @@ class Personal implements ISettings {
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
 		$clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
 
+		// get free space
+		$userFolder = $this->root->getUserFolder($this->userId);
+		$freeSpace = $userFolder->getStorage()->free_space('/');
+
 		$userConfig = [
 			'client_id' => $clientID,
 			'user_name' => $userName,
+			'free_space' => $freeSpace,
 		];
 		$this->initialStateService->provideInitialState($this->appName, 'user-config', $userConfig);
 		$response = new TemplateResponse(Application::APP_ID, 'personalSettings');
