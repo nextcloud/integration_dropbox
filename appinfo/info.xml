@@ -9,13 +9,12 @@
     <author>Julien Veyssier</author>
     <namespace>Dropbox</namespace>
     <documentation>
-        <developer>https://github.com/nextcloud/integration_dropbox/wikis</developer>
+        <developer>https://github.com/eneiluj/integration_dropbox/wikis</developer>
     </documentation>
     <category>integration</category>
-    <category>dashboard</category>
-    <website>https://github.com/nextcloud/integration_dropbox</website>
-    <bugs>https://github.com/nextcloud/integration_dropbox/issues</bugs>
-    <screenshot>https://github.com/nextcloud/integration_dropbox/raw/master/img/screenshot1.jpg</screenshot>
+    <website>https://github.com/eneiluj/integration_dropbox</website>
+    <bugs>https://github.com/eneiluj/integration_dropbox/issues</bugs>
+    <screenshot>https://github.com/eneiluj/integration_dropbox/raw/master/img/screenshot1.jpg</screenshot>
     <dependencies>
         <database min-version="9.4">pgsql</database>
         <database>sqlite</database>
