@@ -101,11 +101,6 @@ class DropboxStorageAPIService {
 			];
 		} while (isset($result['has_more'], $result['cursor']) && $result['has_more']);
 		$info['nbFiles'] = $nbFiles;
-
-		// free space
-		$userFolder = $this->root->getUserFolder($userId);
-		$freeSpace = $userFolder->getStorage()->free_space('/');
-		$info['freeSpace'] = $freeSpace;
 		return $info;
 	}
 

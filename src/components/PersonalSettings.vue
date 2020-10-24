@@ -195,6 +195,7 @@ export default {
 					this.state.user_name = response.data.user_name
 					this.accessCode = ''
 					this.codeFailed = false
+					this.getStorageInfo()
 				})
 				.catch((error) => {
 					this.codeFailed = true
