@@ -145,14 +145,16 @@ class DropboxAPIService {
 	 * @param string $clientID
 	 * @param string $clientSecret
 	 * @param string $userId
+	 * @param string $tmpFilePath
 	 * @param string $fileId
 	 * @return array
 	 */
-	public function fileRequest(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
-							string $fileId): array {
+	public function downloadFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
+								string $tmpFilePath, string $fileId): array {
 		try {
 			$url = 'https://content.dropboxapi.com/2/files/download';
 			$options = [
+				'save_to' => $tmpFilePath,
 				'headers' => [
 					'Authorization' => 'Bearer ' . $accessToken,
 					'User-Agent' => 'Nextcloud Dropbox integration',
@@ -161,13 +163,13 @@ class DropboxAPIService {
 			];
 
 			$response = $this->client->post($url, $options);
-			$body = $response->getBody();
+			//$body = $response->getBody();
 			$respCode = $response->getStatusCode();
 
 			if ($respCode >= 400) {
 				return ['error' => $this->l10n->t('Bad credentials')];
 			} else {
-				return ['content' => $body];
+				return ['success' => true];
 			}
 		} catch (ServerException | ClientException $e) {
 			$response = $e->getResponse();
@@ -183,7 +185,7 @@ class DropboxAPIService {
 					$accessToken = $result['access_token'];
 					$this->config->setUserValue($userId, Application::APP_ID, 'token', $accessToken);
 					// retry the request with new access token
-					return $this->fileRequest($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $fileId);
+					return $this->fileRequest($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $tmpFilePath, $fileId);
 				} else {
 					// impossible to refresh the token
 					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . $result['error']];
@@ -192,6 +194,27 @@ class DropboxAPIService {
 			$this->logger->warning('Dropbox API error : '.$e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
 		}
+	}
+
+	public function chunkedCopy(string $fromPath, $outResource): int {
+		if (!is_resource($outResource)) {
+			throw new \InvalidArgumentException(
+				sprintf(
+					'Argument must be a valid resource type. %s given.',
+					gettype($resource)
+				)
+			);
+		}
+		// 10 Mo at a time
+		$buffer_size = 10000000;
+		$ret = 0;
+		$fin = fopen($fromPath, 'rb');
+		while(!feof($fin)) {
+			$ret += fwrite($outResource, fread($fin, $buffer_size));
+		}
+		fclose($fin);
+		fclose($outResource);
+		return $ret;
 	}
 
 	/**

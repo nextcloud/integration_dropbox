@@ -14,6 +14,7 @@ namespace OCA\Dropbox\Service;
 use OCP\IL10N;
 use Psr\Log\LoggerInterface;
 use OCP\IConfig;
+use OCP\ITempManager;
 use OCP\Files\IRootFolder;
 use OCP\Files\FileInfo;
 use OCP\Files\Node;
@@ -40,6 +41,7 @@ class DropboxStorageAPIService {
 								IRootFolder $root,
 								IConfig $config,
 								IJobList $jobList,
+								ITempManager $tempManager,
 								DropboxAPIService $dropboxApiService) {
 		$this->appName = $appName;
 		$this->l10n = $l10n;
@@ -47,6 +49,7 @@ class DropboxStorageAPIService {
 		$this->config = $config;
 		$this->root = $root;
 		$this->jobList = $jobList;
+		$this->tempManager = $tempManager;
 		$this->dropboxApiService = $dropboxApiService;
 	}
 
@@ -142,10 +145,10 @@ class DropboxStorageAPIService {
 
 		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token', '');
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token', '');
-        $clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
-        $clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
-        $clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', DEFAULT_DROPBOX_CLIENT_SECRET);
-        $clientSecret = $clientSecret ?: DEFAULT_DROPBOX_CLIENT_SECRET;
+		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
+		$clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
+		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', DEFAULT_DROPBOX_CLIENT_SECRET);
+		$clientSecret = $clientSecret ?: DEFAULT_DROPBOX_CLIENT_SECRET;
 		// import batch of files
 		$targetPath = $this->l10n->t('Dropbox import');
 		// import by batch of 500 Mo
@@ -277,10 +280,16 @@ class DropboxStorageAPIService {
 			$saveFolder = $this->createAndGetFolder($dirName, $topFolder);
 		}
 		if (!is_null($saveFolder) && !$saveFolder->nodeExists($fileName)) {
-			$res = $this->dropboxApiService->fileRequest($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $fileItem['id']);
+			$tmpFilePath = $this->tempManager->getTemporaryFile();
+			$res = $this->dropboxApiService->downloadFile(
+				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $tmpFilePath, $fileItem['id']
+			);
 			if (!isset($res['error'])) {
-				$savedFile = $saveFolder->newFile($fileName, $res['content']);
-				return $savedFile->getSize();
+				$savedFile = $saveFolder->newFile($fileName);
+				$resource = $savedFile->fopen('w');
+				$copied = $this->dropboxApiService->chunkedCopy($tmpFilePath, $resource);
+				$savedFile->touch();
+				return $copied;
 			}
 		}
 		return null;
