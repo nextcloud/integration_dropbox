@@ -155,6 +155,7 @@ class DropboxAPIService {
 			$url = 'https://content.dropboxapi.com/2/files/download';
 			$options = [
 				'save_to' => $tmpFilePath,
+				'timeout' => 0,
 				'headers' => [
 					'Authorization' => 'Bearer ' . $accessToken,
 					'User-Agent' => 'Nextcloud Dropbox integration',

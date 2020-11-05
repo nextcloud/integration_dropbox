@@ -289,7 +289,11 @@ class DropboxStorageAPIService {
 				$resource = $savedFile->fopen('w');
 				$copied = $this->dropboxApiService->chunkedCopy($tmpFilePath, $resource);
 				$savedFile->touch();
+				unlink($tmpFilePath);
 				return $copied;
+			}
+			if (file_exists($tmpFilePath)) {
+				unlink($tmpFilePath);
 			}
 		}
 		return null;
