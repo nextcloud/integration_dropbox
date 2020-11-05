@@ -17,6 +17,7 @@ use OCP\IConfig;
 use OCP\Http\Client\IClientService;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Exception\ConnectException;
 use OCP\Notification\IManager as INotificationManager;
 
 use OCA\Dropbox\AppInfo\Application;
@@ -193,6 +194,9 @@ class DropboxAPIService {
 				}
 			}
 			$this->logger->warning('Dropbox API error : '.$e->getMessage(), ['app' => $this->appName]);
+			return ['error' => $e->getMessage()];
+		} catch (ConnectException $e) {
+			$this->logger->warning('Dropbox API connection error : '.$e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
 		}
 	}
