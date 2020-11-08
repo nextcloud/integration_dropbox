@@ -280,21 +280,19 @@ class DropboxStorageAPIService {
 			$saveFolder = $this->createAndGetFolder($dirName, $topFolder);
 		}
 		if (!is_null($saveFolder) && !$saveFolder->nodeExists($fileName)) {
-			$tmpFilePath = $this->tempManager->getTemporaryFile();
+			$savedFile = $saveFolder->newFile($fileName);
+			$resource = $savedFile->fopen('w');
 			$res = $this->dropboxApiService->downloadFile(
-				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $tmpFilePath, $fileItem['id']
+				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileItem['id']
 			);
 			if (!isset($res['error'])) {
-				$savedFile = $saveFolder->newFile($fileName);
-				$resource = $savedFile->fopen('w');
-				$copied = $this->dropboxApiService->chunkedCopy($tmpFilePath, $resource);
+				fclose($resource);
 				$savedFile->touch();
-				unlink($tmpFilePath);
-				return $copied;
+				$stat = $savedFile->stat();
+				return $stat['size'] ?? 0;
 			}
-			if (file_exists($tmpFilePath)) {
-				unlink($tmpFilePath);
-			}
+			fclose($resource);
+			$savedFile->delete();
 		}
 		return null;
 	}
