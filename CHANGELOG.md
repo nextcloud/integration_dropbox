@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.4 – 2020-11-08
+### Changed
+- no more temp files, directly download to target file (in a stream)
+
 ## 0.0.3 – 2020-11-05
 ### Fixed
 - remove timeout when downloading files
