@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.5 – 2020-11-11
+### Fixed
+- don't close already closed resource when downloading
+
 ## 0.0.4 – 2020-11-08
 ### Changed
 - no more temp files, directly download to target file (in a stream)
