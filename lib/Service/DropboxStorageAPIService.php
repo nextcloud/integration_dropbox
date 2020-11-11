@@ -286,13 +286,15 @@ class DropboxStorageAPIService {
 				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileItem['id']
 			);
 			if (!isset($res['error'])) {
-				fclose($resource);
 				$savedFile->touch();
 				$stat = $savedFile->stat();
 				return $stat['size'] ?? 0;
+			} else {
+				$this->logger->warning('Dropbox error downloading file ' . $fileName . ' : ' . $res['error'], ['app' => $this->appName]);
+				if ($savedFile->isDeletable()) {
+					$savedFile->delete();
+				}
 			}
-			fclose($resource);
-			$savedFile->delete();
 		}
 		return null;
 	}
