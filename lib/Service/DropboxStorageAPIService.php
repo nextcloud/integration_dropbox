@@ -271,7 +271,7 @@ class DropboxStorageAPIService {
 	private function getFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
 							string $userId, array $fileItem, Node $topFolder): ?int {
 		$fileName = $fileItem['name'];
-		$path = preg_replace('/^\//', '', $fileItem['path_display']);
+		$path = preg_replace('/^\//', '', $fileItem['path_display'] ?? '.');
 		$pathParts = pathinfo($path);
 		$dirName = $pathParts['dirname'];
 		if ($dirname === '.') {
