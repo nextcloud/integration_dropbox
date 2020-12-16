@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.6 – 2020-12-16
+### Fixed
+- issue with unlimited quota
+
 ## 0.0.5 – 2020-11-11
 ### Fixed
 - don't close already closed resource when downloading
