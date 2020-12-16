@@ -128,7 +128,7 @@ export default {
 				+ '&token_access_type=offline'
 		},
 		enoughSpaceForDropbox() {
-			return this.storageSize === 0 || this.storageSize < this.state.free_space
+			return this.storageSize === 0 || this.state.user_quota === 'none' || this.storageSize < this.state.free_space
 		},
 		lastDropboxImportDate() {
 			return this.lastDropboxImportTimestamp !== 0
