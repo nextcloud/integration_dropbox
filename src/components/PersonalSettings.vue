@@ -76,6 +76,9 @@
 						</button>
 					</div>
 				</div>
+				<div v-else-if="nbFiles === 0">
+					{{ t('integration_dropbox', 'Your Dropbox storage is empty') }}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -108,7 +111,7 @@ export default {
 			isChromium: detectBrowser() === 'chrome',
 			isFirefox: detectBrowser() === 'firefox',
 			// dropbox import stuff
-			nbFiles: 0,
+			nbFiles: -1,
 			storageSize: 0,
 			importingDropbox: false,
 			lastDropboxImportTimestamp: 0,
