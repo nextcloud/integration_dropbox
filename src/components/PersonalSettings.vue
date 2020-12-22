@@ -49,11 +49,11 @@
 					</button>
 				</div>
 				<br>
-				<div v-if="nbFiles > 0" id="import-storage">
+				<div v-if="storageSize > 0" id="import-storage">
 					<h3>{{ t('integration_dropbox', 'Dropbox storage') }}</h3>
 					<label>
 						<span class="icon icon-folder" />
-						{{ n('integration_dropbox', '{nbFiles} file in your Dropbox storage ({formSize})', '{nbFiles} files in your Dropbox storage ({formSize})', nbFiles, { nbFiles, formSize: myHumanFileSize(storageSize, true) }) }}
+						{{ t('integration_dropbox', 'Dropbox storage size: {formSize}', { formSize: myHumanFileSize(storageSize, true) }) }}
 					</label>
 					<button v-if="enoughSpaceForDropbox && !importingDropbox"
 						id="dropbox-import-files"
@@ -66,7 +66,7 @@
 					</span>
 					<div v-else>
 						<br>
-						{{ n('integration_dropbox', '{amount} file imported ({progress}%)', '{amount} files imported ({progress}%)', nbImportedFiles, { amount: nbImportedFiles, progress: dropboxImportProgress }) }}
+						{{ n('integration_dropbox', '{amount} file imported', '{amount} files imported', nbImportedFiles, { amount: nbImportedFiles }) }}
 						<br>
 						{{ lastDropboxImportDate }}
 						<br>
@@ -76,7 +76,7 @@
 						</button>
 					</div>
 				</div>
-				<div v-else-if="nbFiles === 0">
+				<div v-else-if="storageSize === 0">
 					{{ t('integration_dropbox', 'Your Dropbox storage is empty') }}
 				</div>
 			</div>
@@ -111,8 +111,7 @@ export default {
 			isChromium: detectBrowser() === 'chrome',
 			isFirefox: detectBrowser() === 'firefox',
 			// dropbox import stuff
-			nbFiles: -1,
-			storageSize: 0,
+			storageSize: -1,
 			importingDropbox: false,
 			lastDropboxImportTimestamp: 0,
 			nbImportedFiles: 0,
@@ -137,11 +136,6 @@ export default {
 			return this.lastDropboxImportTimestamp !== 0
 				? t('integration_dropbox', 'Last Dropbox import job at {date}', { date: moment.unix(this.lastDropboxImportTimestamp).format('LLL') })
 				: t('integration_dropbox', 'Dropbox import process will begin soon')
-		},
-		dropboxImportProgress() {
-			return this.storageSize > 0 && this.nbImportedFiles > 0
-				? parseInt(this.nbImportedFiles / this.nbFiles * 100)
-				: 0
 		},
 	},
 
@@ -215,9 +209,8 @@ export default {
 			const url = generateUrl('/apps/integration_dropbox/storage-size')
 			axios.get(url)
 				.then((response) => {
-					if (response.data?.usageInStorage && response.data?.nbFiles) {
+					if (response.data?.usageInStorage) {
 						this.storageSize = response.data.usageInStorage
-						this.nbFiles = response.data.nbFiles
 					}
 				})
 				.catch((error) => {

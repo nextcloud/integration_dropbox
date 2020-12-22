@@ -68,43 +68,9 @@ class DropboxStorageAPIService {
 		if (isset($result['error']) || !isset($result['used'])) {
 			return $result;
 		}
-		$info = [
+		return [
 			'usageInStorage' => $result['used'],
 		];
-
-		// count files
-		$nbFiles = 0;
-		$params = [
-			'limit' => 2000,
-			'path' => '',
-			'recursive' => true,
-			'include_media_info' => false,
-			'include_deleted' => false,
-			'include_has_explicit_shared_members' => false,
-			'include_mounted_folders' => true,
-			'include_non_downloadable_files' => false,
-		];
-		do {
-			$suffix = isset($params['cursor']) ? '/continue' : '';
-			$result = $this->dropboxApiService->request(
-				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, 'files/list_folder' . $suffix, $params, 'POST'
-			);
-			if (isset($result['error'])) {
-				return $result;
-			}
-			if (isset($result['entries']) && is_array($result['entries'])) {
-				foreach ($result['entries'] as $entry) {
-					if (isset($entry['.tag']) && $entry['.tag'] === 'file') {
-						$nbFiles++;
-					}
-				}
-			}
-			$params = [
-				'cursor' => $result['cursor'] ?? '',
-			];
-		} while (isset($result['has_more'], $result['cursor']) && $result['has_more']);
-		$info['nbFiles'] = $nbFiles;
-		return $info;
 	}
 
 	/**
@@ -197,11 +163,6 @@ class DropboxStorageAPIService {
 			}
 		}
 
-		$info = $this->getStorageSize($accessToken, $refreshToken, $clientID, $clientSecret, $userId);
-		if (isset($info['error'])) {
-			return $info;
-		}
-		$nbFilesOnDropbox = $info['nbFiles'];
 		$downloadedSize = 0;
 		$nbDownloaded = 0;
 		$totalSeenNumber = 0;
@@ -237,7 +198,7 @@ class DropboxStorageAPIService {
 								return [
 									'nbDownloaded' => $nbDownloaded,
 									'targetPath' => $targetPath,
-									'finished' => ($totalSeenNumber >= $nbFilesOnDropbox),
+									'finished' => false,
 									'totalSeen' => $totalSeenNumber,
 								];
 							}
