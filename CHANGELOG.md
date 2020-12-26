@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## 0.0.10 – 2020-12-26
+## 0.0.11 – 2020-12-26
 ### Fix
 - casing mistake
 [#6](https://github.com/nextcloud/integration_dropbox/issues/6) @johnnyasantoss
