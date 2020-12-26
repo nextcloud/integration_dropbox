@@ -235,7 +235,7 @@ class DropboxStorageAPIService {
 		$path = preg_replace('/^\//', '', $fileItem['path_display'] ?? '.');
 		$pathParts = pathinfo($path);
 		$dirName = $pathParts['dirname'];
-		if ($dirname === '.') {
+		if ($dirName === '.') {
 			$saveFolder = $topFolder;
 		} else {
 			$saveFolder = $this->createAndGetFolder($dirName, $topFolder);
