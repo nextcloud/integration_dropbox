@@ -86,9 +86,9 @@
 
 <script>
 import { loadState } from '@nextcloud/initial-state'
-import { generateUrl, imagePath } from '@nextcloud/router'
+import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
-import { delay, detectBrowser, humanFileSize } from '../utils'
+import { delay, humanFileSize } from '../utils'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 
@@ -106,10 +106,6 @@ export default {
 			accessCode: '',
 			codeLoading: false,
 			codeFailed: false,
-			chromiumImagePath: imagePath('integration_dropbox', 'chromium.png'),
-			firefoxImagePath: imagePath('integration_dropbox', 'firefox.png'),
-			isChromium: detectBrowser() === 'chrome',
-			isFirefox: detectBrowser() === 'firefox',
 			// dropbox import stuff
 			storageSize: -1,
 			importingDropbox: false,
