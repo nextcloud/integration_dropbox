@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.13 – 2021-01-01
+### Changed
+- bump js libs
+
+### Fixed
+- remove useless browser detection (crashing on RPi with chrome anyway)
+[#4](https://github.com/nextcloud/integration_dropbox/issues/4) @janesser
+
 ## 0.0.12 – 2020-12-26
 ### Fix
 - casing mistake
