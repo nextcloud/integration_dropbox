@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.14 – 2021-01-07
+### Fixed
+- skip files that can't be created or written
+[#3](https://github.com/nextcloud/integration_dropbox/issues/3) @agentff6600
+
 ## 0.0.13 – 2021-01-01
 ### Changed
 - bump js libs
