@@ -18,6 +18,7 @@ use OCP\ITempManager;
 use OCP\Files\IRootFolder;
 use OCP\Files\FileInfo;
 use OCP\Files\Node;
+use OCP\Files\NotFoundException;
 use OCP\BackgroundJob\IJobList;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
@@ -241,8 +242,16 @@ class DropboxStorageAPIService {
 			$saveFolder = $this->createAndGetFolder($dirName, $topFolder);
 		}
 		if (!is_null($saveFolder) && !$saveFolder->nodeExists($fileName)) {
-			$savedFile = $saveFolder->newFile($fileName);
-			$resource = $savedFile->fopen('w');
+			try {
+				$savedFile = $saveFolder->newFile($fileName);
+				$resource = $savedFile->fopen('w');
+			} catch (NotFoundException $e) {
+				$this->logger->warning(
+					'Dropbox error, can\'t create file "' . $fileName . '" in "' . $saveFolder->getPath() . '"',
+					['app' => $this->appName]
+				);
+				return null;
+			}
 			$res = $this->dropboxApiService->downloadFile(
 				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileItem['id']
 			);
