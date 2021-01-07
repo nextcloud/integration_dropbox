@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.15 – 2021-01-07
+### Fixed
+- fix wrong method name when refreshing token
+- fix userID type in controller
+[#3](https://github.com/nextcloud/integration_dropbox/issues/3) @agentff6600
+
 ## 0.0.14 – 2021-01-07
 ### Fixed
 - skip files that can't be created or written
