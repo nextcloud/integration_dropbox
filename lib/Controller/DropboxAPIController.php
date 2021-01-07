@@ -52,7 +52,7 @@ class DropboxAPIController extends Controller {
 								IAppData $appData,
 								LoggerInterface $logger,
 								DropboxStorageAPIService $dropboxStorageApiService,
-								string $userId) {
+								?string $userId) {
 		parent::__construct($AppName, $request);
 		$this->userId = $userId;
 		$this->l10n = $l10n;

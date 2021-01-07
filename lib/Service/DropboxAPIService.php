@@ -187,7 +187,7 @@ class DropboxAPIService {
 					$accessToken = $result['access_token'];
 					$this->config->setUserValue($userId, Application::APP_ID, 'token', $accessToken);
 					// retry the request with new access token
-					return $this->fileRequest($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileId);
+					return $this->downloadFile($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileId);
 				} else {
 					// impossible to refresh the token
 					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . $result['error']];
