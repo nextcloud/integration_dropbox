@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.16 – 2021-01-10
+### Fixed
+- allow float file sizes
+- catch lockedException
+[#3](https://github.com/nextcloud/integration_dropbox/issues/3) @agentff6600
+
 ## 0.0.15 – 2021-01-07
 ### Fixed
 - fix wrong method name when refreshing token
