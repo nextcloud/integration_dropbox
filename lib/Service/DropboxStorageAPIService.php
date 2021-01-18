@@ -175,7 +175,6 @@ class DropboxStorageAPIService {
 			'limit' => 2000,
 			'path' => '',
 			'recursive' => true,
-			'include_media_info' => false,
 			'include_deleted' => false,
 			'include_has_explicit_shared_members' => false,
 			'include_mounted_folders' => true,
@@ -264,7 +263,13 @@ class DropboxStorageAPIService {
 				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileItem['id']
 			);
 			if (!isset($res['error'])) {
-				$savedFile->touch();
+				if (isset($fileItem['server_modified'])) {
+					$d = new \Datetime($fileItem['server_modified']);
+					$ts = $d->getTimestamp();
+					$savedFile->touch($ts);
+				} else {
+					$savedFile->touch();
+				}
 				$stat = $savedFile->stat();
 				return $stat['size'] ?? 0;
 			} else {
