@@ -19,6 +19,9 @@ use OCP\Files\IRootFolder;
 use OCP\Files\FileInfo;
 use OCP\Files\Node;
 use OCP\Files\NotFoundException;
+use OCP\Files\ForbiddenException;
+use OCP\Lock\LockedException;
+
 use OCP\BackgroundJob\IJobList;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
@@ -241,7 +244,12 @@ class DropboxStorageAPIService {
 		} else {
 			$saveFolder = $this->createAndGetFolder($dirName, $topFolder);
 		}
-		if (!is_null($saveFolder) && !$saveFolder->nodeExists($fileName)) {
+		try {
+			$fileExists = $saveFolder->nodeExists($fileName);
+		} catch (ForbiddenException $e) {
+			return null;
+		}
+		if (!is_null($saveFolder) && !$fileExists) {
 			try {
 				$savedFile = $saveFolder->newFile($fileName);
 				$resource = $savedFile->fopen('w');
@@ -265,7 +273,7 @@ class DropboxStorageAPIService {
 					if ($savedFile->isDeletable()) {
 						$savedFile->delete();
 					}
-				} catch (\OCP\Lock\LockedException $e) {
+				} catch (LockedException $e) {
 					$this->logger->warning('Dropbox error deleting file ' . $fileName, ['app' => $this->appName]);
 				}
 			}

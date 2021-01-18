@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.17 – 2021-01-18
+### Fixed
+- catch ForbiddenException (for .htaccess files for example)
+[#3](https://github.com/nextcloud/integration_dropbox/issues/3) @agentff6600
+
 ## 0.0.16 – 2021-01-10
 ### Fixed
 - allow float file sizes
