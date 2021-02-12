@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.0.18 – 2021-02-12
+### Changed
+- bump js libs
+- bump max NC version
+
+### Fixed
+- import nc dialogs style
+
 ## 0.0.17 – 2021-01-18
 ### Fixed
 - catch ForbiddenException (for .htaccess files for example)

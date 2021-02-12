@@ -90,6 +90,7 @@ import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { delay, humanFileSize } from '../utils'
 import { showSuccess, showError } from '@nextcloud/dialogs'
+import '@nextcloud/dialogs/styles/toast.scss'
 import moment from '@nextcloud/moment'
 
 export default {
