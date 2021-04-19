@@ -109,9 +109,11 @@ class DropboxStorageAPIService {
 	public function importDropboxJob(string $userId): void {
 		$this->logger->error('Importing dropbox files for ' . $userId);
 		$importingDropbox = $this->config->getUserValue($userId, Application::APP_ID, 'importing_dropbox', '0') === '1';
-		if (!$importingDropbox) {
+		$jobRunning = $this->config->getUserValue($userId, Application::APP_ID, 'dropbox_import_running', '0') === '1';
+		if (!$importingDropbox || $jobRunning) {
 			return;
 		}
+		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_running', '1');
 
 		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token', '');
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token', '');
@@ -140,6 +142,7 @@ class DropboxStorageAPIService {
 			$this->config->setUserValue($userId, Application::APP_ID, 'last_dropbox_import_timestamp', $ts);
 			$this->jobList->add(ImportDropboxJob::class, ['user_id' => $userId]);
 		}
+		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_running', '0');
 	}
 
 	/**
