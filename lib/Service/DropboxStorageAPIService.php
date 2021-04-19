@@ -83,7 +83,8 @@ class DropboxStorageAPIService {
 	 * @return array
 	 */
 	public function startImportDropbox(string $accessToken, string $userId): array {
-		$targetPath = $this->l10n->t('Dropbox import');
+		$targetPath = $this->config->getUserValue($userId, Application::APP_ID, 'output_dir', '/Dropbox import');
+		$targetPath = $targetPath ?: '/Dropbox import';
 		// create root folder
 		$userFolder = $this->root->getUserFolder($userId);
 		if (!$userFolder->nodeExists($targetPath)) {
@@ -122,7 +123,8 @@ class DropboxStorageAPIService {
 		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', DEFAULT_DROPBOX_CLIENT_SECRET);
 		$clientSecret = $clientSecret ?: DEFAULT_DROPBOX_CLIENT_SECRET;
 		// import batch of files
-		$targetPath = $this->l10n->t('Dropbox import');
+		$targetPath = $this->config->getUserValue($userId, Application::APP_ID, 'output_dir', '/Dropbox import');
+		$targetPath = $targetPath ?: '/Dropbox import';
 		// import by batch of 500 Mo
 		$alreadyImported = $this->config->getUserValue($userId, Application::APP_ID, 'nb_imported_files', '0');
 		$alreadyImported = (int) $alreadyImported;

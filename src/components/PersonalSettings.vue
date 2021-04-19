@@ -51,6 +51,20 @@
 				<br>
 				<div v-if="storageSize > 0" id="import-storage">
 					<h3>{{ t('integration_dropbox', 'Dropbox storage') }}</h3>
+					<div v-if="!importingDropbox" class="output-selection">
+						<label for="dropbox-output">
+							<span class="icon icon-folder" />
+							{{ t('integration_dropbox', 'Import directory') }}
+						</label>
+						<input id="dropbox-output"
+							:readonly="true"
+							:value="state.output_dir">
+						<button
+							@click="onOutputChange">
+							<span class="icon-rename" />
+						</button>
+						<br><br>
+					</div>
 					<label>
 						<span class="icon icon-folder" />
 						{{ t('integration_dropbox', 'Dropbox storage size: {formSize}', { formSize: myHumanFileSize(storageSize, true) }) }}
@@ -147,18 +161,16 @@ export default {
 	methods: {
 		onLogoutClick() {
 			this.state.user_name = ''
-			this.saveOptions()
+			this.saveOptions({ user_name: this.state.user_name })
 		},
 		onAccessCodeInput() {
 			delay(() => {
 				this.saveAccessCode()
 			}, 2000)()
 		},
-		saveOptions() {
+		saveOptions(values) {
 			const req = {
-				values: {
-					user_name: this.state.user_name,
-				},
+				values,
 			}
 			const url = generateUrl('/apps/integration_dropbox/config')
 			axios.put(url, req)
@@ -168,7 +180,7 @@ export default {
 				.catch((error) => {
 					showError(
 						t('integration_dropbox', 'Failed to save Dropbox options')
-						+ ': ' + error.response.request.responseText
+						+ ': ' + error.response?.request?.responseText
 					)
 				})
 				.then(() => {
@@ -284,6 +296,21 @@ export default {
 				.then(() => {
 				})
 		},
+		onOutputChange() {
+			OC.dialogs.filepicker(
+				t('integration_dropbox', 'Choose where to write imported files'),
+				(targetPath) => {
+					if (targetPath === '') {
+						targetPath = '/'
+					}
+					this.state.output_dir = targetPath
+					this.saveOptions({ output_dir: this.state.output_dir })
+				},
+				false,
+				'httpd/unix-directory',
+				true
+			)
+		},
 		myHumanFileSize(bytes, approx = false, si = false, dp = 1) {
 			return humanFileSize(bytes, approx, si, dp)
 		},
@@ -345,4 +372,15 @@ body.theme--dark .icon-dropbox {
 	line-height: 38px;
 }
 
+.output-selection {
+	display: flex;
+
+	label,
+	input {
+		width: 300px;
+	}
+	button {
+		width: 44px !important;
+	}
+}
 </style>

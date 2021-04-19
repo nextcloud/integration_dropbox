@@ -49,6 +49,7 @@ class Personal implements ISettings {
 	 */
 	public function getForm(): TemplateResponse {
 		$userName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name', '');
+		$outputDir = $this->config->getUserValue($this->userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 
 		// for OAuth
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
@@ -64,6 +65,7 @@ class Personal implements ISettings {
 			'user_name' => $userName,
 			'free_space' => $freeSpace,
 			'user_quota' => $user->getQuota(),
+			'output_dir' => $outputDir,
 		];
 		$this->initialStateService->provideInitialState($this->appName, 'user-config', $userConfig);
 		$response = new TemplateResponse(Application::APP_ID, 'personalSettings');
