@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.1 – 2021-04-19
+### Added
+- setting to choose output dir
+
+### Changed
+- bump js libs
+
+### Fixed
+- potential mess with concurrent import jobs
+
 ## 1.0.0 – 2021-03-19
 ### Changed
 - bump js libs
