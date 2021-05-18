@@ -19,7 +19,8 @@ use OCA\Dropbox\Service\DropboxStorageAPIService;
 
 class ImportDropboxJob extends QueuedJob {
 
-	private $jobList;
+	/** @var DropboxStorageAPIService */
+	private $service;
 
 	/**
 	 * A QueuedJob to partially import dropbox files and launch following job
