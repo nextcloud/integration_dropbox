@@ -169,9 +169,8 @@ class DropboxAPIService {
 
 			if ($respCode >= 400) {
 				return ['error' => $this->l10n->t('Bad credentials')];
-			} else {
-				return ['success' => true];
 			}
+			return ['success' => true];
 		} catch (ServerException | ClientException $e) {
 			$response = $e->getResponse();
 			if ($response->getStatusCode() === 401) {
