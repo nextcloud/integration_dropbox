@@ -165,7 +165,6 @@ class DropboxAPIService {
 			];
 
 			$response = $this->client->post($url, $options);
-			//$body = $response->getBody();
 			$respCode = $response->getStatusCode();
 
 			if ($respCode >= 400) {
