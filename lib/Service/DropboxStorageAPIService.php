@@ -298,7 +298,6 @@ class DropboxStorageAPIService {
 	 */
 	private function createAndGetFolder(string $dirName, Node $topFolder): ?Node {
 		$dirs = explode('/', $dirName);
-		$seenDirs = [];
 		$dirNode = $topFolder;
 		foreach ($dirs as $dir) {
 			if (!$dirNode->nodeExists($dir)) {
