@@ -267,17 +267,7 @@ class DropboxStorageAPIService {
 			$res = $this->dropboxApiService->downloadFile(
 				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileItem['id']
 			);
-			if (!isset($res['error'])) {
-				if (isset($fileItem['server_modified'])) {
-					$d = new \Datetime($fileItem['server_modified']);
-					$ts = $d->getTimestamp();
-					$savedFile->touch($ts);
-				} else {
-					$savedFile->touch();
-				}
-				$stat = $savedFile->stat();
-				return $stat['size'] ?? 0;
-			} else {
+			if (isset($res['error'])) {
 				$this->logger->warning('Dropbox error downloading file ' . $fileName . ' : ' . $res['error'], ['app' => $this->appName]);
 				try {
 					if ($savedFile->isDeletable()) {
@@ -286,7 +276,17 @@ class DropboxStorageAPIService {
 				} catch (LockedException $e) {
 					$this->logger->warning('Dropbox error deleting file ' . $fileName, ['app' => $this->appName]);
 				}
+				return null;
 			}
+			if (isset($fileItem['server_modified'])) {
+				$d = new \Datetime($fileItem['server_modified']);
+				$ts = $d->getTimestamp();
+				$savedFile->touch($ts);
+			} else {
+				$savedFile->touch();
+			}
+			$stat = $savedFile->stat();
+			return $stat['size'] ?? 0;
 		}
 		return null;
 	}
