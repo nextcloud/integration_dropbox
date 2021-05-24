@@ -11,10 +11,8 @@
 
 namespace OCA\Dropbox\Service;
 
-use OCP\IL10N;
 use Psr\Log\LoggerInterface;
 use OCP\IConfig;
-use OCP\ITempManager;
 use OCP\Files\IRootFolder;
 use OCP\Files\FileInfo;
 use OCP\Files\Node;
@@ -30,7 +28,6 @@ require_once __DIR__ . '/../constants.php';
 
 class DropboxStorageAPIService {
 
-	private $l10n;
 	private $logger;
 
 	/**
@@ -38,19 +35,15 @@ class DropboxStorageAPIService {
 	 */
 	public function __construct (string $appName,
 								LoggerInterface $logger,
-								IL10N $l10n,
 								IRootFolder $root,
 								IConfig $config,
 								IJobList $jobList,
-								ITempManager $tempManager,
 								DropboxAPIService $dropboxApiService) {
 		$this->appName = $appName;
-		$this->l10n = $l10n;
 		$this->logger = $logger;
 		$this->config = $config;
 		$this->root = $root;
 		$this->jobList = $jobList;
-		$this->tempManager = $tempManager;
 		$this->dropboxApiService = $dropboxApiService;
 	}
 
