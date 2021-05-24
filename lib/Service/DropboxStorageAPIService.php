@@ -48,6 +48,8 @@ class DropboxStorageAPIService {
 	}
 
 	/**
+	 * Return dropbox storage size
+	 *
 	 * @param string $accessToken
 	 * @param string $refreshToken
 	 * @param string $clientID
@@ -56,7 +58,6 @@ class DropboxStorageAPIService {
 	 * @return array
 	 */
 	public function getStorageSize(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId): array {
-		// dropbox storage size
 		$params = [];
 		$result = $this->dropboxApiService->request($accessToken, $refreshToken, $clientID, $clientSecret, $userId, 'users/get_space_usage', $params, 'POST');
 		if (isset($result['error']) || !isset($result['used'])) {
