@@ -255,11 +255,7 @@ class DropboxStorageAPIService {
 				return null;
 			}
 		}
-		try {
-			if ($saveFolder->nodeExists($fileName)) {
-				return null;
-			}
-		} catch (ForbiddenException $e) {
+		if ($saveFolder->nodeExists($fileName)) {
 			return null;
 		}
 		try {
