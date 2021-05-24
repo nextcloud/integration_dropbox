@@ -247,47 +247,53 @@ class DropboxStorageAPIService {
 			$saveFolder = $topFolder;
 		} else {
 			$saveFolder = $this->createAndGetFolder($dirName, $topFolder);
-		}
-		try {
-			$fileExists = $saveFolder->nodeExists($fileName);
-		} catch (ForbiddenException $e) {
-			return null;
-		}
-		if (!is_null($saveFolder) && !$fileExists) {
-			try {
-				$savedFile = $saveFolder->newFile($fileName);
-				$resource = $savedFile->fopen('w');
-			} catch (NotFoundException $e) {
+			if (is_null($saveFolder)) {
 				$this->logger->warning(
-					'Dropbox error, can\'t create file "' . $fileName . '" in "' . $saveFolder->getPath() . '"',
+					'Dropbox error, can\'t create directory "' . $dirName . '"',
 					['app' => $this->appName]
 				);
 				return null;
 			}
-			$res = $this->dropboxApiService->downloadFile(
-				$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileItem['id']
-			);
-			if (isset($res['error'])) {
-				$this->logger->warning('Dropbox error downloading file ' . $fileName . ' : ' . $res['error'], ['app' => $this->appName]);
-				try {
-					if ($savedFile->isDeletable()) {
-						$savedFile->delete();
-					}
-				} catch (LockedException $e) {
-					$this->logger->warning('Dropbox error deleting file ' . $fileName, ['app' => $this->appName]);
-				}
+		}
+		try {
+			if ($saveFolder->nodeExists($fileName)) {
 				return null;
 			}
-			if (isset($fileItem['server_modified'])) {
-				$d = new \Datetime($fileItem['server_modified']);
-				$ts = $d->getTimestamp();
-				$savedFile->touch($ts);
-			} else {
-				$savedFile->touch();
-			}
-			return $fileItem['size'] ?? 0;
+		} catch (ForbiddenException $e) {
+			return null;
 		}
-		return null;
+		try {
+			$savedFile = $saveFolder->newFile($fileName);
+			$resource = $savedFile->fopen('w');
+		} catch (NotFoundException $e) {
+			$this->logger->warning(
+				'Dropbox error, can\'t create file "' . $fileName . '" in "' . $saveFolder->getPath() . '"',
+				['app' => $this->appName]
+			);
+			return null;
+		}
+		$res = $this->dropboxApiService->downloadFile(
+			$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileItem['id']
+		);
+		if (isset($res['error'])) {
+			$this->logger->warning('Dropbox error downloading file ' . $fileName . ' : ' . $res['error'], ['app' => $this->appName]);
+			try {
+				if ($savedFile->isDeletable()) {
+					$savedFile->delete();
+				}
+			} catch (LockedException $e) {
+				$this->logger->warning('Dropbox error deleting file ' . $fileName, ['app' => $this->appName]);
+			}
+			return null;
+		}
+		if (isset($fileItem['server_modified'])) {
+			$d = new \Datetime($fileItem['server_modified']);
+			$ts = $d->getTimestamp();
+			$savedFile->touch($ts);
+		} else {
+			$savedFile->touch();
+		}
+		return $fileItem['size'] ?? 0;
 	}
 
 	/**
