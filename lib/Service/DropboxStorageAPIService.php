@@ -19,12 +19,9 @@ use OCP\Files\IRootFolder;
 use OCP\Files\FileInfo;
 use OCP\Files\Node;
 use OCP\Files\NotFoundException;
-use OCP\Files\ForbiddenException;
 use OCP\Lock\LockedException;
 
 use OCP\BackgroundJob\IJobList;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ServerException;
 
 use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\BackgroundJob\ImportDropboxJob;
