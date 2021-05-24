@@ -289,7 +289,7 @@ class DropboxStorageAPIService {
 		} else {
 			$savedFile->touch();
 		}
-		return $fileItem['size'] ?? 0;
+		return $fileItem['size'];
 	}
 
 	/**
