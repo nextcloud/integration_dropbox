@@ -229,7 +229,7 @@ class DropboxStorageAPIService {
 	 * @return ?int downloaded size, null if already existing or network error
 	 */
 	private function getFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
-							string $userId, array $fileItem, Node $topFolder): ?int {
+							string $userId, array $fileItem, Node $topFolder): ?float {
 		$fileName = $fileItem['name'];
 		$path = preg_replace('/^\//', '', $fileItem['path_display'] ?? '.');
 		$pathParts = pathinfo($path);
