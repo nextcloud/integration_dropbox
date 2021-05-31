@@ -23,6 +23,7 @@ use OCP\BackgroundJob\IJobList;
 
 use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\BackgroundJob\ImportDropboxJob;
+use OCP\Files\ForbiddenException;
 
 require_once __DIR__ . '/../constants.php';
 
