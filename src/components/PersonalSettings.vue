@@ -59,7 +59,7 @@
 						<input id="dropbox-output"
 							:readonly="true"
 							:value="state.output_dir">
-						<button
+						<button class="edit-output-dir"
 							@click="onOutputChange">
 							<span class="icon-rename" />
 						</button>
@@ -342,17 +342,27 @@ body.theme--dark .icon-dropbox {
 		font-weight: bold;
 	}
 
-	#import-storage > button {
-		width: 300px;
-	}
+	#import-storage {
+		> button {
+			width: 300px;
+		}
 
-	#import-storage > label {
-		width: 300px;
-		display: inline-block;
+		> label {
+			width: 300px;
+			display: inline-block;
 
-		span {
+			span {
+				margin-bottom: -2px;
+			}
+		}
+
+		.output-selection label span {
 			margin-bottom: -2px;
 		}
+	}
+
+	.edit-output-dir {
+		padding: 6px 6px;
 	}
 }
 
@@ -374,6 +384,7 @@ body.theme--dark .icon-dropbox {
 
 .output-selection {
 	display: flex;
+	align-items: center;
 
 	label,
 	input {
