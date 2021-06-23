@@ -22,8 +22,6 @@ use OCP\Notification\IManager as INotificationManager;
 
 use OCA\Dropbox\AppInfo\Application;
 
-require_once __DIR__ . '/../constants.php';
-
 class DropboxAPIService {
 
 	private $l10n;

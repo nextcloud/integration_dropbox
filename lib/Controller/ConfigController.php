@@ -22,17 +22,12 @@ use Psr\Log\LoggerInterface;
 
 use OCP\IRequest;
 use OCP\IDBConnection;
-use OCP\AppFramework\Http;
-use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Controller;
 use OCP\Http\Client\IClientService;
 
 use OCA\Dropbox\Service\DropboxAPIService;
 use OCA\Dropbox\AppInfo\Application;
-
-require_once __DIR__ . '/../constants.php';
 
 class ConfigController extends Controller {
 
@@ -40,7 +35,6 @@ class ConfigController extends Controller {
     private $userId;
     private $config;
     private $dbconnection;
-    private $dbtype;
 
     public function __construct($AppName,
                                 IRequest $request,
@@ -82,10 +76,10 @@ class ConfigController extends Controller {
         }
         if (isset($values['user_name']) && $values['user_name'] === '') {
             //// revoke token
-            //$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
-            //$clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
-            //$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', DEFAULT_DROPBOX_CLIENT_SECRET);
-            //$clientSecret = $clientSecret ?: DEFAULT_DROPBOX_CLIENT_SECRET;
+            //$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', Application::DEFAULT_DROPBOX_CLIENT_ID);
+            //$clientID = $clientID ?: Application::DEFAULT_DROPBOX_CLIENT_ID;
+            //$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', Application::DEFAULT_DROPBOX_CLIENT_SECRET);
+            //$clientSecret = $clientSecret ?: Application::DEFAULT_DROPBOX_CLIENT_SECRET;
             //$accessToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'token', '');
             //$refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token', '');
 
@@ -128,10 +122,10 @@ class ConfigController extends Controller {
             $message = $this->l->t('Invalid access code');
             return new DataResponse($message, 400);
         }
-        $clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
-        $clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
-        $clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', DEFAULT_DROPBOX_CLIENT_SECRET);
-        $clientSecret = $clientSecret ?: DEFAULT_DROPBOX_CLIENT_SECRET;
+        $clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', Application::DEFAULT_DROPBOX_CLIENT_ID);
+        $clientID = $clientID ?: Application::DEFAULT_DROPBOX_CLIENT_ID;
+        $clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', Application::DEFAULT_DROPBOX_CLIENT_SECRET);
+        $clientSecret = $clientSecret ?: Application::DEFAULT_DROPBOX_CLIENT_SECRET;
 
         if ($clientID) {
             $result = $this->dropboxAPIService->requestOAuthAccessToken($clientID, $clientSecret, [

@@ -6,15 +6,12 @@ use OCP\IRequest;
 use OCP\IL10N;
 use OCP\IConfig;
 use OCP\Settings\ISettings;
-use OCP\Util;
 use OCP\IURLGenerator;
 use OCP\IUserManager;
 use OCP\Files\IRootFolder;
 use OCP\IInitialStateService;
 
 use OCA\Dropbox\AppInfo\Application;
-
-require_once __DIR__ . '/../constants.php';
 
 class Personal implements ISettings {
 
@@ -52,8 +49,8 @@ class Personal implements ISettings {
 		$outputDir = $this->config->getUserValue($this->userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 
 		// for OAuth
-		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
-		$clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
+		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', Application::DEFAULT_DROPBOX_CLIENT_ID);
+		$clientID = $clientID ?: Application::DEFAULT_DROPBOX_CLIENT_ID;
 
 		// get free space
 		$userFolder = $this->root->getUserFolder($this->userId);

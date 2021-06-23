@@ -25,8 +25,6 @@ use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\BackgroundJob\ImportDropboxJob;
 use OCP\Files\ForbiddenException;
 
-require_once __DIR__ . '/../constants.php';
-
 class DropboxStorageAPIService {
 
 	private $logger;
@@ -110,10 +108,10 @@ class DropboxStorageAPIService {
 
 		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token', '');
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token', '');
-		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', DEFAULT_DROPBOX_CLIENT_ID);
-		$clientID = $clientID ?: DEFAULT_DROPBOX_CLIENT_ID;
-		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', DEFAULT_DROPBOX_CLIENT_SECRET);
-		$clientSecret = $clientSecret ?: DEFAULT_DROPBOX_CLIENT_SECRET;
+		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', Application::DEFAULT_DROPBOX_CLIENT_ID);
+		$clientID = $clientID ?: Application::DEFAULT_DROPBOX_CLIENT_ID;
+		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', Application::DEFAULT_DROPBOX_CLIENT_SECRET);
+		$clientSecret = $clientSecret ?: Application::DEFAULT_DROPBOX_CLIENT_SECRET;
 		// import batch of files
 		$targetPath = $this->config->getUserValue($userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 		$targetPath = $targetPath ?: '/Dropbox import';
