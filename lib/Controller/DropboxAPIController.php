@@ -11,14 +11,7 @@
 
 namespace OCA\Dropbox\Controller;
 
-use OCP\App\IAppManager;
-use OCP\Files\IAppData;
-
 use OCP\IConfig;
-use OCP\IServerContainer;
-use OCP\IL10N;
-
-use Psr\Log\LoggerInterface;
 use OCP\IRequest;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
@@ -28,30 +21,46 @@ use OCA\Dropbox\AppInfo\Application;
 
 class DropboxAPIController extends Controller {
 
-
-	private $userId;
+	/**
+	 * @var IConfig
+	 */
 	private $config;
+	/**
+	 * @var DropboxStorageAPIService
+	 */
+	private $dropboxStorageApiService;
+	/**
+	 * @var string|null
+	 */
+	private $userId;
+	/**
+	 * @var string
+	 */
+	private $accessToken;
+	/**
+	 * @var string
+	 */
+	private $refreshToken;
+	/**
+	 * @var string
+	 */
+	private $clientID;
+	/**
+	 * @var string
+	 */
+	private $clientSecret;
 
-	public function __construct(string $AppName,
+	public function __construct(string $appName,
 								IRequest $request,
-								IServerContainer $serverContainer,
 								IConfig $config,
-								IL10N $l10n,
-								IAppManager $appManager,
-								IAppData $appData,
-								LoggerInterface $logger,
 								DropboxStorageAPIService $dropboxStorageApiService,
 								?string $userId) {
-		parent::__construct($AppName, $request);
-		$this->userId = $userId;
-		$this->l10n = $l10n;
-		$this->appData = $appData;
-		$this->serverContainer = $serverContainer;
+		parent::__construct($appName, $request);
 		$this->config = $config;
-		$this->logger = $logger;
 		$this->dropboxStorageApiService = $dropboxStorageApiService;
-		$this->accessToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'token', '');
-		$this->refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token', '');
+		$this->userId = $userId;
+		$this->accessToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'token');
+		$this->refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
 		$this->clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', Application::DEFAULT_DROPBOX_CLIENT_ID);
 		$this->clientID = $this->clientID ?: Application::DEFAULT_DROPBOX_CLIENT_ID;
 		$this->clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', Application::DEFAULT_DROPBOX_CLIENT_SECRET);
@@ -87,7 +96,7 @@ class DropboxAPIController extends Controller {
         if ($this->accessToken === '') {
             return new DataResponse(null, 400);
         }
-        $result = $this->dropboxStorageApiService->startImportDropbox($this->accessToken, $this->userId);
+        $result = $this->dropboxStorageApiService->startImportDropbox($this->userId);
         if (isset($result['error'])) {
             $response = new DataResponse($result['error'], 401);
         } else {
@@ -105,11 +114,10 @@ class DropboxAPIController extends Controller {
         if ($this->accessToken === '') {
             return new DataResponse(null, 400);
         }
-        $response = new DataResponse([
-            'importing_dropbox' => $this->config->getUserValue($this->userId, Application::APP_ID, 'importing_dropbox', '') === '1',
+        return new DataResponse([
+            'importing_dropbox' => $this->config->getUserValue($this->userId, Application::APP_ID, 'importing_dropbox') === '1',
             'last_dropbox_import_timestamp' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0'),
             'nb_imported_files' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'nb_imported_files', '0'),
         ]);
-        return $response;
     }
 }

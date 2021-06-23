@@ -2,38 +2,42 @@
 namespace OCA\Dropbox\Settings;
 
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\IRequest;
-use OCP\IL10N;
+use OCP\AppFramework\Services\IInitialState;
 use OCP\IConfig;
 use OCP\Settings\ISettings;
-use OCP\IURLGenerator;
 use OCP\IUserManager;
 use OCP\Files\IRootFolder;
-use OCP\IInitialStateService;
 
 use OCA\Dropbox\AppInfo\Application;
 
 class Personal implements ISettings {
 
-	private $request;
+	/**
+	 * @var IConfig
+	 */
 	private $config;
-	private $dataDirPath;
-	private $urlGenerator;
-	private $l;
+	/**
+	 * @var IRootFolder
+	 */
+	private $root;
+	/**
+	 * @var IUserManager
+	 */
+	private $userManager;
+	/**
+	 * @var IInitialState
+	 */
+	private $initialStateService;
+	/**
+	 * @var string
+	 */
+	private $userId;
 
-	public function __construct(string $appName,
-								IL10N $l,
-								IRequest $request,
-								IConfig $config,
-								IURLGenerator $urlGenerator,
+	public function __construct(IConfig $config,
 								IRootFolder $root,
 								IUserManager $userManager,
-								IInitialStateService $initialStateService,
+								IInitialState $initialStateService,
 								string $userId) {
-		$this->appName = $appName;
-		$this->urlGenerator = $urlGenerator;
-		$this->request = $request;
-		$this->l = $l;
 		$this->config = $config;
 		$this->root = $root;
 		$this->userManager = $userManager;
@@ -45,7 +49,7 @@ class Personal implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm(): TemplateResponse {
-		$userName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name', '');
+		$userName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$outputDir = $this->config->getUserValue($this->userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 
 		// for OAuth
@@ -64,9 +68,8 @@ class Personal implements ISettings {
 			'user_quota' => $user->getQuota(),
 			'output_dir' => $outputDir,
 		];
-		$this->initialStateService->provideInitialState($this->appName, 'user-config', $userConfig);
-		$response = new TemplateResponse(Application::APP_ID, 'personalSettings');
-		return $response;
+		$this->initialStateService->provideInitialState('user-config', $userConfig);
+		return new TemplateResponse(Application::APP_ID, 'personalSettings');
 	}
 
 	public function getSection(): string {

@@ -11,6 +11,8 @@
 
 namespace OCA\Dropbox\Service;
 
+use Datetime;
+use OCP\Files\Folder;
 use Psr\Log\LoggerInterface;
 use OCP\IConfig;
 use OCP\Files\IRootFolder;
@@ -26,8 +28,30 @@ use OCA\Dropbox\BackgroundJob\ImportDropboxJob;
 use OCP\Files\ForbiddenException;
 
 class DropboxStorageAPIService {
-
+	/**
+	 * @var string
+	 */
+	private $appName;
+	/**
+	 * @var LoggerInterface
+	 */
 	private $logger;
+	/**
+	 * @var IRootFolder
+	 */
+	private $root;
+	/**
+	 * @var IConfig
+	 */
+	private $config;
+	/**
+	 * @var IJobList
+	 */
+	private $jobList;
+	/**
+	 * @var DropboxAPIService
+	 */
+	private $dropboxApiService;
 
 	/**
 	 * Service to make requests to Dropbox API
@@ -40,8 +64,8 @@ class DropboxStorageAPIService {
 								DropboxAPIService $dropboxApiService) {
 		$this->appName = $appName;
 		$this->logger = $logger;
-		$this->config = $config;
 		$this->root = $root;
+		$this->config = $config;
 		$this->jobList = $jobList;
 		$this->dropboxApiService = $dropboxApiService;
 	}
@@ -68,17 +92,16 @@ class DropboxStorageAPIService {
 	}
 
 	/**
-	 * @param string $accessToken
 	 * @param string $userId
 	 * @return array
 	 */
-	public function startImportDropbox(string $accessToken, string $userId): array {
+	public function startImportDropbox(string $userId): array {
 		$targetPath = $this->config->getUserValue($userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 		$targetPath = $targetPath ?: '/Dropbox import';
 		// create root folder
 		$userFolder = $this->root->getUserFolder($userId);
 		if (!$userFolder->nodeExists($targetPath)) {
-			$folder = $userFolder->newFolder($targetPath);
+			$userFolder->newFolder($targetPath);
 		} else {
 			$folder = $userFolder->get($targetPath);
 			if ($folder->getType() !== FileInfo::TYPE_FOLDER) {
@@ -95,7 +118,7 @@ class DropboxStorageAPIService {
 
 	/**
 	 * @param string $userId
-	 * @return array
+	 * @return void
 	 */
 	public function importDropboxJob(string $userId): void {
 		$this->logger->error('Importing dropbox files for ' . $userId);
@@ -106,8 +129,8 @@ class DropboxStorageAPIService {
 		}
 		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_running', '1');
 
-		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token', '');
-		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token', '');
+		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
+		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');
 		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', Application::DEFAULT_DROPBOX_CLIENT_ID);
 		$clientID = $clientID ?: Application::DEFAULT_DROPBOX_CLIENT_ID;
 		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', Application::DEFAULT_DROPBOX_CLIENT_SECRET);
@@ -130,7 +153,7 @@ class DropboxStorageAPIService {
 				]);
 			}
 		} else {
-			$ts = (new \Datetime())->getTimestamp();
+			$ts = (new Datetime())->getTimestamp();
 			$this->config->setUserValue($userId, Application::APP_ID, 'last_dropbox_import_timestamp', $ts);
 			$this->jobList->add(ImportDropboxJob::class, ['user_id' => $userId]);
 		}
@@ -150,7 +173,7 @@ class DropboxStorageAPIService {
 	 */
 	public function importFiles(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
 								string $userId, string $targetPath,
-								?int $maxDownloadSize = null, int $alreadyImported): array {
+								?int $maxDownloadSize = null, int $alreadyImported = 0): array {
 		// create root folder
 		$userFolder = $this->root->getUserFolder($userId);
 		if (!$userFolder->nodeExists($targetPath)) {
@@ -224,11 +247,11 @@ class DropboxStorageAPIService {
 	 * @param string $clientSecret
 	 * @param string $userId
 	 * @param array $fileItem
-	 * @param Node $topFolder
-	 * @return ?int downloaded size, null if already existing or network error
+	 * @param Folder $topFolder
+	 * @return ?float downloaded size, null if already existing or network error
 	 */
 	private function getFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
-							string $userId, array $fileItem, Node $topFolder): ?float {
+							string $userId, array $fileItem, Folder $topFolder): ?float {
 		$fileName = $fileItem['name'];
 		$path = preg_replace('/^\//', '', $fileItem['path_display'] ?? '.');
 		$pathParts = pathinfo($path);
@@ -277,7 +300,7 @@ class DropboxStorageAPIService {
 			return null;
 		}
 		if (isset($fileItem['server_modified'])) {
-			$d = new \Datetime($fileItem['server_modified']);
+			$d = new Datetime($fileItem['server_modified']);
 			$ts = $d->getTimestamp();
 			$savedFile->touch($ts);
 		} else {
@@ -288,10 +311,12 @@ class DropboxStorageAPIService {
 
 	/**
 	 * @param string $dirName
-	 * @param Node $topFolder
+	 * @param Folder $topFolder
 	 * @return ?Node
+	 * @throws NotFoundException
+	 * @throws \OCP\Files\NotPermittedException
 	 */
-	private function createAndGetFolder(string $dirName, Node $topFolder): ?Node {
+	private function createAndGetFolder(string $dirName, Folder $topFolder): ?Folder {
 		$dirs = explode('/', $dirName);
 		$dirNode = $topFolder;
 		foreach ($dirs as $dir) {

@@ -13,11 +13,8 @@ class PersonalSection implements IIconSection {
 	/** @var IURLGenerator */
 	private $urlGenerator;
 
-	public function __construct(string $appName,
-				    IURLGenerator $urlGenerator,
-				    IL10N $l
-				    ) {
-		$this->appName = $appName;
+	public function __construct(IURLGenerator $urlGenerator,
+								IL10N $l) {
 		$this->l = $l;
 		$this->urlGenerator = $urlGenerator;
 	}
@@ -56,5 +53,4 @@ class PersonalSection implements IIconSection {
 	public function getIcon(): ?string {
 		return $this->urlGenerator->imagePath('core', 'actions/download.svg');
 	}
-
 }

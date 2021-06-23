@@ -11,57 +11,49 @@
 
 namespace OCA\Dropbox\Controller;
 
-use OCP\App\IAppManager;
-use OCP\Files\IAppData;
-
-use OCP\IURLGenerator;
 use OCP\IConfig;
-use OCP\IServerContainer;
 use OCP\IL10N;
-use Psr\Log\LoggerInterface;
 
 use OCP\IRequest;
-use OCP\IDBConnection;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
-use OCP\Http\Client\IClientService;
 
 use OCA\Dropbox\Service\DropboxAPIService;
 use OCA\Dropbox\AppInfo\Application;
 
 class ConfigController extends Controller {
 
+	/**
+	 * @var IConfig
+	 */
+	private $config;
+	/**
+	 * @var IL10N
+	 */
+	private $l;
+	/**
+	 * @var DropboxAPIService
+	 */
+	private $dropboxAPIService;
+	/**
+	 * @var string|null
+	 */
+	private $userId;
 
-    private $userId;
-    private $config;
-    private $dbconnection;
-
-    public function __construct($AppName,
-                                IRequest $request,
-                                IServerContainer $serverContainer,
-                                IConfig $config,
-                                IAppManager $appManager,
-                                IAppData $appData,
-                                IDBConnection $dbconnection,
-                                IURLGenerator $urlGenerator,
-                                IL10N $l,
-                                LoggerInterface $logger,
-                                IClientService $clientService,
-                                DropboxAPIService $dropboxAPIService,
-                                $userId) {
-        parent::__construct($AppName, $request);
-        $this->l = $l;
-        $this->appName = $AppName;
-        $this->userId = $userId;
-        $this->appData = $appData;
-        $this->serverContainer = $serverContainer;
-        $this->config = $config;
-        $this->dbconnection = $dbconnection;
-        $this->urlGenerator = $urlGenerator;
-        $this->logger = $logger;
-        $this->clientService = $clientService;
-        $this->dropboxAPIService = $dropboxAPIService;
-    }
+	public function __construct($appName,
+								IRequest $request,
+								IConfig $config,
+								IL10N $l,
+								DropboxAPIService $dropboxAPIService,
+								?string $userId) {
+        parent::__construct($appName, $request);
+		$this->appName = $appName;
+		$this->request = $request;
+		$this->config = $config;
+		$this->l = $l;
+		$this->dropboxAPIService = $dropboxAPIService;
+		$this->userId = $userId;
+	}
 
     /**
      * set config values
@@ -93,8 +85,7 @@ class ConfigController extends Controller {
             $this->config->deleteUserValue($this->userId, Application::APP_ID, 'token');
             $this->config->deleteUserValue($this->userId, Application::APP_ID, 'refresh_token');
         }
-        $response = new DataResponse(1);
-        return $response;
+        return new DataResponse(1);
     }
 
     /**
@@ -107,15 +98,14 @@ class ConfigController extends Controller {
         foreach ($values as $key => $value) {
             $this->config->setAppValue(Application::APP_ID, $key, $value);
         }
-        $response = new DataResponse(1);
-        return $response;
+        return new DataResponse(1);
     }
 
     /**
      * @NoAdminRequired
      *
      * @param string $code
-     * @return array
+     * @return DataResponse
      */
     public function submitAccessCode(string $code = ''): DataResponse {
         if ($code === '') {

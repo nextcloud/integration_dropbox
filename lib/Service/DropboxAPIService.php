@@ -11,6 +11,8 @@
 
 namespace OCA\Dropbox\Service;
 
+use DateTime;
+use Exception;
 use OCP\IL10N;
 use Psr\Log\LoggerInterface;
 use OCP\IConfig;
@@ -21,11 +23,28 @@ use GuzzleHttp\Exception\ConnectException;
 use OCP\Notification\IManager as INotificationManager;
 
 use OCA\Dropbox\AppInfo\Application;
+use Throwable;
 
 class DropboxAPIService {
 
 	private $l10n;
 	private $logger;
+	/**
+	 * @var IConfig
+	 */
+	private $config;
+	/**
+	 * @var INotificationManager
+	 */
+	private $notificationManager;
+	/**
+	 * @var \OCP\Http\Client\IClient
+	 */
+	private $client;
+	/**
+	 * @var string
+	 */
+	private $appName;
 
 	/**
 	 * Service to make requests to Dropbox API
@@ -36,19 +55,18 @@ class DropboxAPIService {
 								IConfig $config,
 								INotificationManager $notificationManager,
 								IClientService $clientService) {
-		$this->appName = $appName;
-		$this->l10n = $l10n;
 		$this->logger = $logger;
+		$this->l10n = $l10n;
 		$this->config = $config;
 		$this->notificationManager = $notificationManager;
-		$this->clientService = $clientService;
 		$this->client = $clientService->newClient();
+		$this->appName = $appName;
 	}
 
 	/**
 	 * @param string $userId
 	 * @param string $subject
-	 * @param string $params
+	 * @param array $params
 	 * @return void
 	 */
 	public function sendNCNotification(string $userId, string $subject, array $params): void {
@@ -57,7 +75,7 @@ class DropboxAPIService {
 
 		$notification->setApp(Application::APP_ID)
 			->setUser($userId)
-			->setDateTime(new \DateTime())
+			->setDateTime(new DateTime())
 			->setObject('dum', 'dum')
 			->setSubject($subject, $params);
 
@@ -104,6 +122,8 @@ class DropboxAPIService {
 				$response = $this->client->put($url, $options);
 			} else if ($method === 'DELETE') {
 				$response = $this->client->delete($url, $options);
+			} else {
+				return ['error' => $this->l10n->t('Bad HTTP method')];
 			}
 			$body = $response->getBody();
 			$respCode = $response->getStatusCode();
@@ -144,9 +164,10 @@ class DropboxAPIService {
 	 * @param string $clientID
 	 * @param string $clientSecret
 	 * @param string $userId
-	 * @param string $tmpFilePath
+	 * @param $resource
 	 * @param string $fileId
 	 * @return array
+	 * @throws \OCP\PreConditionNotMetException
 	 */
 	public function downloadFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
 								$resource, string $fileId): array {
@@ -194,7 +215,7 @@ class DropboxAPIService {
 		} catch (ConnectException $e) {
 			$this->logger->warning('Dropbox API connection error : '.$e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
-		} catch (\Exception | \Throwable $e) {
+		} catch (Exception | Throwable $e) {
 			$this->logger->warning('Dropbox API connection error : '.$e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
 		}
@@ -234,6 +255,8 @@ class DropboxAPIService {
 				$response = $this->client->put($url, $options);
 			} else if ($method === 'DELETE') {
 				$response = $this->client->delete($url, $options);
+			} else {
+				return ['error' => $this->l10n->t('Bad HTTP method')];
 			}
 			$body = $response->getBody();
 			$respCode = $response->getStatusCode();
