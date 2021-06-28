@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.2 – 2021-06-28
+### Changed
+- refactor backend code @vitormattos
+- bump js libs
+- get rid of all deprecated stuff
+- bump min NC version to 22
+- cleanup backend code
+
 ## 1.0.1 – 2021-04-19
 ### Added
 - setting to choose output dir
