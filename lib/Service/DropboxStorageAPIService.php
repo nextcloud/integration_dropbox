@@ -52,6 +52,10 @@ class DropboxStorageAPIService {
 	 * @var DropboxAPIService
 	 */
 	private $dropboxApiService;
+	/**
+	 * @var UserScopeService
+	 */
+	private $userScopeService;
 
 	/**
 	 * Service to make requests to Dropbox API
@@ -61,6 +65,7 @@ class DropboxStorageAPIService {
 								IRootFolder $root,
 								IConfig $config,
 								IJobList $jobList,
+								UserScopeService $userScopeService,
 								DropboxAPIService $dropboxApiService) {
 		$this->appName = $appName;
 		$this->logger = $logger;
@@ -68,6 +73,7 @@ class DropboxStorageAPIService {
 		$this->config = $config;
 		$this->jobList = $jobList;
 		$this->dropboxApiService = $dropboxApiService;
+		$this->userScopeService = $userScopeService;
 	}
 
 	/**
@@ -122,6 +128,11 @@ class DropboxStorageAPIService {
 	 */
 	public function importDropboxJob(string $userId): void {
 		$this->logger->error('Importing dropbox files for ' . $userId);
+
+		// in case SSE is enabled
+		$this->userScopeService->setUserScope($userId);
+		$this->userScopeService->setFilesystemScope($userId);
+
 		$importingDropbox = $this->config->getUserValue($userId, Application::APP_ID, 'importing_dropbox', '0') === '1';
 		$jobRunning = $this->config->getUserValue($userId, Application::APP_ID, 'dropbox_import_running', '0') === '1';
 		if (!$importingDropbox || $jobRunning) {

@@ -172,15 +172,19 @@ class DropboxAPIService {
 	public function downloadFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
 								$resource, string $fileId): array {
 		try {
-			$url = 'https://content.dropboxapi.com/2/files/download';
+			// we could use https://content.dropboxapi.com/2/files/download
+			// with 'Dropbox-API-Arg' => json_encode(['path' => $fileId]),
+			// but the HTTP client can't return a stream for POST requests
+			// so this is a trick: we get a link and download from this link with a GET request
+			$url = 'https://api.dropboxapi.com/2/files/get_temporary_link';
 			$options = [
-				'sink' => $resource,
 				'timeout' => 0,
 				'headers' => [
 					'Authorization' => 'Bearer ' . $accessToken,
 					'User-Agent' => 'Nextcloud Dropbox integration',
-					'Dropbox-API-Arg' => json_encode(['path' => $fileId]),
+					'Content-Type' => 'application/json',
 				],
+				'body' => json_encode(['path' => $fileId]),
 			];
 
 			$response = $this->client->post($url, $options);
@@ -189,6 +193,32 @@ class DropboxAPIService {
 			if ($respCode >= 400) {
 				return ['error' => $this->l10n->t('Bad credentials')];
 			}
+
+			$responseArray = json_decode($response->getBody(), true);
+			if (is_null($responseArray) || !isset($responseArray['link'])) {
+				return ['error' => $this->l10n->t('Can\'t get the temporary dropbox link')];
+			}
+
+			// now download the file
+			$options = [
+				'timeout' => 0,
+				'stream' => true,
+			];
+			$url = $responseArray['link'];
+			$response = $this->client->get($url, $options);
+			$respCode = $response->getStatusCode();
+
+			if ($respCode >= 400) {
+				return ['error' => $this->l10n->t('Bad credentials')];
+			}
+
+			$body = $response->getBody();
+			while (!feof($body)) {
+				// write ~5 MB chunks
+				$chunk = fread($body, 5000000);
+				fwrite($resource, $chunk);
+			}
+
 			return ['success' => true];
 		} catch (ServerException | ClientException $e) {
 			$response = $e->getResponse();
