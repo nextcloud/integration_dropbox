@@ -152,7 +152,13 @@ class DropboxStorageAPIService {
 		// import by batch of 500 Mo
 		$alreadyImported = $this->config->getUserValue($userId, Application::APP_ID, 'nb_imported_files', '0');
 		$alreadyImported = (int) $alreadyImported;
-		$result = $this->importFiles($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $targetPath, 500000000, $alreadyImported);
+		try {
+			$result = $this->importFiles($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $targetPath, 500000000, $alreadyImported);
+		} catch (\Exception | \Throwable $e) {
+			$result = [
+				'error' => 'Unknow job failure. ' . $e->getMessage(),
+			];
+		}
 		if (isset($result['error']) || (isset($result['finished']) && $result['finished'])) {
 			$this->config->setUserValue($userId, Application::APP_ID, 'importing_dropbox', '0');
 			$this->config->setUserValue($userId, Application::APP_ID, 'nb_imported_files', '0');
