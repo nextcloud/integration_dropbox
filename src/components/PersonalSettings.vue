@@ -1,31 +1,34 @@
 <template>
 	<div v-if="state.client_id" id="dropbox_prefs" class="section">
 		<h2>
-			<a class="icon icon-dropbox" />
+			<DropboxIcon />
 			{{ t('integration_dropbox', 'Dropbox data migration') }}
 		</h2>
 		<div class="dropbox-content">
 			<h3>{{ t('integration_dropbox', 'Authentication') }}</h3>
 			<div v-if="!connected">
+				<br>
 				<p class="settings-hint">
-					<span v-if="codeFailed">
-						<span class="icon icon-details" />
+					<span v-if="codeFailed" class="line">
+						<InformationOutlineIcon />
 						{{ t('integration_dropbox', 'If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings.') }}
 					</span>
 				</p>
 				<br>
-				<a class="button"
-					target="_blank"
-					:href="oauthUrl"
-					:class="{ loading: codeLoading }"
-					:disabled="codeLoading === true">
-					<span class="icon icon-external" />
-					{{ t('integration_dropbox', 'Connect to Dropbox to get an access code') }}
+				<a target="_blank"
+					:href="oauthUrl">
+					<NcButton :class="{ loading: codeLoading }"
+						:disabled="codeLoading === true">
+						<template #icon>
+							<OpenInNewIcon />
+						</template>
+						{{ t('integration_dropbox', 'Connect to Dropbox to get an access code') }}
+					</NcButton>
 				</a>
 				<br><br>
-				<div class="dropbox-grid-form">
+				<div class="line">
 					<label for="dropbox-code">
-						<a class="icon icon-category-auth" />
+						<KeyIcon />
 						{{ t('integration_dropbox', 'Dropbox access code') }}
 					</label>
 					<input id="dropbox-code"
@@ -38,56 +41,65 @@
 				</div>
 			</div>
 			<div v-else>
-				<div class="dropbox-grid-form">
+				<div class="line">
 					<label>
-						<a class="icon icon-checkmark-color" />
+						<CheckIcon :size="20" />
 						{{ t('integration_dropbox', 'Connected as {user}', { user: state.user_name }) }}
 					</label>
-					<button id="dropbox-rm-cred" @click="onLogoutClick">
-						<span class="icon icon-close" />
+					<NcButton @click="onLogoutClick">
+						<template #icon>
+							<CloseIcon />
+						</template>
 						{{ t('integration_dropbox', 'Disconnect from Dropbox') }}
-					</button>
+					</NcButton>
 				</div>
 				<br>
-				<div v-if="storageSize > 0" id="import-storage">
+				<div v-if="storageSize > 0"
+					id="import-storage">
 					<h3>{{ t('integration_dropbox', 'Dropbox storage') }}</h3>
-					<div v-if="!importingDropbox" class="output-selection">
+					<div v-if="!importingDropbox" class="line">
 						<label for="dropbox-output">
-							<span class="icon icon-folder" />
+							<FolderIcon :size="20" />
 							{{ t('integration_dropbox', 'Import directory') }}
 						</label>
 						<input id="dropbox-output"
 							:readonly="true"
 							:value="state.output_dir">
-						<button class="edit-output-dir"
-							@click="onOutputChange">
-							<span class="icon-rename" />
-						</button>
+						<NcButton @click="onOutputChange">
+							<template #icon>
+								<PencilIcon />
+							</template>
+						</NcButton>
 						<br><br>
 					</div>
-					<label>
-						<span class="icon icon-folder" />
-						{{ t('integration_dropbox', 'Dropbox storage size: {formSize}', { formSize: myHumanFileSize(storageSize, true) }) }}
-					</label>
-					<button v-if="enoughSpaceForDropbox && !importingDropbox"
-						id="dropbox-import-files"
-						@click="onImportDropbox">
-						<span class="icon icon-files-dark" />
-						{{ t('integration_dropbox', 'Import Dropbox files') }}
-					</button>
-					<span v-else-if="!enoughSpaceForDropbox">
-						{{ t('integration_dropbox', 'Your Dropbox storage is bigger than your remaining space left ({formSpace})', { formSpace: myHumanFileSize(state.free_space) }) }}
-					</span>
-					<div v-else>
-						<br>
-						{{ n('integration_dropbox', '{amount} file imported', '{amount} files imported', nbImportedFiles, { amount: nbImportedFiles }) }}
-						<br>
-						{{ lastDropboxImportDate }}
-						<br>
-						<button @click="onCancelDropboxImport">
-							<span class="icon icon-close" />
-							{{ t('integration_dropbox', 'Cancel Dropbox files import') }}
-						</button>
+					<div class="line">
+						<label>
+							<FolderIcon :size="20" />
+							{{ t('integration_dropbox', 'Dropbox storage size: {formSize}', { formSize: myHumanFileSize(storageSize, true) }) }}
+						</label>
+						<NcButton v-if="enoughSpaceForDropbox && !importingDropbox"
+							@click="onImportDropbox">
+							<template #icon>
+								<FolderIcon :size="20" />
+							</template>
+							{{ t('integration_dropbox', 'Import Dropbox files') }}
+						</NcButton>
+						<span v-else-if="!enoughSpaceForDropbox">
+							{{ t('integration_dropbox', 'Your Dropbox storage is bigger than your remaining space left ({formSpace})', { formSpace: myHumanFileSize(state.free_space) }) }}
+						</span>
+						<div v-else>
+							<br>
+							{{ n('integration_dropbox', '{amount} file imported', '{amount} files imported', nbImportedFiles, { amount: nbImportedFiles }) }}
+							<br>
+							{{ lastDropboxImportDate }}
+							<br>
+							<NcButton @click="onCancelDropboxImport">
+								<template #icon>
+									<CloseIcon />
+								</template>
+								{{ t('integration_dropbox', 'Cancel Dropbox files import') }}
+							</NcButton>
+						</div>
 					</div>
 				</div>
 				<div v-else-if="storageSize === 0">
@@ -99,6 +111,16 @@
 </template>
 
 <script>
+import InformationOutlineIcon from 'vue-material-design-icons/InformationOutline.vue'
+import CheckIcon from 'vue-material-design-icons/Check.vue'
+import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
+import PencilIcon from 'vue-material-design-icons/Pencil.vue'
+import CloseIcon from 'vue-material-design-icons/Close.vue'
+import FolderIcon from 'vue-material-design-icons/Folder.vue'
+import KeyIcon from 'vue-material-design-icons/Key.vue'
+
+import DropboxIcon from './icons/DropboxIcon.vue'
+
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
@@ -106,11 +128,21 @@ import { delay, humanFileSize } from '../utils.js'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import '@nextcloud/dialogs/styles/toast.scss'
 import moment from '@nextcloud/moment'
+import NcButton from '@nextcloud/vue/dist/Components/Button.js'
 
 export default {
 	name: 'PersonalSettings',
 
 	components: {
+		DropboxIcon,
+		NcButton,
+		OpenInNewIcon,
+		PencilIcon,
+		CloseIcon,
+		FolderIcon,
+		KeyIcon,
+		CheckIcon,
+		InformationOutlineIcon,
 	},
 
 	props: [],
@@ -319,79 +351,86 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#dropbox_prefs .icon {
-	display: inline-block;
-	width: 32px;
-}
+#dropbox_prefs {
 
-.icon-dropbox {
-	background-image: url(./../../img/app-dark.svg);
-	background-size: 23px 23px;
-	height: 23px;
-	margin-bottom: -4px;
-}
-
-body.theme--dark .icon-dropbox {
-	background-image: url(./../../img/app.svg);
-}
-
-.dropbox-content {
-	margin-left: 40px;
-
-	h3 {
-		font-weight: bold;
+	h2 {
+		display: flex;
+		align-items: center;
+		span {
+			margin-right: 8px;
+		}
 	}
 
-	#import-storage {
-		> button {
-			width: 300px;
+	.dropbox-content {
+		margin-left: 40px;
+
+		h3 {
+			font-weight: bold;
 		}
 
-		> label {
-			width: 300px;
-			display: inline-block;
+		.line {
+			display: flex;
+			align-items: center;
 
-			span {
-				margin-bottom: -2px;
+			> input {
+				width: 250px;
+			}
+			> span.material-design-icon {
+				margin-right: 8px;
+			}
+
+			label {
+				display: flex;
+				align-items: center;
+				width: 300px;
+
+				> span {
+					margin-right: 8px;
+				}
 			}
 		}
 
-		.output-selection label span {
-			margin-bottom: -2px;
+		.folder-icon {
+			margin-right: 0;
+		}
+
+		label > .folder-icon {
+			color: var(--color-primary);
+			margin-right: 8px;
+		}
+
+		#import-storage {
+			> button {
+				width: 300px;
+			}
+
+			> label {
+				width: 300px;
+				display: inline-block;
+
+				span {
+					margin-bottom: -2px;
+				}
+			}
+
+			.output-selection label span {
+				margin-bottom: -2px;
+			}
 		}
 	}
 
-	.edit-output-dir {
-		padding: 6px 6px;
-	}
-}
+	.output-selection {
+		display: flex;
+		align-items: center;
 
-.dropbox-grid-form {
-	max-width: 600px;
-	display: grid;
-	grid-template: 1fr / 1fr 1fr;
-	button .icon {
-		margin-bottom: -1px;
-	}
-	input {
-		width: 100%;
-	}
-}
+		label,
+		input {
+			width: 300px;
+		}
 
-.dropbox-grid-form label {
-	line-height: 38px;
-}
-
-.output-selection {
-	display: flex;
-	align-items: center;
-
-	label,
-	input {
-		width: 300px;
-	}
-	button {
-		width: 44px !important;
+		button {
+			width: 44px !important;
+		}
 	}
 }
 </style>
