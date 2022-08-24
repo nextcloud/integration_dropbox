@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## 1.0.5 – 2022-08-24
+### Changed
+- use material icons
+- ready for NC 25
+- bump js libs
+- adjust to new eslint config
+
+### Fixed
+- npm scripts
+
 ## 1.0.3 – 2021-09-02
 ### Fixed
 - handle all crashes in import job

@@ -12,8 +12,8 @@
 		"watch": "NODE_ENV=development webpack --progress --watch --config webpack.js",
 		"lint": "eslint --ext .js,.vue src",
 		"lint:fix": "eslint --ext .js,.vue src --fix",
-		"stylelint": "stylelint src",
-		"stylelint:fix": "stylelint src --fix"
+		"stylelint": "stylelint src/**/*.vue src/**/*.scss src/**/*.css",
+		"stylelint:fix": "stylelint src/**/*.vue src/**/*.scss src/**/*.css --fix"
 	},
 	"repository": {
 		"type": "git",
@@ -31,6 +31,10 @@
 	"browserslist": [
 		"extends @nextcloud/browserslist-config"
 	],
+	"engines": {
+		"node": "^16.0.0",
+		"npm": "^7.0.0 || ^8.0.0"
+	},
 	"dependencies": {
 		"@nextcloud/auth": "^2.0.0",
 		"@nextcloud/axios": "^2.0.0",
