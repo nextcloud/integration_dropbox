@@ -1,53 +1,63 @@
 <template>
 	<div id="dropbox_prefs" class="section">
 		<h2>
-			<a class="icon icon-dropbox" />
+			<DropboxIcon class="icon" />
 			{{ t('integration_dropbox', 'Dropbox integration') }}
 		</h2>
 		<p class="settings-hint">
 			{{ t('integration_dropbox', 'Leave all fields empty to use default Nextcloud Dropbox OAuth app.') }}
-			<br><br>
 			{{ t('integration_dropbox', 'If you want your Nextcloud users to authenticate to Dropbox using your own Dropbox OAuth app, create one in Dropbox.') }}
-			<a href="https://www.dropbox.com/developers/apps" class="external" target="_blank">
-				{{ t('integration_dropbox', 'Dropbox developer settings') }}
-			</a>
-			<br>
+		</p>
+		<a href="https://www.dropbox.com/developers/apps" class="external" target="_blank">
+			{{ t('integration_dropbox', 'Dropbox developer settings') }}
+		</a>
+		<br><br>
+		<p class="settings-hint">
 			{{ t('integration_dropbox', 'Make sure your give those permissions to your app:') }}
-			<br>
-			<b>account_info.read - files.metadata.read - files.content.read</b>
-			<br>
+		</p>
+		<p class="settings-hint">
+			<strong>account_info.read - files.metadata.read - files.content.read</strong>
+		</p>
+		<p class="settings-hint">
 			{{ t('integration_dropbox', 'No need to add any redirect URI.') }}
-			<br>
 			{{ t('integration_dropbox', 'Then set the app key and app secret below.') }}
 		</p>
-		<div class="grid-form">
-			<label for="dropbox-client-id">
-				<a class="icon icon-category-auth" />
-				{{ t('integration_dropbox', 'App key') }}
-			</label>
-			<input id="dropbox-client-id"
-				v-model="state.client_id"
-				type="password"
-				:readonly="readonly"
-				:placeholder="t('integration_dropbox', 'Your Dropbox application key')"
-				@input="onInput"
-				@focus="readonly = false">
-			<label for="dropbox-client-secret">
-				<a class="icon icon-category-auth" />
-				{{ t('integration_dropbox', 'App secret') }}
-			</label>
-			<input id="dropbox-client-secret"
-				v-model="state.client_secret"
-				type="password"
-				:readonly="readonly"
-				:placeholder="t('integration_dropbox', 'Your Dropbox application secret')"
-				@input="onInput"
-				@focus="readonly = false">
+		<div id="dropbox-content">
+			<div class="line">
+				<label for="dropbox-client-id">
+					<KeyIcon :size="20" class="icon" />
+					{{ t('integration_dropbox', 'App key') }}
+				</label>
+				<input id="dropbox-client-id"
+					v-model="state.client_id"
+					type="password"
+					:readonly="readonly"
+					:placeholder="t('integration_dropbox', 'Your Dropbox application key')"
+					@input="onInput"
+					@focus="readonly = false">
+			</div>
+			<div class="line">
+				<label for="dropbox-client-secret">
+					<KeyIcon :size="20" class="icon" />
+					{{ t('integration_dropbox', 'App secret') }}
+				</label>
+				<input id="dropbox-client-secret"
+					v-model="state.client_secret"
+					type="password"
+					:readonly="readonly"
+					:placeholder="t('integration_dropbox', 'Your Dropbox application secret')"
+					@input="onInput"
+					@focus="readonly = false">
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import KeyIcon from 'vue-material-design-icons/Key.vue'
+
+import DropboxIcon from './icons/DropboxIcon.vue'
+
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
@@ -59,6 +69,8 @@ export default {
 	name: 'AdminSettings',
 
 	components: {
+		DropboxIcon,
+		KeyIcon,
 	},
 
 	props: [],
@@ -110,39 +122,34 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.grid-form label {
-	line-height: 38px;
-}
+#dropbox_prefs {
+	#dropbox-content{
+		margin-left: 40px;
+	}
 
-.grid-form input {
-	width: 100%;
-}
+	h2,
+	.line,
+	.settings-hint {
+		display: flex;
+		align-items: center;
+		.icon {
+			margin-right: 4px;
+		}
+	}
 
-.grid-form {
-	max-width: 500px;
-	display: grid;
-	grid-template: 1fr / 1fr 1fr;
-	margin-left: 30px;
-}
+	h2 .icon {
+		margin-right: 8px;
+	}
 
-#dropbox_prefs .icon {
-	display: inline-block;
-	width: 32px;
+	.line {
+		> label {
+			width: 300px;
+			display: flex;
+			align-items: center;
+		}
+		> input {
+			width: 250px;
+		}
+	}
 }
-
-#dropbox_prefs .grid-form .icon {
-	margin-bottom: -3px;
-}
-
-.icon-dropbox {
-	background-image: url(./../../img/app-dark.svg);
-	background-size: 23px 23px;
-	height: 23px;
-	margin-bottom: -4px;
-}
-
-body.theme--dark .icon-dropbox {
-	background-image: url(./../../img/app.svg);
-}
-
 </style>
