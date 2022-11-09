@@ -1,0 +1,7 @@
+{ "translations": {
+    "Error during OAuth exchanges" : "Hiba történt az OAuth üzenetváltás során",
+    "Bad HTTP method" : "Hibás HTTP metódus",
+    "Bad credentials" : "Hibás hitelesítő adatok",
+    "Connected as {user}" : "Kapcsolódva mint {user}"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

@@ -1,0 +1,5 @@
+{ "translations": {
+    "Bad credentials" : "Marrits identificants",
+    "Connected as {user}" : "Connectat coma {user}"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}
