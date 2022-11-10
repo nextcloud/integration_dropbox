@@ -1,0 +1,7 @@
+{ "translations": {
+    "Dropbox" : "Dropbox",
+    "App key" : "Clave del Application",
+    "App secret" : "Secreto del Application",
+    "Authentication" : "Authentication"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

@@ -1,4 +1,7 @@
 { "translations": {
-    "App key" : "აპლიკაციის გასაღები"
+    "Dropbox" : "Dropbox-ი",
+    "App key" : "აპლიკაციის გასაღები",
+    "App secret" : "აპლიკაციის საიდუმლო",
+    "Authentication" : "აუტენტიფიკაცია"
 },"pluralForm" :"nplurals=2; plural=(n!=1);"
 }

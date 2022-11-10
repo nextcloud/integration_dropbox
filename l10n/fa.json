@@ -1,0 +1,8 @@
+{ "translations": {
+    "Dropbox" : "Dropbox",
+    "Connected accounts" : "حساب‌های متصل",
+    "App key" : "کلید برنامه",
+    "App secret" : "کد برنامه",
+    "Authentication" : "احراز هویت"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}

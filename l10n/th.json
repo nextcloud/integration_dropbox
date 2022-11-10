@@ -1,5 +1,8 @@
 { "translations": {
+    "Dropbox" : "Dropbox",
     "App key" : "App key",
+    "App secret" : "App secret",
+    "Authentication" : "การตรวจสอบสิทธิ์",
     "Connected as {user}" : "เชื่อมต่อเป็น {user} แล้ว"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
