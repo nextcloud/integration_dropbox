@@ -1,6 +1,7 @@
 OC.L10N.register(
     "integration_dropbox",
     {
+    "Invalid access code" : "Ungültiger Zugangscode",
     "Error during OAuth exchanges" : "Fehler beim OAuth-Austausch",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Ungültige HTTP-Methode",
@@ -9,12 +10,27 @@ OC.L10N.register(
     "OAuth access token refused" : "OAuth-Zugriffstoken abgelehnt",
     "Connected accounts" : "Verbundene Konten",
     "Data migration" : "Datenmigration",
+    "Dropbox integration" : "Dropbox-Integration",
+    "Import Dropbox data in Nextcloud" : "Dropbox-Daten nach Nextcloud importieren",
+    "Dropbox developer settings" : "Dropbox Entwicklereinstellungen",
     "App key" : "App-Schlüssel",
+    "Your Dropbox application key" : "Ihr Dropbox-Anwendungsschlüssel",
     "App secret" : "Geheime Zeichenkette der App",
+    "Your Dropbox application secret" : "Ihr Dropbox-Anwendungsgeheimnis",
+    "Dropbox data migration" : "Dropbox-Datenmigration",
     "Authentication" : "Authentifizierung",
+    "Dropbox access code" : "Dropbox Zugriffscode",
+    "Access code" : "Zugriffscode",
     "Connected as {user}" : "Verbunden als {user}",
+    "Disconnect from Dropbox" : "Von Dropbox trennen",
+    "Dropbox storage" : "Dropbox-Speicher",
     "Import directory" : "Import-Verzeichnis",
+    "Dropbox storage size: {formSize}" : "Dropbox Speichergrüße: {formSize}",
+    "Import Dropbox files" : "Dropboxdateien importieren",
+    "Your Dropbox storage is empty" : "Ihr Dropbox-Speicher ist leer",
+    "Dropbox options saved" : "Dropbox-Einstellungen gespeichert",
     "Starting importing files in {targetPath} directory" : "Beginn des Imports von Dateien ins Verzeichnis {targetPath}",
-    "Choose where to write imported files" : "Auswählen, wo die Dateien importiert werden sollen"
+    "Choose where to write imported files" : "Auswählen, wo die Dateien importiert werden sollen",
+    "_{amount} file imported_::_{amount} files imported_" : ["{amount} Datei importiert","{amount} Dateien importiert"]
 },
 "nplurals=2; plural=(n != 1);");
