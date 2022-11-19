@@ -28,7 +28,7 @@ OC.L10N.register(
     "Cancel Dropbox files import" : "Annuler l'import de fichiers depuis Dropbox",
     "Successfully connected to Dropbox!" : "Connexion à Dropbox réussie !",
     "Failed to connect to Dropbox" : "Échec de connexion à Dropbox",
-    "Starting importing files in {targetPath} directory" : "Démarrage de l'importation de fichiers dans le répertoire {targetPath}",
+    "Starting importing files in {targetPath} directory" : "Démarrage de l'import des fichiers dans le dossier {targetPath}",
     "Choose where to write imported files" : "Choisissez où écrire les fichiers importés",
     "_{amount} file imported_::_{amount} files imported_" : ["{amount} fichier importé","{amount} fichiers importés","{amount} fichiers importés"]
 },

@@ -14,7 +14,8 @@ OC.L10N.register(
     "Authentication" : "Kimlik doğrulama",
     "Connected as {user}" : "{user} olarak bağlantı kuruldu",
     "Import directory" : "İçe klasör aktar",
-    "Starting importing files in {targetPath} directory" : "{targetPath} klasöründeki dosyaların içe aktarılmasına başlanıyor",
+    "Starting importing files in {targetPath} directory" : "{targetPath} klasöründeki dosyaların içe aktarılması işlemine başlanıyor",
+    "Failed to start importing Dropbox storage" : "Dropbox depolamasının içe aktarılması işlemine başlanamadı",
     "Choose where to write imported files" : "İçe aktarılan dosyaların kaydedileceği konumu seçin"
 },
 "nplurals=2; plural=(n > 1);");
