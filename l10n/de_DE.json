@@ -46,7 +46,7 @@
     "Successfully connected to Dropbox!" : "Erfolgreich mit Dropbox verbunden!",
     "Failed to connect to Dropbox" : "Fehler beim Verbinden mit Dropbox",
     "Failed to get Dropbox storage information" : "Fehler beim Abrufen der Dropbox-Speicher-Informationen",
-    "Starting importing files in {targetPath} directory" : "Beginn des Imports von Dateien ins Verzeichnis {targetPath}",
+    "Starting importing files in {targetPath} directory" : "Beginn des Imports von Dateien in das Verzeichnis {targetPath}",
     "Failed to start importing Dropbox storage" : "Fehler beim Starten des Dropbox-Speicher-Imports",
     "Choose where to write imported files" : "Auswählen, wohin die Dateien importiert werden sollen",
     "_{amount} file imported_::_{amount} files imported_" : ["{amount} Datei importiert","{amount} Dateien importiert"],
