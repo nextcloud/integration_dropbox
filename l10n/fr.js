@@ -10,7 +10,7 @@ OC.L10N.register(
     "Token is not valid anymore. Impossible to refresh it." : "Le jeton d'accès n'est plus valide. Impossible de le renouveler.",
     "OAuth access token refused" : "Jeton d'accès OAuth refusé",
     "Connected accounts" : "Comptes connectés",
-    "Data migration" : "Migration de données",
+    "Data migration" : "Migration des données",
     "Dropbox integration" : "Intégration avec Dropbox",
     "Import Dropbox data in Nextcloud" : "Importer les données Dropbox dans Nextcloud",
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "L'intégration avec Dropbox vous permet d'importer automatiquement vos fichiers Dropbox dans Nextcloud.",
