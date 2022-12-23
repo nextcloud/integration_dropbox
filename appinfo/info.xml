@@ -16,7 +16,7 @@
     <bugs>https://github.com/eneiluj/integration_dropbox/issues</bugs>
     <screenshot>https://github.com/eneiluj/integration_dropbox/raw/master/img/screenshot1.jpg</screenshot>
     <dependencies>
-        <nextcloud min-version="22" max-version="25"/>
+        <nextcloud min-version="22" max-version="26"/>
     </dependencies>
     <settings>
         <admin>OCA\Dropbox\Settings\Admin</admin>

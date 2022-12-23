@@ -12,6 +12,7 @@
 namespace OCA\Dropbox\Service;
 
 use Datetime;
+use Exception;
 use OCP\Files\Folder;
 use Psr\Log\LoggerInterface;
 use OCP\IConfig;
@@ -26,6 +27,7 @@ use OCP\BackgroundJob\IJobList;
 use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\BackgroundJob\ImportDropboxJob;
 use OCP\Files\ForbiddenException;
+use Throwable;
 
 class DropboxStorageAPIService {
 	/**
@@ -134,11 +136,20 @@ class DropboxStorageAPIService {
 		$this->userScopeService->setFilesystemScope($userId);
 
 		$importingDropbox = $this->config->getUserValue($userId, Application::APP_ID, 'importing_dropbox', '0') === '1';
-		$jobRunning = $this->config->getUserValue($userId, Application::APP_ID, 'dropbox_import_running', '0') === '1';
-		if (!$importingDropbox || $jobRunning) {
+		if (!$importingDropbox) {
 			return;
 		}
+		$jobRunning = $this->config->getUserValue($userId, Application::APP_ID, 'dropbox_import_running', '0') === '1';
+		$nowTs = (new Datetime())->getTimestamp();
+		if ($jobRunning) {
+			$lastJobStart = $this->config->getUserValue($userId, Application::APP_ID, 'dropbox_import_job_last_start');
+			if ($lastJobStart !== '' && ($nowTs - intval($lastJobStart) < Application::IMPORT_JOB_TIMEOUT)) {
+				// last job has started less than an hour ago => we consider it can still be running
+				return;
+			}
+		}
 		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_running', '1');
+		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_job_last_start', strval($nowTs));
 
 		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
 		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');
@@ -154,7 +165,7 @@ class DropboxStorageAPIService {
 		$alreadyImported = (int) $alreadyImported;
 		try {
 			$result = $this->importFiles($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $targetPath, 500000000, $alreadyImported);
-		} catch (\Exception | \Throwable $e) {
+		} catch (Exception | Throwable $e) {
 			$result = [
 				'error' => 'Unknow job failure. ' . $e->getMessage(),
 			];

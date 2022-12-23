@@ -17,22 +17,14 @@ use OCP\Notification\IManager as INotificationManager;
 
 use OCA\Dropbox\Notification\Notifier;
 
-/**
- * Class Application
- *
- * @package OCA\Dropbox\AppInfo
- */
 class Application extends App implements IBootstrap {
 
 	public const APP_ID = 'integration_dropbox';
 	public const DEFAULT_DROPBOX_CLIENT_ID = 'hh276c3kzellh2x';
 	public const DEFAULT_DROPBOX_CLIENT_SECRET = 'rdsuw9qg4y4fj5p';
+	// consider that a job is not running anymore after N seconds
+	public const IMPORT_JOB_TIMEOUT = 3600;
 
-	/**
-	 * Constructor
-	 *
-	 * @param array $urlParams
-	 */
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
 
