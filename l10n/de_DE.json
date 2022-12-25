@@ -27,7 +27,7 @@
     "Failed to save Dropbox admin options" : "Fehler beim Speichern der Dropbox Administrations-Einstellungen ",
     "Dropbox data migration" : "Dropbox-Datenmigration",
     "Authentication" : "Authentifizierung",
-    "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Wenn Sie Probleme bei der Authentifizierung haben, bitten Sie Ihren Nextcloud-Administrator, die Dropbox-Admin-Einstellungen zu überprüfen.",
+    "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Wenn Sie Probleme bei der Anmeldung haben, bitten Sie Ihre Nextcloud-Administration, die Dropbox-Admin-Einstellungen zu überprüfen.",
     "Connect to Dropbox to get an access code" : "Mit Dropbox verbinden um einen Zugriffscode zu erhalten",
     "Dropbox access code" : "Dropbox Zugriffscode",
     "Access code" : "Zugriffscode",
