@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 1.0.6 – 2023-01-06
+### Changed
+- improve admin settings style
+
+### Fixed
+- fix app being unable to start importing after a job has been brutaly stopped
+
 ## 1.0.5 – 2022-08-24
 ### Changed
 - use material icons
