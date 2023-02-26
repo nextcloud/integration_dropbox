@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Error during OAuth exchanges" : "Produciuse un erro durante os intercambios de OAuth",
     "Dropbox" : "Dropbox",
+    "Bad HTTP method" : "Método HTTP incorrecto",
     "Bad credentials" : "Credenciais incorrectas",
     "Token is not valid anymore. Impossible to refresh it." : "O token xa non é válido. Non é posíbel actualizalo.",
     "OAuth access token refused" : "Foi rexeitado o testemuño de acceso de OAuth",
