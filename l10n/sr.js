@@ -1,7 +1,11 @@
 OC.L10N.register(
     "integration_dropbox",
     {
+    "Error during OAuth exchanges" : "Грешко приликом OAuth размена",
     "Dropbox" : "Dropbox",
+    "Bad HTTP method" : "Лоша HTTP метода",
+    "Bad credentials" : "Лоши креденцијали",
+    "OAuth access token refused" : "Одбијен је OAuth приступни жетон",
     "App key" : "Кључ апликације",
     "App secret" : "Тајна апликације",
     "Authentication" : "Провера идентитета"
