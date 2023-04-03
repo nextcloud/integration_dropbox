@@ -90,7 +90,7 @@ class Notifier implements INotifier {
 			$p = $notification->getSubjectParameters();
 			$nbImported = (int) ($p['nbImported'] ?? 0);
 			$targetPath = $p['targetPath'];
-			$content = $l->n('%s file was imported from Dropbox storage.', '%s files were imported from Dropbox storage.', $nbImported, [$nbImported]);
+			$content = $l->n('%n file was imported from Dropbox storage.', '%n files were imported from Dropbox storage.', $nbImported);
 
 			$notification->setParsedSubject($content)
 				->setIcon($this->url->getAbsoluteURL($this->url->imagePath(Application::APP_ID, 'app-dark.svg')))
