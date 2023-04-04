@@ -4,7 +4,6 @@ OC.L10N.register(
     "Invalid access code" : "Sarbide-kode baliogabea",
     "Error during OAuth exchanges" : "Errorea OAuth trukeak egitean",
     "Dropbox" : "Dropbox",
-    "_%s file was imported from Dropbox storage._::_%s files were imported from Dropbox storage._" : ["Fitxategi %s inportatu da Dropbox biltegiratzetik."," %s fitxategi inportatu dira Dropbox biltegiratzetik."],
     "Bad HTTP method" : "HTTP metodo okerra",
     "Bad credentials" : "Kredentzial okerrak",
     "Token is not valid anymore. Impossible to refresh it." : "Token honek ez du balio dagoeneko. Ezin izan da freskatu.",

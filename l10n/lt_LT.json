@@ -2,7 +2,6 @@
     "Invalid access code" : "Neteisingas prieigos kodas",
     "Error during OAuth exchanges" : "Klaida „OAuth“ apsikeitimo metu",
     "Dropbox" : "Dropbox",
-    "_%s file was imported from Dropbox storage._::_%s files were imported from Dropbox storage._" : ["Iš „Dropbox“ saugyklos buvo importuotas %s failas.","Iš „Dropbox“ saugyklos buvo importuoti %s failai.","Iš „Dropbox“ saugyklos buvo importuota %s failų.","Iš „Dropbox“ saugyklos buvo importuotas %s failas."],
     "Bad HTTP method" : "Blogas HTTP metodas",
     "Bad credentials" : "Blogi prisijungimo duomenys",
     "Token is not valid anymore. Impossible to refresh it." : "Prieigos raktas daugiau nebegalioja. Neįmanoma įkelti jo iš naujo.",

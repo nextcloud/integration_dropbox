@@ -2,7 +2,6 @@
     "Invalid access code" : "Neplatný přístupový kód",
     "Error during OAuth exchanges" : "Chyba při výměnách informací v rámci OAuth",
     "Dropbox" : "Dropbox",
-    "_%s file was imported from Dropbox storage._::_%s files were imported from Dropbox storage._" : ["%s soubor byl naimportován z úložiště Dropbox.","%s soubory byly naimportovány z úložiště Dropbox.","%s souborů bylo naimportováno z úložiště Dropbox.","%s soubory byly naimportovány z úložiště Dropbox."],
     "Bad HTTP method" : "Nesprávná HTTP metoda",
     "Bad credentials" : "Nesprávné přihlašovací údaje",
     "Token is not valid anymore. Impossible to refresh it." : "Token už není platný. Není možné ho obnovit.",

@@ -2,7 +2,6 @@
     "Invalid access code" : "Code d'accès non valide",
     "Error during OAuth exchanges" : "Erreur pendant les échanges OAuth",
     "Dropbox" : "Dropbox",
-    "_%s file was imported from Dropbox storage._::_%s files were imported from Dropbox storage._" : ["%s fichier a été importé depuis Dropbox","%s fichiers ont été importés depuis Dropbox","%s fichiers ont été importés depuis Dropbox"],
     "Bad HTTP method" : "Mauvaise méthode HTTP",
     "Bad credentials" : "Identifiants incorrects",
     "Token is not valid anymore. Impossible to refresh it." : "Le jeton d'accès n'est plus valide. Impossible de le renouveler.",

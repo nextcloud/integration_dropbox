@@ -4,7 +4,6 @@ OC.L10N.register(
     "Invalid access code" : "Virheellinen pääsykoodi",
     "Error during OAuth exchanges" : "Virhe OAuth-tunnistautumisessa",
     "Dropbox" : "Dropbox",
-    "_%s file was imported from Dropbox storage._::_%s files were imported from Dropbox storage._" : ["%s tiedosto tuotiin Dropbox-tallennustilasta.","%s tiedostoa tuotiin Dropbox-tallennustilasta."],
     "Bad HTTP method" : "Virheellinen HTTP-metodi",
     "Bad credentials" : "Virheelliset kirjautumistiedot",
     "Token is not valid anymore. Impossible to refresh it." : "Valtuutus ei ole enää käyttökelpoinen. Sitä ei voida päivittää.",

@@ -4,7 +4,6 @@ OC.L10N.register(
     "Invalid access code" : "Неисправан приступни кôд",
     "Error during OAuth exchanges" : "Грешко приликом OAuth размена",
     "Dropbox" : "Dropbox",
-    "_%s file was imported from Dropbox storage._::_%s files were imported from Dropbox storage._" : ["%s фајл је увезен са Dropbox складишта.","%s фајла су увезена са Dropbox складишта.","%s фајлова је увезено са Dropbox складишта."],
     "Bad HTTP method" : "Лоша HTTP метода",
     "Bad credentials" : "Лоши креденцијали",
     "Token is not valid anymore. Impossible to refresh it." : "Жетон више не важи. Не може да се освежи.",

@@ -4,7 +4,6 @@ OC.L10N.register(
     "Invalid access code" : "Неверный код доступа",
     "Error during OAuth exchanges" : "Ошибка во время обмена OAuth",
     "Dropbox" : "Dropbox",
-    "_%s file was imported from Dropbox storage._::_%s files were imported from Dropbox storage._" : ["%s файл был импортирован из хранилища Dropbox.","%s файлов были импортированы из хранилища Dropbox.","%s файлов были импортированы из хранилища Dropbox.","%s файлов были импортированы из хранилища Dropbox."],
     "Bad HTTP method" : "Неверный метод HTTP",
     "Bad credentials" : "Неверные учетные данные",
     "Token is not valid anymore. Impossible to refresh it." : "Токен больше не действителен. Невозможно обновить его.",

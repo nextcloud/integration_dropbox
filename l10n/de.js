@@ -4,7 +4,6 @@ OC.L10N.register(
     "Invalid access code" : "Ungültiger Zugangscode",
     "Error during OAuth exchanges" : "Fehler beim OAuth-Austausch",
     "Dropbox" : "Dropbox",
-    "_%s file was imported from Dropbox storage._::_%s files were imported from Dropbox storage._" : ["%s Datei wurde vom Dropbox-Speicher importiert.","%s Dateien wurden vom Dropbox-Speicher importiert."],
     "Bad HTTP method" : "Ungültige HTTP-Methode",
     "Bad credentials" : "Falsche Anmeldeinformationen",
     "Token is not valid anymore. Impossible to refresh it." : "Token ist nicht mehr gültig. Es ist unmöglich, diesen zu aktualisieren.",
