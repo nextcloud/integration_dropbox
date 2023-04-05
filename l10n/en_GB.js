@@ -4,6 +4,7 @@ OC.L10N.register(
     "Invalid access code" : "Invalid access code",
     "Error during OAuth exchanges" : "Error during OAuth exchanges",
     "Dropbox" : "Dropbox",
+    "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["%n file was imported from Dropbox storage.","%n files were imported from Dropbox storage."],
     "Bad HTTP method" : "Bad HTTP method",
     "Bad credentials" : "Bad credentials",
     "Token is not valid anymore. Impossible to refresh it." : "Token is not valid anymore. Impossible to refresh it.",

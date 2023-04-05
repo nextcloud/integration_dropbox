@@ -4,6 +4,7 @@ OC.L10N.register(
     "Invalid access code" : "無效的存取代碼",
     "Error during OAuth exchanges" : "OAuth 交換時發生錯誤",
     "Dropbox" : "Dropbox",
+    "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["從 Dropbox 儲存空間匯入了 %n 個檔案。"],
     "Bad HTTP method" : "不正確的 HTTP 方法",
     "Bad credentials" : "錯誤的憑證",
     "Token is not valid anymore. Impossible to refresh it." : "權杖不再有效。不可能刷新它。",
