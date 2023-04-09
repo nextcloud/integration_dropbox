@@ -4,6 +4,7 @@ OC.L10N.register(
     "Invalid access code" : "Erişim kodu geçersiz",
     "Error during OAuth exchanges" : "OAuth takasında sorun çıktı",
     "Dropbox" : "Dropbox",
+    "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["%n dosya Dropbox depolama alanından içe aktarıldı.","%n dosya Dropbox depolama alanından içe aktarıldı."],
     "Bad HTTP method" : "HTTP yöntemi hatalı",
     "Bad credentials" : "Kimlik doğrulama bilgileri hatalı",
     "Token is not valid anymore. Impossible to refresh it." : "Kod artık geçersiz. Yenileme yapılamıyor.",
