@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Error during OAuth exchanges" : "שגיאה במהלך החלפות OAuth",
     "Dropbox" : "Dropbox",
+    "Bad HTTP method" : "שגיאה במתודת HTTP",
     "Bad credentials" : "פרטי גישה שגויים",
     "Token is not valid anymore. Impossible to refresh it." : "האסימון אינו תקף עוד. אי אפשר לרענן אותו.",
     "OAuth access token refused" : "אסימון הגישה ב־OAuth סורב",
