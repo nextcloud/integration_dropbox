@@ -27,6 +27,7 @@ OC.L10N.register(
     "Import Dropbox files" : "Inportatu Dropbox fitxategiak",
     "Dropbox options saved" : "Dropbox aukerak gorde dira",
     "Failed to save Dropbox options" : "Dropbox aukerak gordetzeak huts egin du",
+    "Failed to connect to Dropbox" : "Dropbox-era konektatzeak huts egin du",
     "Starting importing files in {targetPath} directory" : "Fitxategiak {targetPath} direktoriora inportatzea abiatzen",
     "Choose where to write imported files" : "Aukeratu non idatzi inportatutako fitxategiak"
 },
