@@ -15,9 +15,6 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
-use OCP\Notification\IManager as INotificationManager;
-use Psr\Container\ContainerInterface;
-
 class Application extends App implements IBootstrap {
 
 	public const APP_ID = 'integration_dropbox';
@@ -31,7 +28,7 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function register(IRegistrationContext $context): void {
-        $context->registerNotifierService(Notifier::class);
+		$context->registerNotifierService(Notifier::class);
 	}
 
 	public function boot(IBootContext $context): void {

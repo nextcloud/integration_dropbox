@@ -32,10 +32,10 @@ class ImportDropboxJob extends QueuedJob {
 		$this->service = $service;
 	}
 
-    /**
-     * @param array{user_id: string} $argument
-     * @return void
-     */
+	/**
+	 * @param array{user_id: string} $argument
+	 * @return void
+	 */
 	public function run($argument) {
 		$userId = $argument['user_id'];
 		$this->service->importDropboxJob($userId);

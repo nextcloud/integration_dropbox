@@ -20,7 +20,6 @@ use OCP\Files\FileInfo;
 use OCP\Files\Folder;
 use OCP\Files\ForbiddenException;
 use OCP\Files\IRootFolder;
-use OCP\Files\Node;
 
 use OCP\Files\NotFoundException;
 
@@ -314,14 +313,14 @@ class DropboxStorageAPIService {
 			);
 			return null;
 		}
-        if ($resource === false) {
-            $this->logger->warning(
-                'Dropbox error, can\'t open file "' . $fileName . '" in "' . $saveFolder->getPath() . '"',
-                ['app' => $this->appName]
-            );
-            return null;
-        }
-        $res = $this->dropboxApiService->downloadFile(
+		if ($resource === false) {
+			$this->logger->warning(
+				'Dropbox error, can\'t open file "' . $fileName . '" in "' . $saveFolder->getPath() . '"',
+				['app' => $this->appName]
+			);
+			return null;
+		}
+		$res = $this->dropboxApiService->downloadFile(
 			$accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileItem['id']
 		);
 		if (isset($res['error'])) {

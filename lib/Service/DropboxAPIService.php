@@ -34,11 +34,11 @@ class DropboxAPIService {
 	 * Service to make requests to Dropbox API
 	 */
 	public function __construct(
-        private string $appName,
+		private string $appName,
 		private LoggerInterface $logger,
 		private IL10N $l10n,
 		private IConfig $config,
-        private INotificationManager $notificationManager,
+		private INotificationManager $notificationManager,
 		IClientService $clientService) {
 		$this->client = $clientService->newClient();
 	}
@@ -111,9 +111,9 @@ class DropboxAPIService {
 			if ($respCode >= 400) {
 				return ['error' => $this->l10n->t('Bad credentials')];
 			} else {
-                if (is_resource($body)) {
-                    $body = stream_get_contents($body);
-                }
+				if (is_resource($body)) {
+					$body = stream_get_contents($body);
+				}
 				return json_decode($body, true);
 			}
 		} catch (ServerException | ClientException $e) {
@@ -177,10 +177,10 @@ class DropboxAPIService {
 				return ['error' => $this->l10n->t('Bad credentials')];
 			}
 
-            $body = $response->getBody();
-            if(is_resource($body)) {
-                $body = stream_get_contents($body);
-            }
+			$body = $response->getBody();
+			if(is_resource($body)) {
+				$body = stream_get_contents($body);
+			}
 
 			$responseArray = json_decode($body, true);
 			if (is_null($responseArray) || !isset($responseArray['link'])) {
@@ -192,7 +192,7 @@ class DropboxAPIService {
 				'timeout' => 0,
 				'stream' => true,
 			];
-            /** @var string $url */
+			/** @var string $url */
 			$url = $responseArray['link'];
 			$response = $this->client->get($url, $options);
 			$respCode = $response->getStatusCode();
@@ -202,25 +202,25 @@ class DropboxAPIService {
 			}
 
 			$body = $response->getBody();
-            if (is_resource($body)) {
-                while (!feof($body)) {
-                    // write ~5 MB chunks
-                    $chunk = fread($body, 5000000);
-                    fwrite($resource, $chunk);
-                }
-            }else{
-                fwrite($resource, $body);
-            }
+			if (is_resource($body)) {
+				while (!feof($body)) {
+					// write ~5 MB chunks
+					$chunk = fread($body, 5000000);
+					fwrite($resource, $chunk);
+				}
+			} else {
+				fwrite($resource, $body);
+			}
 
 			return ['success' => true];
 		} catch (ServerException | ClientException $e) {
 			$response = $e->getResponse();
 			if ($response->getStatusCode() === 401) {
-                if ($try > 3) {
-                    // impossible to refresh the token
-                    $this->logger->info('Received the following response upon trying to download a file: '. $response->getBody()->getContents());
-                    return ['error' => $this->l10n->t('Could not access file due to failed authentication.')];
-                }
+				if ($try > 3) {
+					// impossible to refresh the token
+					$this->logger->info('Received the following response upon trying to download a file: '. $response->getBody()->getContents());
+					return ['error' => $this->l10n->t('Could not access file due to failed authentication.')];
+				}
 				$this->logger->info('Trying to REFRESH the access token', ['app' => $this->appName]);
 				// try to refresh the token
 				$result = $this->requestOAuthAccessToken($clientID, $clientSecret, [
@@ -232,7 +232,7 @@ class DropboxAPIService {
 					$accessToken = $result['access_token'];
 					$this->config->setUserValue($userId, Application::APP_ID, 'token', $accessToken);
 					// retry the request with new access token
-					return $this->downloadFile($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileId, $try+1);
+					return $this->downloadFile($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileId, $try + 1);
 				} else {
 					// impossible to refresh the token
 					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . ($result['error'] ?? '')];
@@ -292,9 +292,9 @@ class DropboxAPIService {
 			if ($respCode >= 400) {
 				return ['error' => $this->l10n->t('OAuth access token refused')];
 			} else {
-                if (is_resource($body)) {
-                    $body = stream_get_contents($body);
-                }
+				if (is_resource($body)) {
+					$body = stream_get_contents($body);
+				}
 				return json_decode($body, true);
 			}
 		} catch (ClientException $e) {
@@ -303,7 +303,7 @@ class DropboxAPIService {
 
 			$response = $e->getResponse();
 			$body = $response->getBody();
-            /** @var array{error_description?:string} $decodedBody */
+			/** @var array{error_description?:string} $decodedBody */
 			$decodedBody = json_decode($body->getContents(), true);
 			if (isset($decodedBody['error_description'])) {
 				$result['error_description'] = $decodedBody['error_description'];

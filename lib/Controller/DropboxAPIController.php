@@ -47,9 +47,9 @@ class DropboxAPIController extends Controller {
 	 * @return DataResponse
 	 */
 	public function getStorageSize(): DataResponse {
-        if ($this->userId === null) {
-            return new DataResponse([], Http::STATUS_BAD_REQUEST);
-        }
+		if ($this->userId === null) {
+			return new DataResponse([], Http::STATUS_BAD_REQUEST);
+		}
 		if ($this->accessToken === '') {
 			return new DataResponse([], 400);
 		}
@@ -61,7 +61,7 @@ class DropboxAPIController extends Controller {
 			return new DataResponse($result['error'], 401);
 		}
 
-        return new DataResponse($result);
+		return new DataResponse($result);
 	}
 
 	/**
@@ -70,18 +70,18 @@ class DropboxAPIController extends Controller {
 	 * @return DataResponse
 	 */
 	public function importDropbox(): DataResponse {
-        if ($this->userId === null) {
-            return new DataResponse([], Http::STATUS_BAD_REQUEST);
-        }
+		if ($this->userId === null) {
+			return new DataResponse([], Http::STATUS_BAD_REQUEST);
+		}
 		if ($this->accessToken === '') {
 			return new DataResponse([], 400);
 		}
 		$result = $this->dropboxStorageApiService->startImportDropbox($this->userId);
-        if (isset($result['error'])) {
-            return new DataResponse($result['error'], 401);
-        }
+		if (isset($result['error'])) {
+			return new DataResponse($result['error'], 401);
+		}
 
-        return new DataResponse($result);
+		return new DataResponse($result);
 	}
 
 	/**
