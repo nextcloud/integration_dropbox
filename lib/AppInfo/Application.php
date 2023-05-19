@@ -9,13 +9,13 @@
 
 namespace OCA\Dropbox\AppInfo;
 
+use OCA\Dropbox\Notification\Notifier;
 use OCP\AppFramework\App;
-use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
-use OCP\Notification\IManager as INotificationManager;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
-use OCA\Dropbox\Notification\Notifier;
+use OCP\Notification\IManager as INotificationManager;
 
 class Application extends App implements IBootstrap {
 

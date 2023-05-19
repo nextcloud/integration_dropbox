@@ -11,13 +11,13 @@
 
 namespace OCA\Dropbox\Controller;
 
+use OCA\Dropbox\AppInfo\Application;
+use OCA\Dropbox\Service\DropboxStorageAPIService;
+use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\DataResponse;
+
 use OCP\IConfig;
 use OCP\IRequest;
-use OCP\AppFramework\Http\DataResponse;
-use OCP\AppFramework\Controller;
-
-use OCA\Dropbox\Service\DropboxStorageAPIService;
-use OCA\Dropbox\AppInfo\Application;
 
 class DropboxAPIController extends Controller {
 
@@ -51,10 +51,10 @@ class DropboxAPIController extends Controller {
 	private $clientSecret;
 
 	public function __construct(string $appName,
-								IRequest $request,
-								IConfig $config,
-								DropboxStorageAPIService $dropboxStorageApiService,
-								?string $userId) {
+		IRequest $request,
+		IConfig $config,
+		DropboxStorageAPIService $dropboxStorageApiService,
+		?string $userId) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->dropboxStorageApiService = $dropboxStorageApiService;
@@ -88,36 +88,36 @@ class DropboxAPIController extends Controller {
 	}
 
 	/**
-     * @NoAdminRequired
-     *
-     * @return DataResponse
-     */
-    public function importDropbox(): DataResponse {
-        if ($this->accessToken === '') {
-            return new DataResponse(null, 400);
-        }
-        $result = $this->dropboxStorageApiService->startImportDropbox($this->userId);
-        if (isset($result['error'])) {
-            $response = new DataResponse($result['error'], 401);
-        } else {
-            $response = new DataResponse($result);
-        }
-        return $response;
+	 * @NoAdminRequired
+	 *
+	 * @return DataResponse
+	 */
+	public function importDropbox(): DataResponse {
+		if ($this->accessToken === '') {
+			return new DataResponse(null, 400);
+		}
+		$result = $this->dropboxStorageApiService->startImportDropbox($this->userId);
+		if (isset($result['error'])) {
+			$response = new DataResponse($result['error'], 401);
+		} else {
+			$response = new DataResponse($result);
+		}
+		return $response;
 	}
 
 	/**
-     * @NoAdminRequired
-     *
-     * @return DataResponse
-     */
-    public function getImportDropboxInformation(): DataResponse {
-        if ($this->accessToken === '') {
-            return new DataResponse(null, 400);
-        }
-        return new DataResponse([
-            'importing_dropbox' => $this->config->getUserValue($this->userId, Application::APP_ID, 'importing_dropbox') === '1',
-            'last_dropbox_import_timestamp' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0'),
-            'nb_imported_files' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'nb_imported_files', '0'),
-        ]);
-    }
+	 * @NoAdminRequired
+	 *
+	 * @return DataResponse
+	 */
+	public function getImportDropboxInformation(): DataResponse {
+		if ($this->accessToken === '') {
+			return new DataResponse(null, 400);
+		}
+		return new DataResponse([
+			'importing_dropbox' => $this->config->getUserValue($this->userId, Application::APP_ID, 'importing_dropbox') === '1',
+			'last_dropbox_import_timestamp' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0'),
+			'nb_imported_files' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'nb_imported_files', '0'),
+		]);
+	}
 }

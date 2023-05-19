@@ -12,10 +12,10 @@
 
 namespace OCA\Dropbox\BackgroundJob;
 
-use OCP\BackgroundJob\QueuedJob;
+use OCA\Dropbox\Service\DropboxStorageAPIService;
 use OCP\AppFramework\Utility\ITimeFactory;
 
-use OCA\Dropbox\Service\DropboxStorageAPIService;
+use OCP\BackgroundJob\QueuedJob;
 
 class ImportDropboxJob extends QueuedJob {
 
@@ -27,7 +27,7 @@ class ImportDropboxJob extends QueuedJob {
 	 *
 	 */
 	public function __construct(ITimeFactory $timeFactory,
-								DropboxStorageAPIService $service) {
+		DropboxStorageAPIService $service) {
 		parent::__construct($timeFactory);
 		$this->service = $service;
 	}

@@ -13,16 +13,16 @@ namespace OCA\Dropbox\Service;
 
 use DateTime;
 use Exception;
-use OCP\IL10N;
-use Psr\Log\LoggerInterface;
-use OCP\IConfig;
-use OCP\Http\Client\IClientService;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\ServerException;
+use OCA\Dropbox\AppInfo\Application;
+use OCP\Http\Client\IClientService;
+use OCP\IConfig;
+use OCP\IL10N;
 use OCP\Notification\IManager as INotificationManager;
 
-use OCA\Dropbox\AppInfo\Application;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class DropboxAPIService {
@@ -49,12 +49,12 @@ class DropboxAPIService {
 	/**
 	 * Service to make requests to Dropbox API
 	 */
-	public function __construct (string $appName,
-								LoggerInterface $logger,
-								IL10N $l10n,
-								IConfig $config,
-								INotificationManager $notificationManager,
-								IClientService $clientService) {
+	public function __construct(string $appName,
+		LoggerInterface $logger,
+		IL10N $l10n,
+		IConfig $config,
+		INotificationManager $notificationManager,
+		IClientService $clientService) {
 		$this->logger = $logger;
 		$this->l10n = $l10n;
 		$this->config = $config;
@@ -94,7 +94,7 @@ class DropboxAPIService {
 	 * @return array
 	 */
 	public function request(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
-							string $endPoint, array $params = [], string $method = 'GET'): array {
+		string $endPoint, array $params = [], string $method = 'GET'): array {
 		try {
 			$url = 'https://api.dropboxapi.com/2/' . $endPoint;
 			$options = [
@@ -116,11 +116,11 @@ class DropboxAPIService {
 
 			if ($method === 'GET') {
 				$response = $this->client->get($url, $options);
-			} else if ($method === 'POST') {
+			} elseif ($method === 'POST') {
 				$response = $this->client->post($url, $options);
-			} else if ($method === 'PUT') {
+			} elseif ($method === 'PUT') {
 				$response = $this->client->put($url, $options);
-			} else if ($method === 'DELETE') {
+			} elseif ($method === 'DELETE') {
 				$response = $this->client->delete($url, $options);
 			} else {
 				return ['error' => $this->l10n->t('Bad HTTP method')];
@@ -170,7 +170,7 @@ class DropboxAPIService {
 	 * @throws \OCP\PreConditionNotMetException
 	 */
 	public function downloadFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
-								$resource, string $fileId): array {
+		$resource, string $fileId): array {
 		try {
 			// we could use https://content.dropboxapi.com/2/files/download
 			// with 'Dropbox-API-Arg' => json_encode(['path' => $fileId]),
@@ -279,11 +279,11 @@ class DropboxAPIService {
 
 			if ($method === 'GET') {
 				$response = $this->client->get($url, $options);
-			} else if ($method === 'POST') {
+			} elseif ($method === 'POST') {
 				$response = $this->client->post($url, $options);
-			} else if ($method === 'PUT') {
+			} elseif ($method === 'PUT') {
 				$response = $this->client->put($url, $options);
-			} else if ($method === 'DELETE') {
+			} elseif ($method === 'DELETE') {
 				$response = $this->client->delete($url, $options);
 			} else {
 				return ['error' => $this->l10n->t('Bad HTTP method')];

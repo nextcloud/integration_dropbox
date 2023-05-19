@@ -13,20 +13,20 @@ namespace OCA\Dropbox\Service;
 
 use Datetime;
 use Exception;
-use OCP\Files\Folder;
-use Psr\Log\LoggerInterface;
-use OCP\IConfig;
-use OCP\Files\IRootFolder;
-use OCP\Files\FileInfo;
-use OCP\Files\Node;
-use OCP\Files\NotFoundException;
-use OCP\Lock\LockedException;
-
-use OCP\BackgroundJob\IJobList;
-
 use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\BackgroundJob\ImportDropboxJob;
+use OCP\BackgroundJob\IJobList;
+use OCP\Files\FileInfo;
+use OCP\Files\Folder;
 use OCP\Files\ForbiddenException;
+use OCP\Files\IRootFolder;
+use OCP\Files\Node;
+
+use OCP\Files\NotFoundException;
+
+use OCP\IConfig;
+use OCP\Lock\LockedException;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class DropboxStorageAPIService {
@@ -62,13 +62,13 @@ class DropboxStorageAPIService {
 	/**
 	 * Service to make requests to Dropbox API
 	 */
-	public function __construct (string $appName,
-								LoggerInterface $logger,
-								IRootFolder $root,
-								IConfig $config,
-								IJobList $jobList,
-								UserScopeService $userScopeService,
-								DropboxAPIService $dropboxApiService) {
+	public function __construct(string $appName,
+		LoggerInterface $logger,
+		IRootFolder $root,
+		IConfig $config,
+		IJobList $jobList,
+		UserScopeService $userScopeService,
+		DropboxAPIService $dropboxApiService) {
 		$this->appName = $appName;
 		$this->logger = $logger;
 		$this->root = $root;
@@ -200,8 +200,8 @@ class DropboxStorageAPIService {
 	 * @return array
 	 */
 	public function importFiles(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
-								string $userId, string $targetPath,
-								?int $maxDownloadSize = null, int $alreadyImported = 0): array {
+		string $userId, string $targetPath,
+		?int $maxDownloadSize = null, int $alreadyImported = 0): array {
 		// create root folder
 		$userFolder = $this->root->getUserFolder($userId);
 		if (!$userFolder->nodeExists($targetPath)) {
@@ -279,7 +279,7 @@ class DropboxStorageAPIService {
 	 * @return ?float downloaded size, null if already existing or network error
 	 */
 	private function getFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
-							string $userId, array $fileItem, Folder $topFolder): ?float {
+		string $userId, array $fileItem, Folder $topFolder): ?float {
 		$fileName = $fileItem['name'];
 		$path = preg_replace('/^\//', '', $fileItem['path_display'] ?? '.');
 		$pathParts = pathinfo($path);
