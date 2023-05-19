@@ -1,6 +1,6 @@
 {
 	"name": "integration_dropbox",
-	"version": "0.0.1",
+	"version": "2.0.0",
 	"description": "Dropbox integration",
 	"main": "index.js",
 	"directories": {
