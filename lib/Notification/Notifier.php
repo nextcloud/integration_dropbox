@@ -22,32 +22,11 @@ use OCP\Notification\INotifier;
 
 class Notifier implements INotifier {
 
-	/** @var IFactory */
-	protected $factory;
-
-	/** @var IUserManager */
-	protected $userManager;
-
-	/** @var INotificationManager */
-	protected $notificationManager;
-
-	/** @var IURLGenerator */
-	protected $url;
-
-	/**
-	 * @param IFactory $factory
-	 * @param IUserManager $userManager
-	 * @param INotificationManager $notificationManager
-	 * @param IURLGenerator $urlGenerator
-	 */
-	public function __construct(IFactory $factory,
-		IUserManager $userManager,
-		INotificationManager $notificationManager,
-		IURLGenerator $urlGenerator) {
-		$this->factory = $factory;
-		$this->userManager = $userManager;
-		$this->notificationManager = $notificationManager;
-		$this->url = $urlGenerator;
+	public function __construct(
+        protected IFactory $factory,
+        protected IUserManager $userManager,
+        protected INotificationManager $notificationManager,
+        protected IURLGenerator $url) {
 	}
 
 	/**
@@ -88,6 +67,7 @@ class Notifier implements INotifier {
 			case 'import_dropbox_finished':
 				$p = $notification->getSubjectParameters();
 				$nbImported = (int) ($p['nbImported'] ?? 0);
+                /** @var string $targetPath */
 				$targetPath = $p['targetPath'];
 				$content = $l->n('%n file was imported from Dropbox storage.', '%n files were imported from Dropbox storage.', $nbImported);
 

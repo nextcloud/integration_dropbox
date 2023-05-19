@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.x-dev@">
+  <file src="lib/Controller/ConfigController.php">
+    <MixedArgument occurrences="1">
+      <code>$info['name']['display_name']</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$data['user_name']</code>
+    </MixedAssignment>
+  </file>
+  <file src="lib/Service/DropboxAPIService.php">
+    <MixedInferredReturnType occurrences="2">
+      <code>array{access_token?: string, refresh_token?: string, account_id?: string, uid?: string, error_description?: string, error?: string}</code>
+      <code>array{error?:string}</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>json_decode($body, true)</code>
+      <code>json_decode($body, true)</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="lib/Service/DropboxStorageAPIService.php">
+    <InvalidArgument occurrences="1">
+      <code>$entry</code>
+    </InvalidArgument>
+    <InvalidArrayOffset occurrences="1">
+      <code>$params['cursor']</code>
+    </InvalidArrayOffset>
+    <MixedAssignment occurrences="1">
+      <code>$entry</code>
+    </MixedAssignment>
+  </file>
+</files>

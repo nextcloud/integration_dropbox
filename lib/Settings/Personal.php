@@ -13,37 +13,12 @@ use OCP\Settings\ISettings;
 
 class Personal implements ISettings {
 
-	/**
-	 * @var IConfig
-	 */
-	private $config;
-	/**
-	 * @var IRootFolder
-	 */
-	private $root;
-	/**
-	 * @var IUserManager
-	 */
-	private $userManager;
-	/**
-	 * @var IInitialState
-	 */
-	private $initialStateService;
-	/**
-	 * @var string
-	 */
-	private $userId;
-
-	public function __construct(IConfig $config,
-		IRootFolder $root,
-		IUserManager $userManager,
-		IInitialState $initialStateService,
-		string $userId) {
-		$this->config = $config;
-		$this->root = $root;
-		$this->userManager = $userManager;
-		$this->initialStateService = $initialStateService;
-		$this->userId = $userId;
+	public function __construct(
+        private IConfig $config,
+		private IRootFolder $root,
+		private IUserManager $userManager,
+		private IInitialState $initialStateService,
+		private string $userId) {
 	}
 
 	/**
@@ -66,7 +41,7 @@ class Personal implements ISettings {
 			'client_id' => $clientID,
 			'user_name' => $userName,
 			'free_space' => $freeSpace,
-			'user_quota' => $user->getQuota(),
+			'user_quota' => $user?->getQuota(),
 			'output_dir' => $outputDir,
 		];
 		$this->initialStateService->provideInitialState('user-config', $userConfig);

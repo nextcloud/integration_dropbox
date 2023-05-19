@@ -28,19 +28,19 @@ use OCP\IUserSession;
 
 class UserScopeService {
 
-	public function __construct(IUserSession $userSession, IUserManager $userManager) {
-		$this->userSession = $userSession;
-		$this->userManager = $userManager;
+	public function __construct(
+        private IUserSession $userSession,
+        private IUserManager $userManager) {
 	}
 
 	/**
 	 * Set a valid user in IUserSession since lots of server logic is relying on obtaining
 	 * the current acting user from that
 	 *
-	 * @param $uid
+	 * @param ?string $uid
 	 * @throws \InvalidArgumentException
 	 */
-	public function setUserScope(string $uid = null) {
+	public function setUserScope(string $uid = null): void {
 		if ($uid === null) {
 			return;
 		}
@@ -60,7 +60,7 @@ class UserScopeService {
 	 *
 	 * @param string $owner
 	 */
-	public function setFilesystemScope(string $owner) {
+	public function setFilesystemScope(string $owner): void {
 		\OC_Util::tearDownFS();
 		\OC_Util::setupFS($owner);
 	}

@@ -17,6 +17,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\ServerException;
 use OCA\Dropbox\AppInfo\Application;
+use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
 use OCP\IConfig;
 use OCP\IL10N;
@@ -27,40 +28,19 @@ use Throwable;
 
 class DropboxAPIService {
 
-	private $l10n;
-	private $logger;
-	/**
-	 * @var IConfig
-	 */
-	private $config;
-	/**
-	 * @var INotificationManager
-	 */
-	private $notificationManager;
-	/**
-	 * @var \OCP\Http\Client\IClient
-	 */
-	private $client;
-	/**
-	 * @var string
-	 */
-	private $appName;
+	private IClient $client;
 
 	/**
 	 * Service to make requests to Dropbox API
 	 */
-	public function __construct(string $appName,
-		LoggerInterface $logger,
-		IL10N $l10n,
-		IConfig $config,
-		INotificationManager $notificationManager,
+	public function __construct(
+        private string $appName,
+		private LoggerInterface $logger,
+		private IL10N $l10n,
+		private IConfig $config,
+        private INotificationManager $notificationManager,
 		IClientService $clientService) {
-		$this->logger = $logger;
-		$this->l10n = $l10n;
-		$this->config = $config;
-		$this->notificationManager = $notificationManager;
 		$this->client = $clientService->newClient();
-		$this->appName = $appName;
 	}
 
 	/**
@@ -91,7 +71,7 @@ class DropboxAPIService {
 	 * @param string $endPoint
 	 * @param array $params
 	 * @param string $method
-	 * @return array
+	 * @return array{error?:string}
 	 */
 	public function request(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
 		string $endPoint, array $params = [], string $method = 'GET'): array {
@@ -131,6 +111,9 @@ class DropboxAPIService {
 			if ($respCode >= 400) {
 				return ['error' => $this->l10n->t('Bad credentials')];
 			} else {
+                if (is_resource($body)) {
+                    $body = stream_get_contents($body);
+                }
 				return json_decode($body, true);
 			}
 		} catch (ServerException | ClientException $e) {
@@ -150,7 +133,7 @@ class DropboxAPIService {
 					return $this->request($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $endPoint, $params, $method);
 				} else {
 					// impossible to refresh the token
-					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . $result['error']];
+					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . ($result['error'] ?? '')];
 				}
 			}
 			$this->logger->warning('Dropbox API error : '.$e->getMessage(), ['app' => $this->appName]);
@@ -164,13 +147,13 @@ class DropboxAPIService {
 	 * @param string $clientID
 	 * @param string $clientSecret
 	 * @param string $userId
-	 * @param $resource
+	 * @param resource $resource
 	 * @param string $fileId
-	 * @return array
+	 * @return array{success?: true, error?: string}
 	 * @throws \OCP\PreConditionNotMetException
 	 */
 	public function downloadFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
-		$resource, string $fileId): array {
+		$resource, string $fileId, int $try = 0): array {
 		try {
 			// we could use https://content.dropboxapi.com/2/files/download
 			// with 'Dropbox-API-Arg' => json_encode(['path' => $fileId]),
@@ -194,7 +177,12 @@ class DropboxAPIService {
 				return ['error' => $this->l10n->t('Bad credentials')];
 			}
 
-			$responseArray = json_decode($response->getBody(), true);
+            $body = $response->getBody();
+            if(is_resource($body)) {
+                $body = stream_get_contents($body);
+            }
+
+			$responseArray = json_decode($body, true);
 			if (is_null($responseArray) || !isset($responseArray['link'])) {
 				return ['error' => $this->l10n->t('Can\'t get the temporary dropbox link')];
 			}
@@ -204,6 +192,7 @@ class DropboxAPIService {
 				'timeout' => 0,
 				'stream' => true,
 			];
+            /** @var string $url */
 			$url = $responseArray['link'];
 			$response = $this->client->get($url, $options);
 			$respCode = $response->getStatusCode();
@@ -213,16 +202,25 @@ class DropboxAPIService {
 			}
 
 			$body = $response->getBody();
-			while (!feof($body)) {
-				// write ~5 MB chunks
-				$chunk = fread($body, 5000000);
-				fwrite($resource, $chunk);
-			}
+            if (is_resource($body)) {
+                while (!feof($body)) {
+                    // write ~5 MB chunks
+                    $chunk = fread($body, 5000000);
+                    fwrite($resource, $chunk);
+                }
+            }else{
+                fwrite($resource, $body);
+            }
 
 			return ['success' => true];
 		} catch (ServerException | ClientException $e) {
 			$response = $e->getResponse();
 			if ($response->getStatusCode() === 401) {
+                if ($try > 3) {
+                    // impossible to refresh the token
+                    $this->logger->info('Received the following response upon trying to download a file: '. $response->getBody()->getContents());
+                    return ['error' => $this->l10n->t('Could not access file due to failed authentication.')];
+                }
 				$this->logger->info('Trying to REFRESH the access token', ['app' => $this->appName]);
 				// try to refresh the token
 				$result = $this->requestOAuthAccessToken($clientID, $clientSecret, [
@@ -234,10 +232,10 @@ class DropboxAPIService {
 					$accessToken = $result['access_token'];
 					$this->config->setUserValue($userId, Application::APP_ID, 'token', $accessToken);
 					// retry the request with new access token
-					return $this->downloadFile($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileId);
+					return $this->downloadFile($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileId, $try+1);
 				} else {
 					// impossible to refresh the token
-					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . $result['error']];
+					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . ($result['error'] ?? '')];
 				}
 			}
 			$this->logger->warning('Dropbox API error : '.$e->getMessage(), ['app' => $this->appName]);
@@ -256,7 +254,7 @@ class DropboxAPIService {
 	 * @param string $clientSecret
 	 * @param array $params
 	 * @param string $method
-	 * @return array
+	 * @return array{access_token?: string, refresh_token?: string, account_id?: string, uid?: string, error_description?: string, error?: string}
 	 */
 	public function requestOAuthAccessToken(string $clientID, string $clientSecret, array $params = [], string $method = 'GET'): array {
 		try {
@@ -294,6 +292,9 @@ class DropboxAPIService {
 			if ($respCode >= 400) {
 				return ['error' => $this->l10n->t('OAuth access token refused')];
 			} else {
+                if (is_resource($body)) {
+                    $body = stream_get_contents($body);
+                }
 				return json_decode($body, true);
 			}
 		} catch (ClientException $e) {
@@ -302,7 +303,8 @@ class DropboxAPIService {
 
 			$response = $e->getResponse();
 			$body = $response->getBody();
-			$decodedBody = json_decode($body, true);
+            /** @var array{error_description?:string} $decodedBody */
+			$decodedBody = json_decode($body->getContents(), true);
 			if (isset($decodedBody['error_description'])) {
 				$result['error_description'] = $decodedBody['error_description'];
 			}
