@@ -1,5 +1,4 @@
 { "translations": {
-    "Error during OAuth exchanges" : "Napaka med izmenjavo podatkov OAuth",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Neustrezen način HTTP",
     "Bad credentials" : "Neustrezna poverila",

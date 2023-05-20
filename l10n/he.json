@@ -1,5 +1,4 @@
 { "translations": {
-    "Error during OAuth exchanges" : "שגיאה במהלך החלפות OAuth",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "שגיאה במתודת HTTP",
     "Bad credentials" : "פרטי גישה שגויים",

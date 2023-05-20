@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Invalid access code" : "Neplatný přístupový kód",
-    "Error during OAuth exchanges" : "Chyba při výměnách informací v rámci OAuth",
     "Dropbox" : "Dropbox",
     "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["%n soubor byl naimportován z úložiště Dropbox.","%n soubory byly naimportovány z úložiště Dropbox.","%n souborů bylo naimportováno z úložiště Dropbox.","%n soubory byly naimportovány z úložiště Dropbox."],
     "Bad HTTP method" : "Nesprávná HTTP metoda",

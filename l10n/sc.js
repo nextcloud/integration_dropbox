@@ -1,7 +1,6 @@
 OC.L10N.register(
     "integration_dropbox",
     {
-    "Error during OAuth exchanges" : "Errore cuncambiende OAuth",
     "Bad HTTP method" : "Mètodu HTTP no bàlidu",
     "Bad credentials" : "Credentziales non bàlidas",
     "Token is not valid anymore. Impossible to refresh it." : "Su token no est prus bàlidu. Non faghet a dd'agiornare.",

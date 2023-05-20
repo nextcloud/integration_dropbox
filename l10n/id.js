@@ -1,7 +1,6 @@
 OC.L10N.register(
     "integration_dropbox",
     {
-    "Error during OAuth exchanges" : "Terjadi kesalahan saat penukaran OAuth",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Metode HTTP tidak benar",
     "Bad credentials" : "Kredensial tidak benar",

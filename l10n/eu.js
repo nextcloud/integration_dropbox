@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Invalid access code" : "Sarbide-kode baliogabea",
-    "Error during OAuth exchanges" : "Errorea OAuth trukeak egitean",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "HTTP metodo okerra",
     "Bad credentials" : "Kredentzial okerrak",

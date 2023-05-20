@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Invalid access code" : "Ungültiger Zugangscode",
-    "Error during OAuth exchanges" : "Fehler beim OAuth-Austausch",
     "Dropbox" : "Dropbox",
     "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["%n Dateien wurde vom Dropbox-Speicher importiert.","%n Dateien wurden vom Dropbox-Speicher importiert."],
     "Bad HTTP method" : "Ungültige HTTP-Methode",

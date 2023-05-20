@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Invalid access code" : "Neteisingas prieigos kodas",
-    "Error during OAuth exchanges" : "Klaida „OAuth“ apsikeitimo metu",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Blogas HTTP metodas",
     "Bad credentials" : "Blogi prisijungimo duomenys",

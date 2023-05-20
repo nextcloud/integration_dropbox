@@ -1,7 +1,6 @@
 OC.L10N.register(
     "integration_dropbox",
     {
-    "Error during OAuth exchanges" : "خطأ أثناء تبادل OAuth.",
     "Bad HTTP method" : "دالة HTTP  غير صحيحة",
     "Bad credentials" : "رموز التعريف غير صحيحة",
     "OAuth access token refused" : "أمارة token مرفوضة",

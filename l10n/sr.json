@@ -1,6 +1,5 @@
 { "translations": {
     "Invalid access code" : "Неисправан приступни кôд",
-    "Error during OAuth exchanges" : "Грешко приликом OAuth размена",
     "Dropbox" : "Dropbox",
     "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["%n фајл је увезен са Dropbox складишта.","%n ајла су увезена са Dropbox складишта.","%n фајлова је увезено са Dropbox складишта."],
     "Bad HTTP method" : "Лоша HTTP метода",

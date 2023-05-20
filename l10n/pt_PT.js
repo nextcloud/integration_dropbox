@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Invalid access code" : "Código de acesso inválido",
-    "Error during OAuth exchanges" : "Erro durante trocas com o OAuth",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Método HTTP incorreto",
     "Bad credentials" : "Credenciais inválidas",

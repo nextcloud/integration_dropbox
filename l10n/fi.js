@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Invalid access code" : "Virheellinen pääsykoodi",
-    "Error during OAuth exchanges" : "Virhe OAuth-tunnistautumisessa",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Virheellinen HTTP-metodi",
     "Bad credentials" : "Virheelliset kirjautumistiedot",

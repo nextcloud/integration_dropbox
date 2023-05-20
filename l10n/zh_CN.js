@@ -1,7 +1,6 @@
 OC.L10N.register(
     "integration_dropbox",
     {
-    "Error during OAuth exchanges" : "OAuth 交换期间出错",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "错误的HTTP方法",
     "Bad credentials" : "错误的凭据",

@@ -1,5 +1,4 @@
 { "translations": {
-    "Error during OAuth exchanges" : "Fel vid utväxling av OAuth-token",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Felaktig HTTP-metod",
     "Bad credentials" : "Ogiltiga inloggningsuppgifter",

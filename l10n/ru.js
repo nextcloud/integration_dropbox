@@ -2,7 +2,6 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Invalid access code" : "Неверный код доступа",
-    "Error during OAuth exchanges" : "Ошибка во время обмена OAuth",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Неверный метод HTTP",
     "Bad credentials" : "Неверные учетные данные",
