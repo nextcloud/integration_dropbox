@@ -8,6 +8,7 @@ OC.L10N.register(
     "Bad credentials" : "Bad credentials",
     "Token is not valid anymore. Impossible to refresh it." : "Token is not valid anymore. Impossible to refresh it.",
     "Can't get the temporary dropbox link" : "Can't get the temporary dropbox link",
+    "Could not access file due to failed authentication." : "Could not access file due to failed authentication.",
     "OAuth access token refused" : "OAuth access token refused",
     "Connected accounts" : "Connected accounts",
     "Data migration" : "Data migration",

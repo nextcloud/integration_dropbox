@@ -5,6 +5,7 @@ OC.L10N.register(
     "Bad HTTP method" : "错误的HTTP方法",
     "Bad credentials" : "错误的凭据",
     "Token is not valid anymore. Impossible to refresh it." : "令牌已不再有效。无法刷新。",
+    "Could not access file due to failed authentication." : "由于验证失败，无法访问文件。",
     "OAuth access token refused" : "OAuth 访问令牌被拒绝",
     "Connected accounts" : "关联账号",
     "Data migration" : "数据迁移",

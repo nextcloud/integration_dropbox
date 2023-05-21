@@ -8,6 +8,7 @@ OC.L10N.register(
     "Bad credentials" : "Kimlik doğrulama bilgileri hatalı",
     "Token is not valid anymore. Impossible to refresh it." : "Kod artık geçersiz. Yenileme yapılamıyor.",
     "Can't get the temporary dropbox link" : "Geçici Dropbox bağlantısı alınamadı",
+    "Could not access file due to failed authentication." : "Kimlik doğrulanamadığından dosyaya erişilemedi.",
     "OAuth access token refused" : "OAuth erişim kodu reddedildi",
     "Connected accounts" : "Bağlı hesaplar",
     "Data migration" : "Veri aktarma",
