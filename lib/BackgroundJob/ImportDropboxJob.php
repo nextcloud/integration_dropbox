@@ -17,6 +17,7 @@ use OCA\Dropbox\Service\DropboxStorageAPIService;
 use OCP\AppFramework\Utility\ITimeFactory;
 
 use OCP\BackgroundJob\QueuedJob;
+use OCP\IConfig;
 
 class ImportDropboxJob extends QueuedJob {
 
