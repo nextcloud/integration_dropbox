@@ -94,6 +94,8 @@ class DropboxAPIController extends Controller {
 			return new DataResponse([], 400);
 		}
 		return new DataResponse([
+			'last_import_error' => $this->config->getUserValue($this->userId, Application::APP_ID, 'last_import_error', '') !== '',
+			'dropbox_import_running' => $this->config->getUserValue($this->userId, Application::APP_ID, 'dropbox_import_running') === '1',
 			'importing_dropbox' => $this->config->getUserValue($this->userId, Application::APP_ID, 'importing_dropbox') === '1',
 			'last_dropbox_import_timestamp' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0'),
 			'nb_imported_files' => (int) $this->config->getUserValue($this->userId, Application::APP_ID, 'nb_imported_files', '0'),

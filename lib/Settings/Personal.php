@@ -25,6 +25,8 @@ class Personal implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm(): TemplateResponse {
+		$email = $this->config->getUserValue($this->userId, Application::APP_ID, 'email');
+		$accountId = $this->config->getUserValue($this->userId, Application::APP_ID, 'account_id');
 		$userName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
 		$outputDir = $this->config->getUserValue($this->userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 
@@ -39,6 +41,8 @@ class Personal implements ISettings {
 
 		$userConfig = [
 			'client_id' => $clientID,
+			'account_id' => $accountId,
+			'email' => $email,
 			'user_name' => $userName,
 			'free_space' => $freeSpace,
 			'user_quota' => $user?->getQuota(),

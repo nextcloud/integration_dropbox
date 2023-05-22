@@ -44,7 +44,7 @@
 				<div class="line">
 					<label>
 						<CheckIcon :size="20" />
-						{{ t('integration_dropbox', 'Connected as {user}', { user: state.user_name }) }}
+						{{ t('integration_dropbox', 'Connected as {user} ({email})', { user: state.user_name, email: state.email }) }}
 					</label>
 					<NcButton @click="onLogoutClick">
 						<template #icon>
@@ -91,8 +91,10 @@
 							<br>
 							{{ n('integration_dropbox', '{amount} file imported', '{amount} files imported', nbImportedFiles, { amount: nbImportedFiles }) }}
 							<br>
-							{{ lastDropboxImportDate }}
+							<span v-if="importJobRunning">{{ t('integration_dropbox', 'Import job is currently running') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="loading-small" /></span>
+							<span v-else>{{ lastDropboxImportDate }}</span>
 							<br>
+							<span v-if="lastImportError">{{ t('integration_dropbox', 'An error occured during the import: {error}', {error: lastImportError}) }}</span>
 							<NcButton @click="onCancelDropboxImport">
 								<template #icon>
 									<CloseIcon />
@@ -156,6 +158,8 @@ export default {
 			storageSize: -1,
 			importingDropbox: false,
 			lastDropboxImportTimestamp: 0,
+			importJobRunning: 0,
+			lastImportError: '',
 			nbImportedFiles: 0,
 			dropboxImportLoop: null,
 		}
@@ -163,7 +167,7 @@ export default {
 
 	computed: {
 		connected() {
-			return this.state.user_name && this.state.user_name !== ''
+			return (this.state.user_name && this.state.user_name !== '') || this.state.account_id || this.state.email
 		},
 		oauthUrl() {
 			return 'https://www.dropbox.com/oauth2/authorize?'
@@ -230,6 +234,8 @@ export default {
 				.then((response) => {
 					showSuccess(t('integration_dropbox', 'Successfully connected to Dropbox!'))
 					this.state.user_name = response.data.user_name
+					this.state.email = response.data.email
+					this.state.account_id = response.data.account_id
 					this.accessCode = ''
 					this.codeFailed = false
 					this.getStorageInfo()
@@ -267,6 +273,8 @@ export default {
 			axios.get(url)
 				.then((response) => {
 					if (response.data && Object.keys(response.data).length > 0) {
+						this.lastImportError = response.data.last_import_error
+						this.importJobRunning = response.data.dropbox_import_running
 						this.lastDropboxImportTimestamp = response.data.last_dropbox_import_timestamp
 						this.nbImportedFiles = response.data.nb_imported_files
 						this.importingDropbox = response.data.importing_dropbox

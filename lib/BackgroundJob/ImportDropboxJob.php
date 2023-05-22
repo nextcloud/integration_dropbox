@@ -12,6 +12,7 @@
 
 namespace OCA\Dropbox\BackgroundJob;
 
+use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\Service\DropboxStorageAPIService;
 use OCP\AppFramework\Utility\ITimeFactory;
 
@@ -26,8 +27,11 @@ class ImportDropboxJob extends QueuedJob {
 	 * A QueuedJob to partially import dropbox files and launch following job
 	 *
 	 */
-	public function __construct(ITimeFactory $timeFactory,
-		DropboxStorageAPIService $service) {
+	public function __construct(
+        ITimeFactory $timeFactory,
+		DropboxStorageAPIService $service,
+        private IConfig $config
+    ) {
 		parent::__construct($timeFactory);
 		$this->service = $service;
 	}
@@ -38,6 +42,10 @@ class ImportDropboxJob extends QueuedJob {
 	 */
 	public function run($argument) {
 		$userId = $argument['user_id'];
-		$this->service->importDropboxJob($userId);
+        try {
+            $this->service->importDropboxJob($userId);
+        }catch(\Exception|\Throwable $e) {
+            $this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', $e->getMessage());
+        }
 	}
 }
