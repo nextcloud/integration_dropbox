@@ -16,7 +16,6 @@ use Exception;
 use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\BackgroundJob\ImportDropboxJob;
 use OCP\BackgroundJob\IJobList;
-use OCP\Files\FileInfo;
 use OCP\Files\Folder;
 use OCP\Files\ForbiddenException;
 use OCP\Files\IRootFolder;
@@ -148,7 +147,7 @@ class DropboxStorageAPIService {
 				return;
 			}
 		}
-        $this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', '');
+		$this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', '');
 		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_running', '1');
 		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_job_last_start', strval($nowTs));
 
@@ -171,18 +170,18 @@ class DropboxStorageAPIService {
 				'error' => 'Unknow job failure. ' . $e->getMessage(),
 			];
 		}
-        if (isset($result['finished']) && $result['finished']) {
-            $this->config->setUserValue($userId, Application::APP_ID, 'importing_dropbox', '0');
-            $this->config->setUserValue($userId, Application::APP_ID, 'nb_imported_files', '0');
-            $this->config->setUserValue($userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0');
-            $this->dropboxApiService->sendNCNotification($userId, 'import_dropbox_finished', [
-                'nbImported' => $result['totalSeen'],
-                'targetPath' => $targetPath,
-            ]);
-        }
-        if (isset($result['error'])) {
-            $this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', $result['error']);
-        }
+		if (isset($result['finished']) && $result['finished']) {
+			$this->config->setUserValue($userId, Application::APP_ID, 'importing_dropbox', '0');
+			$this->config->setUserValue($userId, Application::APP_ID, 'nb_imported_files', '0');
+			$this->config->setUserValue($userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0');
+			$this->dropboxApiService->sendNCNotification($userId, 'import_dropbox_finished', [
+				'nbImported' => $result['totalSeen'],
+				'targetPath' => $targetPath,
+			]);
+		}
+		if (isset($result['error'])) {
+			$this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', $result['error']);
+		}
 		if ((!isset($result['finished']) || !$result['finished']) && !isset($result['error'])) {
 			$ts = (string)(new DateTime())->getTimestamp();
 			$this->config->setUserValue($userId, Application::APP_ID, 'last_dropbox_import_timestamp', $ts);

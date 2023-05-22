@@ -29,10 +29,10 @@ class ImportDropboxJob extends QueuedJob {
 	 *
 	 */
 	public function __construct(
-        ITimeFactory $timeFactory,
+		ITimeFactory $timeFactory,
 		DropboxStorageAPIService $service,
-        private IConfig $config
-    ) {
+		private IConfig $config
+	) {
 		parent::__construct($timeFactory);
 		$this->service = $service;
 	}
@@ -43,10 +43,10 @@ class ImportDropboxJob extends QueuedJob {
 	 */
 	public function run($argument) {
 		$userId = $argument['user_id'];
-        try {
-            $this->service->importDropboxJob($userId);
-        }catch(\Exception|\Throwable $e) {
-            $this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', $e->getMessage());
-        }
+		try {
+			$this->service->importDropboxJob($userId);
+		} catch(\Exception|\Throwable $e) {
+			$this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', $e->getMessage());
+		}
 	}
 }

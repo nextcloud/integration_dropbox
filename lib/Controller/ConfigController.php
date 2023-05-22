@@ -116,14 +116,14 @@ class ConfigController extends Controller {
 				$accessToken, $refreshToken, $clientID, $clientSecret, $this->userId, 'users/get_current_account', [], 'POST'
 			);
 			$data['info'] = $info;
-            if (isset($result['account_id'])) {
-                $this->config->setUserValue($this->userId, Application::APP_ID, 'account_id', $result['account_id']);
-                $data['account_id'] = $result['account_id'];
-            }
-            if (isset($result['email'])) {
-                $this->config->setUserValue($this->userId, Application::APP_ID, 'email', $result['email']);
-                $data['email'] = $result['email'];
-            }
+			if (isset($result['account_id'])) {
+				$this->config->setUserValue($this->userId, Application::APP_ID, 'account_id', $result['account_id']);
+				$data['account_id'] = $result['account_id'];
+			}
+			if (isset($result['email'])) {
+				$this->config->setUserValue($this->userId, Application::APP_ID, 'email', $result['email']);
+				$data['email'] = $result['email'];
+			}
 			if (isset($info['name'], $info['name']['display_name'])) {
 				$this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', $info['name']['display_name']);
 				$data['user_name'] = $info['name']['display_name'];
