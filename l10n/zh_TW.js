@@ -8,6 +8,7 @@ OC.L10N.register(
     "Bad credentials" : "錯誤的憑證",
     "Token is not valid anymore. Impossible to refresh it." : "權杖不再有效。無法重新整理。",
     "Can't get the temporary dropbox link" : "無法取得暫時的 Dropbox 連結",
+    "Could not access file due to failed authentication." : "因為驗證失敗，無法存取檔案。",
     "OAuth access token refused" : "OAuth 存取權杖被拒絕",
     "Connected accounts" : "已連線的帳號",
     "Data migration" : "資料遷移",
