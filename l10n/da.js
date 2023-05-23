@@ -5,7 +5,6 @@ OC.L10N.register(
     "Connected accounts" : "Forbundne konti",
     "App key" : "App-nøgle",
     "App secret" : "App-hemmelighed",
-    "Authentication" : "Godkendelse",
-    "Connected as {user}" : "Forbundet som {user}"
+    "Authentication" : "Godkendelse"
 },
 "nplurals=2; plural=(n != 1);");

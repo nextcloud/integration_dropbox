@@ -32,7 +32,6 @@ OC.L10N.register(
     "Connect to Dropbox to get an access code" : "Přístupový kód získáte připojením se k Dropbox",
     "Dropbox access code" : "Přístupový kód do Dropbox",
     "Access code" : "Přístupový kód",
-    "Connected as {user}" : "Připojeni jako {user}",
     "Disconnect from Dropbox" : "Odpojit od Dropbox",
     "Dropbox storage" : "Úložiště Dropbox",
     "Import directory" : "Importovat adresář",

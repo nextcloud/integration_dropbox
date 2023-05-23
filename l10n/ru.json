@@ -14,7 +14,6 @@
     "App key" : "Ключ приложения",
     "App secret" : "Секретный ключ ",
     "Authentication" : "Аутентификация",
-    "Connected as {user}" : "Подключено под именем {user}",
     "Import directory" : "Каталог импорта",
     "Starting importing files in {targetPath} directory" : "Начало импорта файлов в каталог {targetPath}",
     "Choose where to write imported files" : "Выберите, куда сохранять импортированные файлы"

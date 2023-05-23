@@ -11,7 +11,6 @@ OC.L10N.register(
     "App key" : "Κλειδί εφαρμογής",
     "App secret" : "Μυστικό εφαρμογής",
     "Authentication" : "Πιστοποίηση",
-    "Connected as {user}" : "Συνδεδεμένος ως {user}",
     "Import directory" : "Εισαγωγή καταλόγου",
     "Starting importing files in {targetPath} directory" : "Έναρξη εισαγωγής αρχείων στον κατάλογο {targetPath}",
     "Choose where to write imported files" : "Επιλέξτε πού να γράψετε τα εισαγόμενα αρχεία"

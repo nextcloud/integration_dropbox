@@ -4,7 +4,6 @@ OC.L10N.register(
     "Dropbox" : "Dropbox",
     "App key" : "คีย์แอป",
     "App secret" : "ข้อมูลลับแอป",
-    "Authentication" : "การตรวจสอบสิทธิ์",
-    "Connected as {user}" : "เชื่อมต่อเป็น {user} แล้ว"
+    "Authentication" : "การตรวจสอบสิทธิ์"
 },
 "nplurals=1; plural=0;");

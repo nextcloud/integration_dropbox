@@ -17,7 +17,6 @@ OC.L10N.register(
     "Authentication" : "Tapatybės nustatymas",
     "Dropbox access code" : "„Dropbox“ prieigos kodas",
     "Access code" : "Prieigos kodas",
-    "Connected as {user}" : "Prisijungta kaip {user}",
     "Disconnect from Dropbox" : "Atsijungti nuo „Dropbox“",
     "Dropbox storage" : "„Dropbox“ saugykla",
     "Import directory" : "Importuoti katalogą",

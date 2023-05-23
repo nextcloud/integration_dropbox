@@ -33,7 +33,6 @@ OC.L10N.register(
     "Connect to Dropbox to get an access code" : "Connect to Dropbox to get an access code",
     "Dropbox access code" : "Dropbox access code",
     "Access code" : "Access code",
-    "Connected as {user}" : "Connected as {user}",
     "Disconnect from Dropbox" : "Disconnect from Dropbox",
     "Dropbox storage" : "Dropbox storage",
     "Import directory" : "Import directory",

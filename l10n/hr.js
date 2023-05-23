@@ -10,7 +10,6 @@ OC.L10N.register(
     "App key" : "Ključ aplikacije",
     "App secret" : "Tajna aplikacije",
     "Authentication" : "Autentifikacija",
-    "Connected as {user}" : "Povezan kao {user}",
     "Import directory" : "Uvezi direktorij",
     "Starting importing files in {targetPath} directory" : "Početak uvoza datoteka u direktorij {targetPath}",
     "Choose where to write imported files" : "Odaberite gdje želite zapisivati uvezene datoteke"

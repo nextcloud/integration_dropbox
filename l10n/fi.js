@@ -19,7 +19,6 @@ OC.L10N.register(
     "Connect to Dropbox to get an access code" : "Yhdistä Dropboxiin saadaksesi pääsykoodin",
     "Dropbox access code" : "Dropboxin pääsykoodi",
     "Access code" : "Pääsykoodi",
-    "Connected as {user}" : "Yhdistetty käyttäjänä {user}",
     "Disconnect from Dropbox" : "Katkaise yhteys Dropboxiin",
     "Dropbox storage" : "Dropbox-tallennustila",
     "Import directory" : "Tuo kansio",

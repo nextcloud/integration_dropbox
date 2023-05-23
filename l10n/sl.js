@@ -11,7 +11,6 @@ OC.L10N.register(
     "App key" : "Programski ključ",
     "App secret" : "Skrivni programski ključ",
     "Authentication" : "Overitev",
-    "Connected as {user}" : "Povezan je uporabniški račun {user}",
     "Import directory" : "Uvozi mapo",
     "Starting importing files in {targetPath} directory" : "Začeto je uvažanje datotek v mapo {targetPath}.",
     "Choose where to write imported files" : "Izbor mesta za shranjevanje uvoženih datotek"

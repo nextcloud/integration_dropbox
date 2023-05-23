@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Bad credentials" : "Marrits identificants",
     "Connected accounts" : "Comptes connectats",
-    "Authentication" : "Autentificacion",
-    "Connected as {user}" : "Connectat coma {user}"
+    "Authentication" : "Autentificacion"
 },
 "nplurals=2; plural=(n > 1);");

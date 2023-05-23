@@ -6,7 +6,6 @@
     "Connected accounts" : "Akun terhubung",
     "App key" : "Kunci Apl",
     "App secret" : "Rahasia Apl",
-    "Authentication" : "Otentikasi",
-    "Connected as {user}" : "Terhubung sebagai {user}"
+    "Authentication" : "Otentikasi"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

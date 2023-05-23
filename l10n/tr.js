@@ -33,7 +33,6 @@ OC.L10N.register(
     "Connect to Dropbox to get an access code" : "Bir erişim kodu almak için Dropbox bağlantısı kurun",
     "Dropbox access code" : "Dropbox erişim kodu",
     "Access code" : "Erişim kodu",
-    "Connected as {user}" : "{user} olarak bağlantı kuruldu",
     "Disconnect from Dropbox" : "Dropbox bağlantısını kes",
     "Dropbox storage" : "Dropbox depolama alanı",
     "Import directory" : "İçe klasör aktar",

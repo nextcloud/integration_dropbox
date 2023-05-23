@@ -9,7 +9,6 @@ OC.L10N.register(
     "Data migration" : "データ移行",
     "App key" : "アプリキー",
     "App secret" : "アプリシークレット",
-    "Authentication" : "認証",
-    "Connected as {user}" : "{user} に接続済み"
+    "Authentication" : "認証"
 },
 "nplurals=1; plural=0;");

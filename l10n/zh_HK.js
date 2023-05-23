@@ -33,7 +33,6 @@ OC.L10N.register(
     "Connect to Dropbox to get an access code" : "連線至 Dropbox 以取得存取代碼",
     "Dropbox access code" : "Dropbox 存取代碼",
     "Access code" : "存取代碼",
-    "Connected as {user}" : "以 {user} 身份連線",
     "Disconnect from Dropbox" : "從 Dropbox 斷線",
     "Dropbox storage" : "Dropbox 儲存空間",
     "Import directory" : "導入資料夾",

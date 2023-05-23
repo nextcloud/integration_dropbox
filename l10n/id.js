@@ -8,7 +8,6 @@ OC.L10N.register(
     "Connected accounts" : "Akun terhubung",
     "App key" : "Kunci Apl",
     "App secret" : "Rahasia Apl",
-    "Authentication" : "Otentikasi",
-    "Connected as {user}" : "Terhubung sebagai {user}"
+    "Authentication" : "Otentikasi"
 },
 "nplurals=1; plural=0;");

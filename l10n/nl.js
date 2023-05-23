@@ -11,7 +11,6 @@ OC.L10N.register(
     "App key" : "App key",
     "App secret" : "App secret",
     "Authentication" : "Authenticatie",
-    "Connected as {user}" : "Verbonden als {user}",
     "Import directory" : "Importdirectory",
     "Starting importing files in {targetPath} directory" : "Beginnen met importeren bestanden in {targetPath} directory",
     "Choose where to write imported files" : "Kies waar geïmporteerde bestanden moeten worden weggeschreven"

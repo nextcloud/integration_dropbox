@@ -6,7 +6,6 @@
     "App key" : "Lykill forrits",
     "App secret" : "Leynilykill forrits",
     "Authentication" : "Auðkenning",
-    "Connected as {user}" : "Tengt sem {user}",
     "Import directory" : "Flytja möppu inn"
 },"pluralForm" :"nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);"
 }

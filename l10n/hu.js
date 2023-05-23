@@ -11,7 +11,6 @@ OC.L10N.register(
     "App key" : "Alkalmazáskulcs",
     "App secret" : "Alkalmazás titka",
     "Authentication" : "Hitelesítés",
-    "Connected as {user}" : "Kapcsolódva mint {user}",
     "Import directory" : "Mappa importálása",
     "Starting importing files in {targetPath} directory" : "Fájlok importálásának megkezdése a(z) {targetPath} könyvtárban",
     "Choose where to write imported files" : "Válassza ki az importált fájlok helyét"

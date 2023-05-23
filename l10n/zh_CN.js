@@ -12,7 +12,6 @@ OC.L10N.register(
     "App key" : "App key",
     "App secret" : "应用程序 secret",
     "Authentication" : "身份认证",
-    "Connected as {user}" : "以 {user} 身份连接",
     "Import directory" : "导入文件夹"
 },
 "nplurals=1; plural=0;");

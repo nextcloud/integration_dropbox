@@ -10,7 +10,6 @@ OC.L10N.register(
     "App key" : "Crae de s'aplicatzione",
     "App secret" : "Segretu de s'aplicatzione",
     "Authentication" : "Autenticatzione",
-    "Connected as {user}" : "Connètidu comente {user}",
     "Import directory" : "Importa cartella",
     "Starting importing files in {targetPath} directory" : "Aviamentu de s'importatzione de is archìvios in sa cartella {targetPath}",
     "Choose where to write imported files" : "Sèbera in ue est a pònnere is archìvios importados"
