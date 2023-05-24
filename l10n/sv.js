@@ -8,6 +8,7 @@ OC.L10N.register(
     "Connected accounts" : "Anslutna konton",
     "App key" : "Appnyckel",
     "App secret" : "Apphemlighet",
-    "Authentication" : "Autentisering"
+    "Authentication" : "Autentisering",
+    "Connected as {user} ({email})" : "Ansluten som {user} ({email})"
 },
 "nplurals=2; plural=(n != 1);");

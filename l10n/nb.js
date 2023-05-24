@@ -7,6 +7,7 @@ OC.L10N.register(
     "OAuth access token refused" : "OAuth access token ble avslått",
     "App key" : "App-nøkkel",
     "App secret" : "App-hemmelighet",
-    "Authentication" : "Autentisering"
+    "Authentication" : "Autentisering",
+    "Connected as {user} ({email})" : "Tilkoblet som {user} ({email})"
 },
 "nplurals=2; plural=(n != 1);");

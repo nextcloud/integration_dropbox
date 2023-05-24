@@ -16,6 +16,7 @@ OC.L10N.register(
     "App key" : "Ключ приложения",
     "App secret" : "Секретный ключ ",
     "Authentication" : "Аутентификация",
+    "Connected as {user} ({email})" : "Подключено как {user} ({email})",
     "Import directory" : "Каталог импорта",
     "Starting importing files in {targetPath} directory" : "Начало импорта файлов в каталог {targetPath}",
     "Choose where to write imported files" : "Выберите, куда сохранять импортированные файлы"

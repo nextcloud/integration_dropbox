@@ -11,6 +11,7 @@ OC.L10N.register(
     "App key" : "Kľúč aplikácie",
     "App secret" : "Heslo aplikácie",
     "Authentication" : "Autentifikácia",
+    "Connected as {user} ({email})" : "Pripojený ako {user} ({email})",
     "Import directory" : "Importovať adresár",
     "Starting importing files in {targetPath} directory" : "Spúšťa sa import súborov do adresára {targetPath}",
     "Choose where to write imported files" : "Vyberte kam zapísať importované súbory"

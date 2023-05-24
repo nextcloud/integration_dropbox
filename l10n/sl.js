@@ -12,6 +12,7 @@ OC.L10N.register(
     "App secret" : "Skrivni programski ključ",
     "Authentication" : "Overitev",
     "Import directory" : "Uvozi mapo",
+    "Import job is currently running" : "Trenutno poteka opravilo uvažanja podatkov",
     "Starting importing files in {targetPath} directory" : "Začeto je uvažanje datotek v mapo {targetPath}.",
     "Choose where to write imported files" : "Izbor mesta za shranjevanje uvoženih datotek"
 },
