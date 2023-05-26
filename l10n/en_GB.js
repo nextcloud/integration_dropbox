@@ -41,6 +41,7 @@ OC.L10N.register(
     "Import Dropbox files" : "Import Dropbox files",
     "Your Dropbox storage is bigger than your remaining space left ({formSpace})" : "Your Dropbox storage is bigger than your remaining space left ({formSpace})",
     "Import job is currently running" : "Import job is currently running",
+    "An error occured during the import: {error}" : "An error occurred during the import: {error}",
     "Cancel Dropbox files import" : "Cancel Dropbox files import",
     "Your Dropbox storage is empty" : "Your Dropbox storage is empty",
     "Dropbox import process will begin soon" : "Dropbox import process will begin soon",
