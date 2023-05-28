@@ -41,6 +41,7 @@ OC.L10N.register(
     "Import Dropbox files" : "Dropbox dosyalarını içe aktar",
     "Your Dropbox storage is bigger than your remaining space left ({formSpace})" : "Dropbox depolama alanınız kalan boş alanınızdan daha büyük gibi görünüyor ({formSpace})",
     "Import job is currently running" : "İçe aktarma işlemi şu anda yapılıyor",
+    "An error occured during the import: {error}" : "İçe aktarma sırasında bir sorun çıktı: {error}",
     "Cancel Dropbox files import" : "Dropbox dosyalarını içe aktarmayı iptal et",
     "Your Dropbox storage is empty" : "Dropbox depolama alanınız boş",
     "Dropbox import process will begin soon" : "Birazdan Dropbox içe aktarma işlemine başlanacak",
