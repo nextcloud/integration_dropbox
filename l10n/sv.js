@@ -6,6 +6,7 @@ OC.L10N.register(
     "Bad credentials" : "Ogiltiga inloggningsuppgifter",
     "OAuth access token refused" : "OAuth-token avvisades",
     "Connected accounts" : "Anslutna konton",
+    "Data migration" : "Datamigrering",
     "App key" : "Appnyckel",
     "App secret" : "Apphemlighet",
     "Authentication" : "Autentisering",
