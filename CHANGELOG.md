@@ -4,7 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.0.1] - 2023-05-31
+
+### Fixed
+
+ - Fix ImportDropboxJob
+ - Fix sign-in if username is empty + Give more feedback in UI
+ - Update translations from Transifex
+
+## [2.0.0] - 2023-05-19
+
+### Breaking changes
+
+ - Drop support for Nextcloud pre 26
+ - Now supported: Nextcloud 26 and Nextcloud 27
+
 
 ## 1.0.6 – 2023-01-06
 ### Changed
