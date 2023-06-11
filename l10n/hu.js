@@ -1,7 +1,9 @@
 OC.L10N.register(
     "integration_dropbox",
     {
+    "Invalid access code" : "Érvénytelen hozzáférési kód",
     "Dropbox" : "Dropbox",
+    "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["%n fájl importálva a Dropbox-tárolóból.","%n fájl importálva a Dropbox-tárolóból."],
     "Bad HTTP method" : "Hibás HTTP metódus",
     "Bad credentials" : "Hibás hitelesítő adatok",
     "Token is not valid anymore. Impossible to refresh it." : "A token már nem érvényes. Lehetetlen frissíteni.",
