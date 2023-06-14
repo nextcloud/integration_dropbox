@@ -10,6 +10,7 @@ OC.L10N.register(
     "App secret" : "Тајна на апликацијата",
     "Dropbox data migration" : "Мигрирање на податоци од Dropbox ",
     "Authentication" : "Автентикација",
+    "Connected as {user} ({email})" : "Поврзан како {user} ({email})",
     "Dropbox storage" : "Dropbox складиште",
     "Import directory" : "Увези папка",
     "Failed to get Dropbox storage information" : "Неуспешно добивање информации за Dropbox складиштето",
