@@ -8,7 +8,7 @@ OC.L10N.register(
     "OAuth access token refused" : "Foi rexeitado o testemuño de acceso de OAuth",
     "Connected accounts" : "Contas conectadas",
     "Data migration" : "Migración de datos",
-    "App key" : "Clave da aplicación",
+    "App key" : "Chave da aplicación",
     "App secret" : "Segredo da aplicación",
     "Authentication" : "Autenticación",
     "Import directory" : "Importar directorio",
