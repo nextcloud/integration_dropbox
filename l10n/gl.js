@@ -13,6 +13,7 @@ OC.L10N.register(
     "App key" : "Chave da aplicación",
     "App secret" : "Segredo da aplicación",
     "Authentication" : "Autenticación",
+    "Connected as {user} ({email})" : "Conectado como {user} ({email})",
     "Import directory" : "Importar directorio",
     "Import Dropbox files" : "Importar ficheiros de Dropbox",
     "Cancel Dropbox files import" : "Cancelar a importación de ficheiros de Dropbox",
