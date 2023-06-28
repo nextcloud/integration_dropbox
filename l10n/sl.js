@@ -7,7 +7,7 @@ OC.L10N.register(
     "Token is not valid anymore. Impossible to refresh it." : "Žeton ni več veljaven, zato ga ni mogoče osvežiti.",
     "OAuth access token refused" : "Žeton OAuth za dostop je bil zavrnjen",
     "Connected accounts" : "Povezani računi",
-    "Data migration" : "Selitev podatkov",
+    "Data migration" : "Preselitev podatkov",
     "App key" : "Programski ključ",
     "App secret" : "Skrivni programski ključ",
     "Authentication" : "Overitev",
