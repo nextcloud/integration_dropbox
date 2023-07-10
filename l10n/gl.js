@@ -16,6 +16,7 @@ OC.L10N.register(
     "Connected as {user} ({email})" : "Conectado como {user} ({email})",
     "Import directory" : "Importar directorio",
     "Import Dropbox files" : "Importar ficheiros de Dropbox",
+    "Import job is currently running" : "O traballo de importación está en execución",
     "Cancel Dropbox files import" : "Cancelar a importación de ficheiros de Dropbox",
     "Starting importing files in {targetPath} directory" : "Comezando a importar ficheiros no directorio {targetPath}",
     "Choose where to write imported files" : "Escolla onde gravar os ficheiros importados"
