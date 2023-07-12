@@ -52,6 +52,7 @@ OC.L10N.register(
     "Starting importing files in {targetPath} directory" : "بدء استيراد الملفات إلى الدليل {targetPath} ",
     "Failed to start importing Dropbox storage" : "فشل في البدء في استيراد مخزوهن Dropbox",
     "Choose where to write imported files" : "حدِّد إلى أين ستتم كتابة الملفات المستوردة",
+    "_{amount} file imported_::_{amount} files imported_" : ["تم استيراد {amount} ملفات","تم استيراد {amount} ملف","تم استيراد {amount} ملفات","تم استيراد {amount} ملفات","تم استيراد {amount} ملفات","تم استيراد {amount} ملفات"],
     "Last Dropbox import job at {date}" : "آخر مهمة استيراد من Dropbox تمّت في {date}"
 },
 "nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;");
