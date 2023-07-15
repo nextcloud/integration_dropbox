@@ -8,7 +8,7 @@ OC.L10N.register(
     "Bad credentials" : "Credenciais incorrectas",
     "Token is not valid anymore. Impossible to refresh it." : "O testemuño xa non é válido. Non é posíbel actualizalo.",
     "Can't get the temporary dropbox link" : "Non é posíbel obter a ligazón temporal de Dropbox",
-    "Could not access file due to failed authentication." : "Non foi posíbel acceder ao ficheiro debido a un erro na autenticación.",
+    "Could not access file due to failed authentication." : "Non foi posíbel acceder ao ficheiro por mor dun erro na autenticación.",
     "OAuth access token refused" : "Foi rexeitado o testemuño de acceso de OAuth",
     "Connected accounts" : "Contas conectadas",
     "Data migration" : "Migración de datos",
