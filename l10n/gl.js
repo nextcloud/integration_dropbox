@@ -52,7 +52,7 @@ OC.L10N.register(
     "Failed to get Dropbox storage information" : "Produciuse un fallo ao obter información do almacenamento de Dropbox",
     "Starting importing files in {targetPath} directory" : "Comezando a importar ficheiros no directorio {targetPath}",
     "Failed to start importing Dropbox storage" : "Produciuse un fallo ao comezar a importar dende o almacenamento de Dropbox",
-    "Choose where to write imported files" : "Escolla onde gravar os ficheiros importados",
+    "Choose where to write imported files" : "Escoller onde gravar os ficheiros importados",
     "_{amount} file imported_::_{amount} files imported_" : ["{amount} ficheiro importado","{amount} ficheiros importados"],
     "Last Dropbox import job at {date}" : "Último traballo de importación de Dropbox o {date}"
 },
