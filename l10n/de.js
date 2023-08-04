@@ -52,6 +52,6 @@ OC.L10N.register(
     "Failed to start importing Dropbox storage" : "Fehler beim Starten des Dropbox-Speicher-Imports",
     "Choose where to write imported files" : "Auswählen, wo die Dateien importiert werden sollen",
     "_{amount} file imported_::_{amount} files imported_" : ["{amount} Datei importiert","{amount} Dateien importiert"],
-    "Last Dropbox import job at {date}" : "Letzter Dropbox-Import-Vorgang am {date} "
+    "Last Dropbox import job at {date}" : "Letzter Dropbox-Import am {date} "
 },
 "nplurals=2; plural=(n != 1);");
