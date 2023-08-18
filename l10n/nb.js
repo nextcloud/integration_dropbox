@@ -5,6 +5,7 @@ OC.L10N.register(
     "Bad HTTP method" : "HTTP-metode er feil",
     "Bad credentials" : "Påloggingsdetaljene er feil",
     "OAuth access token refused" : "OAuth access token ble avslått",
+    "Connected accounts" : "Tilknyttede kontoer",
     "App key" : "App-nøkkel",
     "App secret" : "App-hemmelighet",
     "Authentication" : "Autentisering",
