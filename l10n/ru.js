@@ -13,6 +13,7 @@ OC.L10N.register(
     "Import Dropbox data in Nextcloud" : "Импорт данных Dropbox в Nextcloud",
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "Интеграция с Dropbox позволяет вам автоматически импортировать ваши файлы из Dropbox в Nextcloud",
     "Leave all fields empty to use default Nextcloud Dropbox OAuth app." : "Оставьте все поля пустыми, чтобы использовать приложение Nextcloud Dropbox OAuth по умолчанию.",
+    "If you want your Nextcloud users to authenticate to Dropbox using your own Dropbox OAuth app, create one in Dropbox." : "Если вы хотите, чтобы пользователи Nextcloud аутентифицировались в Dropbox с помощью вашего собственного приложения Dropbox OAuth, создайте его в Dropbox.",
     "App key" : "Ключ приложения",
     "App secret" : "Секретный ключ ",
     "Authentication" : "Аутентификация",
