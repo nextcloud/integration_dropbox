@@ -10,6 +10,7 @@ OC.L10N.register(
     "Data migration" : "Prenos údajov",
     "App key" : "Kľúč aplikácie",
     "App secret" : "Heslo aplikácie",
+    "Your Dropbox application secret" : "Váš tajný kľúč pre program Dropbox",
     "Authentication" : "Autentifikácia",
     "Connected as {user} ({email})" : "Pripojený ako {user} ({email})",
     "Import directory" : "Importovať adresár",
