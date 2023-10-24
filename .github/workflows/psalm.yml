@@ -21,8 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: [ '8.0', '8.1', '8.2' ]
-        server-versions: ['dev-master']
+        php-versions: [ '8.1' ]
+        server-versions: ['dev-master', '27.x', '26.x']
+        include:
+          - php-versions: '8.0'
+            server-versions: '27.x'
+          - php-versions: '8.0'
+            server-versions: '267.x'
+          - php-versions: '8.2'
+            server-versions: 'dev-master'
 
     name: Nextcloud
     steps:
