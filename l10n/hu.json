@@ -12,6 +12,8 @@
     "Data migration" : "Adatköltöztetés",
     "Dropbox integration" : "Dropbox integráció",
     "Import Dropbox data in Nextcloud" : "Dropbox adatok imoprtálása a Nextcloudba",
+    "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "A Dropbox integráció lehetővé teszi, hogy automatikusan importálja a Dropboxban lévő fájlokat a Nextcloudba.",
+    "Leave all fields empty to use default Nextcloud Dropbox OAuth app." : "Az alapértelmezett Nextcloud Dropbox OAuth alkalmazás használatához hagyjon üresen minden mezőt.",
     "Dropbox developer settings" : "Dropbox fejlesztői beállítások",
     "Make sure your give those permissions to your app:" : "Adja meg a következő engedélyeket az alkalmazás számára:",
     "No need to add any redirect URI." : "Nincs szükség átirányító hivatkozásra.",
