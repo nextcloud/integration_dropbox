@@ -10,7 +10,7 @@
   </file>
   <file src="lib/Service/DropboxAPIService.php">
     <MixedInferredReturnType occurrences="2">
-      <code>array{access_token?: string, refresh_token?: string, account_id?: string, uid?: string, error_description?: string, error?: string}</code>
+      <code>array{access_token?: string, refresh_token?: string, account_id?: string, uid?: string, error_description?: string, error?: string, email?: string}</code>
       <code>array{error?:string}</code>
     </MixedInferredReturnType>
     <MixedReturnStatement occurrences="2">
@@ -19,14 +19,26 @@
     </MixedReturnStatement>
   </file>
   <file src="lib/Service/DropboxStorageAPIService.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>$resource === false</code>
+    </DocblockTypeContradiction>
     <InvalidArgument occurrences="1">
       <code>$entry</code>
     </InvalidArgument>
     <InvalidArrayOffset occurrences="1">
       <code>$params['cursor']</code>
     </InvalidArrayOffset>
+    <InvalidReturnStatement occurrences="1">
+      <code>$result</code>
+    </InvalidReturnStatement>
     <MixedAssignment occurrences="1">
       <code>$entry</code>
     </MixedAssignment>
+    <MoreSpecificReturnType occurrences="1">
+      <code>array{nbDownloaded: int, targetPath: string, finished: bool, totalSeen: int}|array{error: non-empty-string}</code>
+    </MoreSpecificReturnType>
+    <PossiblyUndefinedArrayOffset occurrences="1">
+      <code>$result['totalSeen']</code>
+    </PossiblyUndefinedArrayOffset>
   </file>
 </files>

@@ -48,8 +48,11 @@ jobs:
       - name: Install dependencies
         run: composer i
 
-      - name: Install nextcloud OCP
-        run: composer require --update-with-all-dependencies --dev nextcloud/ocp:${{ matrix.server-versions }}
+      - name: Install deps + nextcloud OCP
+        run: |
+          composer remove --dev nextcloud/ocp --update-with-all-dependencies
+          rm composer.lock
+          composer require --dev nextcloud/ocp:${{ matrix.server-versions }} --update-with-all-dependencies
 
       - name: Run coding standards check
         run: composer run psalm

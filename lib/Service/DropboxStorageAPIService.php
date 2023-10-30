@@ -199,7 +199,7 @@ class DropboxStorageAPIService {
 	 * @param string $targetPath
 	 * @param ?int $maxDownloadSize
 	 * @param int $alreadyImported
-	 * @return array
+	 * @return array{nbDownloaded: int, targetPath: string, finished: bool, totalSeen: int}|array{error: non-empty-string}
 	 */
 	public function importFiles(string $accessToken, string $refreshToken, string $clientID, string $clientSecret,
 		string $userId, string $targetPath,

@@ -254,7 +254,7 @@ class DropboxAPIService {
 	 * @param string $clientSecret
 	 * @param array $params
 	 * @param string $method
-	 * @return array{access_token?: string, refresh_token?: string, account_id?: string, uid?: string, error_description?: string, error?: string}
+	 * @return array{access_token?: string, refresh_token?: string, account_id?: string, uid?: string, error_description?: string, error?: string, email?: string}
 	 */
 	public function requestOAuthAccessToken(string $clientID, string $clientSecret, array $params = [], string $method = 'GET'): array {
 		try {
