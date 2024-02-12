@@ -4,9 +4,13 @@
     "Bad credentials" : "Påloggingsdetaljene er feil",
     "OAuth access token refused" : "OAuth access token ble avslått",
     "Connected accounts" : "Tilknyttede kontoer",
+    "Data migration" : "Datamigrering",
     "App key" : "App-nøkkel",
     "App secret" : "App-hemmelighet",
     "Authentication" : "Autentisering",
-    "Connected as {user} ({email})" : "Tilkoblet som {user} ({email})"
+    "Connected as {user} ({email})" : "Tilkoblet som {user} ({email})",
+    "Import directory" : "Importkatalog",
+    "Starting importing files in {targetPath} directory" : "Begynner å importere filer i {targetPath}-katalogen",
+    "Choose where to write imported files" : "Velg hvor du vil skrive importerte filer"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
