@@ -12,6 +12,7 @@ OC.L10N.register(
     "Authentication" : "Autentisering",
     "Connected as {user} ({email})" : "Tilkoblet som {user} ({email})",
     "Import directory" : "Importkatalog",
+    "Import job is currently running" : "Importjobben kjører for øyeblikket",
     "Starting importing files in {targetPath} directory" : "Begynner å importere filer i {targetPath}-katalogen",
     "Choose where to write imported files" : "Velg hvor du vil skrive importerte filer"
 },
