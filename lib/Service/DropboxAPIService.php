@@ -155,7 +155,7 @@ class DropboxAPIService {
 	public function downloadFile(string $accessToken, string $refreshToken, string $clientID, string $clientSecret, string $userId,
 		$resource, string $fileId, int $try = 0): array {
 		try {
-			$url = 'https://api.dropboxapi.com/2/files/download';
+			$url = 'https://content.dropboxapi.com/2/files/download';
 			$options = [
 				'timeout' => 0,
 				'headers' => [
