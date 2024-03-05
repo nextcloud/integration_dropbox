@@ -4,6 +4,9 @@
     <UndefinedClass occurrences="1">
       <code>Command</code>
     </UndefinedClass>
+    <MixedArgument occurrences="1">
+      <code>$input-&gt;getArgument('user_id')</code>
+    </MixedArgument>
   </file>
   <file src="lib/Controller/ConfigController.php">
     <DeprecatedMethod occurrences="3">
@@ -35,6 +38,9 @@
     </MixedReturnStatement>
   </file>
   <file src="lib/Service/DropboxStorageAPIService.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>$resource === false</code>
+    </DocblockTypeContradiction>
     <DeprecatedMethod occurrences="2">
       <code>getAppValue</code>
       <code>getAppValue</code>
