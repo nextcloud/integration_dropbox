@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="4.x-dev@">
+  <file src="lib/Command/StartImport.php">
+    <UndefinedClass occurrences="1">
+      <code>Command</code>
+    </UndefinedClass>
+  </file>
   <file src="lib/Controller/ConfigController.php">
     <DeprecatedMethod occurrences="3">
       <code>getAppValue</code>
