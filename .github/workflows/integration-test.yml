@@ -37,14 +37,14 @@ jobs:
     name: Integration test
 
     steps:
-      - name: Checkout bookmarks app
+      - name: Checkout nextcloud
         uses: actions/checkout@v3
         with:
           path: server
           repository: nextcloud/server
           ref:
 
-      - name: Checkout bookmarks app
+      - name: Checkout app
         uses: actions/checkout@v3
         with:
           path: server/apps/${{ env.APP_NAME }}
@@ -101,12 +101,16 @@ jobs:
           sqlite3 data/owncloud.db "SELECT * from oc_preferences where configkey = 'nb_imported_files';" > result.txt
           sqlite3 data/owncloud.db "SELECT * from oc_preferences where configkey = 'importing_dropbox';" >> result.txt
           sqlite3 data/owncloud.db "SELECT * from oc_preferences where configkey = 'last_import_error';" >> result.txt
-          cat > result.planned.txt <<- EOM
+          cat > result.expected.txt <<- EOM
           admin|integration_dropbox|nb_imported_files|0
           admin|integration_dropbox|importing_dropbox|0
           admin|integration_dropbox|last_import_error|
           EOM
-          diff result.planned.txt result.txt
+          diff result.expected.txt result.txt
+          cat > du-sh.expected.txt <<- EOM
+          1.5G	data/admin/files/Dropbox import/
+          EOM
+          du -sh data/admin/files/Dropbox\ import/ | diff du-sh.expected.txt -
           
 
       - name: Show log on failure
