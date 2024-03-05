@@ -1,4 +1,5 @@
 <?php
+
 namespace OCA\Dropbox\Command;
 
 use OCA\Dropbox\Service\DropboxStorageAPIService;
