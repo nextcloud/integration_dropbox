@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.2.0] - 2024-03-06
+
+### Changed
+ - Add support for nc 29
+
+### Fixed
+ - fix(DropboxStorageAPIService): Don't allow shared folder as target folder 
+ - fix(downloadFile): Switch to /download endpoint to avoid temporary_link endpoint 
+ - Fix(l10n): Update translations from Transifex
+
 ## [2.1.0] - 2023-05-31
 
 ### Changed
