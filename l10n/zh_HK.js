@@ -7,7 +7,6 @@ OC.L10N.register(
     "Bad HTTP method" : "不正確的 HTTP 方法",
     "Bad credentials" : "錯誤的憑證",
     "Token is not valid anymore. Impossible to refresh it." : "權杖不再有效。不可能刷新它。",
-    "Can't get the temporary dropbox link" : "無法取得暫時的 Dropbox 連結",
     "Could not access file due to failed authentication." : "由於身份驗證失敗，無法存取檔案。",
     "OAuth access token refused" : "OAuth 存取權杖被拒絕",
     "Connected accounts" : "已連線的賬號",

@@ -5,7 +5,6 @@
     "Bad HTTP method" : "HTTP metodo okerra",
     "Bad credentials" : "Kredentzial okerrak",
     "Token is not valid anymore. Impossible to refresh it." : "Token honek ez du balio dagoeneko. Ezin izan da freskatu.",
-    "Can't get the temporary dropbox link" : "Ezin da jaso aldi baterako dropbox esteka",
     "Could not access file due to failed authentication." : "Ezin izan da fitxategia atzitu, autentifikazioak kale egin duelako.",
     "OAuth access token refused" : "OAuth sarbide tokena ukatua izan da",
     "Connected accounts" : "Konektatutako kontuak",

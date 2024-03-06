@@ -7,7 +7,6 @@ OC.L10N.register(
     "Bad HTTP method" : "HTTP-metode er feil",
     "Bad credentials" : "Påloggingsdetaljene er feil",
     "Token is not valid anymore. Impossible to refresh it." : "Tokenet er ikke gyldig lenger. Umulig å oppfriske det.",
-    "Can't get the temporary dropbox link" : "Kan ikke motta den midlertidige dropbox-koblingen",
     "Could not access file due to failed authentication." : "Kan ikke få tilgang til filen på grunn av feilet autentisering.",
     "OAuth access token refused" : "OAuth access token ble avslått",
     "Connected accounts" : "Tilknyttede kontoer",

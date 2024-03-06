@@ -5,7 +5,6 @@
     "Bad HTTP method" : "Лош HTTP метод",
     "Bad credentials" : "Лоши идентификационни данни",
     "Token is not valid anymore. Impossible to refresh it." : "Маркерът вече не е валиден. Не е възможно да го обновите.",
-    "Can't get the temporary dropbox link" : "Неуспешно получаване на временната връзка към Dropbox",
     "OAuth access token refused" : " Маркерът за достъп OAuth е отказан",
     "Connected accounts" : "Свързани профили",
     "Data migration" : "Миграция на данни",

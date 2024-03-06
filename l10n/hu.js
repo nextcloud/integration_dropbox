@@ -7,7 +7,6 @@ OC.L10N.register(
     "Bad HTTP method" : "Hibás HTTP metódus",
     "Bad credentials" : "Hibás hitelesítő adatok",
     "Token is not valid anymore. Impossible to refresh it." : "A token már nem érvényes. Lehetetlen frissíteni.",
-    "Can't get the temporary dropbox link" : "Nem sikerült hozzáférni az ideiglenes dropbox hivatkozáshoz",
     "Could not access file due to failed authentication." : "Hitelesítési hiba miatt a fájl nem hozzáférhető.",
     "OAuth access token refused" : "Az OAuth hozzáférési token lekérése visszautasítva",
     "Connected accounts" : "Kapcsolt fiókok",

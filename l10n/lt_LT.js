@@ -6,7 +6,6 @@ OC.L10N.register(
     "Bad HTTP method" : "Blogas HTTP metodas",
     "Bad credentials" : "Blogi prisijungimo duomenys",
     "Token is not valid anymore. Impossible to refresh it." : "Prieigos raktas daugiau nebegalioja. Neįmanoma įkelti jo iš naujo.",
-    "Can't get the temporary dropbox link" : "Nepavyksta gauti laikinosios „Dropbox“ nuorodos",
     "OAuth access token refused" : "„OAuth“ prieigos raktas atmestas",
     "Connected accounts" : "Prijungtos paskyros",
     "Data migration" : "Duomenų perkėlimas",

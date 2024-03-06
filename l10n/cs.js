@@ -7,7 +7,6 @@ OC.L10N.register(
     "Bad HTTP method" : "Nesprávná HTTP metoda",
     "Bad credentials" : "Nesprávné přihlašovací údaje",
     "Token is not valid anymore. Impossible to refresh it." : "Token už není platný. Není možné ho obnovit.",
-    "Can't get the temporary dropbox link" : "Nedaří se získat dočasný odkaz do dropbox",
     "Could not access file due to failed authentication." : "Z důvodu nezdaru v ověření se není možné k souboru přistupovat.",
     "OAuth access token refused" : "OAuth přístupový token odmítnut",
     "Connected accounts" : "Propojené účty",

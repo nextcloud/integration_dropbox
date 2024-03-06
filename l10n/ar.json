@@ -5,7 +5,6 @@
     "Bad HTTP method" : "دالة HTTP  غير صحيحة",
     "Bad credentials" : "حيثيّات الدخول credentials غير صحيحة",
     "Token is not valid anymore. Impossible to refresh it." : "الأَمَارَة token لم تعد صالحة بعد الآن. و يستحيل تحديثها",
-    "Can't get the temporary dropbox link" : "تعذّر الحصول على الرابط المؤقت لـ dropbox",
     "Could not access file due to failed authentication." : "تعذّر الوصول إلي الملف نتيجة فشل المصادقة.",
     "OAuth access token refused" : "أمَاَرَة token مرفوضة",
     "Connected accounts" : "حسابات مترابطة",

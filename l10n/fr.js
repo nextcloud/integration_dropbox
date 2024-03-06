@@ -7,7 +7,6 @@ OC.L10N.register(
     "Bad HTTP method" : "Mauvaise méthode HTTP",
     "Bad credentials" : "Identifiants incorrects",
     "Token is not valid anymore. Impossible to refresh it." : "Le jeton d'accès n'est plus valide. Impossible de le renouveler.",
-    "Can't get the temporary dropbox link" : "Impossible d'obtenir le lien Dropbox temporaire",
     "Could not access file due to failed authentication." : "Impossible d'accéder au fichier en raison de l'échec de l'authentification.",
     "OAuth access token refused" : "Jeton d'accès OAuth refusé",
     "Connected accounts" : "Comptes connectés",

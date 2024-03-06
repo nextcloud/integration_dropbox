@@ -1,0 +1,6 @@
+{ "translations": {
+    "App key" : "Clave d'aplicación",
+    "App secret" : "Secretu d'aplicación",
+    "Authentication" : "Autenticación"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

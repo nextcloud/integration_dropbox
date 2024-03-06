@@ -5,7 +5,6 @@
     "Bad HTTP method" : "Κακή μέθοδος HTTP",
     "Bad credentials" : "Εσφαλμένα διαπιστευτήρια",
     "Token is not valid anymore. Impossible to refresh it." : "Το κουπόνι δεν είναι πλέον έγκυρο. Αδύνατο να το ανανεώσετε.",
-    "Can't get the temporary dropbox link" : "Δεν μπορώ να πάρω τον προσωρινό σύνδεσμο του Dropbox",
     "OAuth access token refused" : "Το διακριτικό πρόσβασης OAuth απορρίφθηκε",
     "Connected accounts" : "Συνδεδεμένοι λογαριασμοί",
     "Data migration" : "Μετεγκατάσταση δεδομένων",

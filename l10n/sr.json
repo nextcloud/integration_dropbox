@@ -5,7 +5,6 @@
     "Bad HTTP method" : "Лоша HTTP метода",
     "Bad credentials" : "Лоши креденцијали",
     "Token is not valid anymore. Impossible to refresh it." : "Жетон више не важи. Не може да се освежи.",
-    "Can't get the temporary dropbox link" : "Не може да се добије привремени dropbox линк",
     "Could not access file due to failed authentication." : "Не може да се приступи фајлу услед неуспешне провере идентитета.",
     "OAuth access token refused" : "Одбијен је OAuth приступни жетон",
     "Connected accounts" : "Повезани налози",

@@ -5,7 +5,6 @@
     "Bad HTTP method" : "Método HTTP incorreto",
     "Bad credentials" : "Credenciais inválidas",
     "Token is not valid anymore. Impossible to refresh it." : "O token não é mais válido. Impossível atualizá-lo.",
-    "Can't get the temporary dropbox link" : "Não foi possível obter o link temporário do dropbox",
     "Could not access file due to failed authentication." : "Não foi possível acessar o arquivo devido a falha na autenticação.",
     "OAuth access token refused" : "Token de acesso OAuth recusado",
     "Connected accounts" : "Contas conectadas",
