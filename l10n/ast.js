@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "App key" : "Clave d'aplicación",
     "App secret" : "Secretu d'aplicación",
-    "Authentication" : "Autenticación"
+    "Authentication" : "Autenticación",
+    "Failed to save Dropbox options" : "Nun se puen guardar la configuración de Dropbox"
 },
 "nplurals=2; plural=(n != 1);");
