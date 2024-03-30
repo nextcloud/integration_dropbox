@@ -1,6 +1,7 @@
 OC.L10N.register(
     "integration_dropbox",
     {
+    "Data migration" : "Migración de los datos",
     "App key" : "Clave d'aplicación",
     "App secret" : "Secretu d'aplicación",
     "Authentication" : "Autenticación",
