@@ -4,6 +4,7 @@ OC.L10N.register(
     "Bad HTTP method" : "Droch-mhodh HTTP",
     "Bad credentials" : "Dintiúir dona",
     "OAuth access token refused" : "Diúltaíodh comhartha rochtana OAuth",
+    "Connected accounts" : "Cuntais nasctha",
     "App key" : "Eochair aip",
     "App secret" : "Rúnda aip",
     "Authentication" : "Fíordheimhniú",
