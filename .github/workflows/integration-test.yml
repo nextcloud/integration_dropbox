@@ -32,7 +32,7 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: [ '8.1' ]
-        server-versions: [ 'master', 'stable28', 'stable27', 'stable26' ]
+        server-versions: [ 'master', 'stable29', 'stable28' ]
 
     name: Integration test
 
