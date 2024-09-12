@@ -36,7 +36,7 @@ class StartImport extends Command {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		try {
-			$this->dropboxStorageAPIService->importDropboxJob($input->getArgument('user_id'));
+			$this->dropboxStorageAPIService->startImportDropbox($input->getArgument('user_id'));
 		} catch (\Exception $ex) {
 			$output->writeln('<error>Failed to start import</error>');
 			$output->writeln($ex->getMessage());

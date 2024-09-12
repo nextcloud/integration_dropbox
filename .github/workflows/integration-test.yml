@@ -32,7 +32,8 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: [ '8.1' ]
-        server-versions: [ 'master', 'stable29', 'stable28' ]
+        #server-versions: [ 'stable30', 'stable29', 'stable28' ]
+        server-versions: [ 'stable30' ]
 
     name: Integration test
 
@@ -42,7 +43,7 @@ jobs:
         with:
           path: server
           repository: nextcloud/server
-          ref:
+          ref: ${{ matrix.server-versions }}
 
       - name: Checkout app
         uses: actions/checkout@v3
@@ -81,6 +82,8 @@ jobs:
         working-directory: server/
         env:
           DROPBOX_CONFIG: ${{ secrets.DROPBOX_CONFIG }}
+          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
         run: |
           echo $DROPBOX_CONFIG > config.json
           sudo apt install jq sqlite3
@@ -88,12 +91,16 @@ jobs:
           sqlite3 data/owncloud.db "INSERT INTO oc_preferences  ( userid, appid, configkey, configvalue) VALUES ('admin', 'integration_dropbox', 'token', $(cat config.json | jq '.config.token'));"
           sqlite3 data/owncloud.db "INSERT INTO oc_preferences  ( userid, appid, configkey, configvalue) VALUES ('admin', 'integration_dropbox', 'refresh_token', $(cat config.json | jq '.config.refresh_token'));"
           sqlite3 data/owncloud.db "INSERT INTO oc_preferences  ( userid, appid, configkey, configvalue) VALUES ('admin', 'integration_dropbox', 'importing_dropbox', '1');"
+          sqlite3 data/owncloud.db "INSERT INTO oc_appconfig  ( appid, configkey, configvalue) VALUES ('integration_dropbox', 'client_id', '$OAUTH_CLIENT_ID');"
+          sqlite3 data/owncloud.db "INSERT INTO oc_appconfig  ( appid, configkey, configvalue) VALUES ('integration_dropbox', 'client_secret', '$OAUTH_CLIENT_SECRET');"
 
       - name: Run import
         working-directory: server/
         run: |
           php occ integration_dropbox:start-import admin
-          for run in {1..10}; do php cron.php; done
+          for run in {1..10}; do date; echo "run $run starting"; php cron.php; ls -lh data/admin/files/Dropbox\ import/ ; echo "run $run done"; done
+          date
+          du -shc data/admin/files/Dropbox\ import/*
 
       - name: Check import result
         working-directory: server/
@@ -108,10 +115,14 @@ jobs:
           EOM
           diff result.expected.txt result.txt
           cat > du-sh.expected.txt <<- EOM
-          1.5G	data/admin/files/Dropbox import/
+          1.6G	data/admin/files/Dropbox import/
           EOM
+          echo CHECK "du -shc data/admin/files/Dropbox\ import/*"
+          du -shc data/admin/files/Dropbox\ import/*
+          echo CHECK "md5sum data/admin/files/Dropbox\ import/*"
+          md5sum data/admin/files/Dropbox\ import/*
+          echo END CHECKS
           du -sh data/admin/files/Dropbox\ import/ | diff du-sh.expected.txt -
-          
 
       - name: Show log on failure
         working-directory: server/

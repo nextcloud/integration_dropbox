@@ -65,6 +65,7 @@ class ConfigController extends Controller {
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'user_name');
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'uid');
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'account_id');
+			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'email');
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'token');
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'refresh_token');
 		}
@@ -123,6 +124,9 @@ class ConfigController extends Controller {
 			if (isset($result['email'])) {
 				$this->config->setUserValue($this->userId, Application::APP_ID, 'email', $result['email']);
 				$data['email'] = $result['email'];
+			} elseif (isset($info['email'])) {
+				$this->config->setUserValue($this->userId, Application::APP_ID, 'email', $info['email']);
+				$data['email'] = $info['email'];
 			}
 			if (isset($info['name'], $info['name']['display_name'])) {
 				$this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', $info['name']['display_name']);

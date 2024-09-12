@@ -205,6 +205,8 @@ export default {
 	methods: {
 		onLogoutClick() {
 			this.state.user_name = ''
+			this.state.email = null
+			this.state.account_id = null
 			this.saveOptions({ user_name: this.state.user_name })
 		},
 		onAccessCodeInput() {
