@@ -66,7 +66,7 @@ class Notifier implements INotifier {
 		switch ($notification->getSubject()) {
 			case 'import_dropbox_finished':
 				$p = $notification->getSubjectParameters();
-				$nbImported = (int) ($p['nbImported'] ?? 0);
+				$nbImported = (int)($p['nbImported'] ?? 0);
 				/** @var string $targetPath */
 				$targetPath = $p['targetPath'];
 				$content = $l->n('%n file was imported from Dropbox storage.', '%n files were imported from Dropbox storage.', $nbImported);
