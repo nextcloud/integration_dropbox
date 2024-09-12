@@ -10,4 +10,4 @@ The account configuration and data migration happens in the "Data migration" use
 
 ### Admin settings
 
-There also is a "Connected accounts" **admin** settings section if you want your Nextcloud users to use another OAuth application to authenticate to Dropbox. The Nextcloud Dropbox OAuth app is used by default.
+There also is a "Connected accounts" **admin** settings section to set your OAuth application ID and secret to let Nextcloud users authenticate to Dropbox.
