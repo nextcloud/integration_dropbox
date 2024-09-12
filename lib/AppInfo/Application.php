@@ -18,8 +18,6 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
 class Application extends App implements IBootstrap {
 
 	public const APP_ID = 'integration_dropbox';
-	public const DEFAULT_DROPBOX_CLIENT_ID = 'hh276c3kzellh2x';
-	public const DEFAULT_DROPBOX_CLIENT_SECRET = 'rdsuw9qg4y4fj5p';
 	// consider that a job is not running anymore after N seconds
 	public const IMPORT_JOB_TIMEOUT = 3600;
 

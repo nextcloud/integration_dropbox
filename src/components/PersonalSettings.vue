@@ -1,10 +1,13 @@
 <template>
-	<div v-if="state.client_id" id="dropbox_prefs" class="section">
+	<div id="dropbox_prefs" class="section">
 		<h2>
 			<DropboxIcon />
 			{{ t('integration_dropbox', 'Dropbox data migration') }}
 		</h2>
-		<div class="dropbox-content">
+		<NcNoteCard v-if="!isAdminConfigured" type="info">
+			{{ t('integration_dropbox', 'Your administrator didn\'t configure this integration yet.') }}
+		</NcNoteCard>
+		<div v-else class="dropbox-content">
 			<h3>{{ t('integration_dropbox', 'Authentication') }}</h3>
 			<div v-if="!connected">
 				<br>
@@ -123,13 +126,15 @@ import KeyIcon from 'vue-material-design-icons/Key.vue'
 
 import DropboxIcon from './icons/DropboxIcon.vue'
 
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+import NcNoteCard from '@nextcloud/vue/dist/Components/NcNoteCard.js'
+
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { delay, humanFileSize } from '../utils.js'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 
 export default {
 	name: 'PersonalSettings',
@@ -137,6 +142,7 @@ export default {
 	components: {
 		DropboxIcon,
 		NcButton,
+		NcNoteCard,
 		OpenInNewIcon,
 		PencilIcon,
 		CloseIcon,
@@ -166,6 +172,9 @@ export default {
 	},
 
 	computed: {
+		isAdminConfigured() {
+			return this.state.client_id !== '' && this.state.has_client_secret === true
+		},
 		connected() {
 			return (this.state.user_name && this.state.user_name !== '') || this.state.account_id || this.state.email
 		},

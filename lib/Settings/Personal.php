@@ -31,8 +31,8 @@ class Personal implements ISettings {
 		$outputDir = $this->config->getUserValue($this->userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 
 		// for OAuth
-		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', Application::DEFAULT_DROPBOX_CLIENT_ID);
-		$clientID = $clientID ?: Application::DEFAULT_DROPBOX_CLIENT_ID;
+		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
+		$hasClientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret') !== '';
 
 		// get free space
 		$userFolder = $this->root->getUserFolder($this->userId);
@@ -40,6 +40,7 @@ class Personal implements ISettings {
 		$user = $this->userManager->get($this->userId);
 
 		$userConfig = [
+			'has_client_secret' => $hasClientSecret,
 			'client_id' => $clientID,
 			'account_id' => $accountId,
 			'email' => $email,

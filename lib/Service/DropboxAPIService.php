@@ -39,7 +39,8 @@ class DropboxAPIService {
 		private IL10N $l10n,
 		private IConfig $config,
 		private INotificationManager $notificationManager,
-		IClientService $clientService) {
+		IClientService $clientService,
+	) {
 		$this->client = $clientService->newClient();
 	}
 

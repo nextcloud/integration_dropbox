@@ -9,7 +9,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class StartImport extends Command {
-	public function __construct(private DropboxStorageAPIService $dropboxStorageAPIService) {
+	public function __construct(
+		private DropboxStorageAPIService $dropboxStorageAPIService,
+	) {
 		parent::__construct();
 	}
 
