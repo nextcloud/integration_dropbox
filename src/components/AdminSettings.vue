@@ -65,6 +65,7 @@ import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { delay } from '../utils.js'
 import { showSuccess, showError } from '@nextcloud/dialogs'
+import { confirmPassword } from '@nextcloud/password-confirmation'
 
 export default {
 	name: 'AdminSettings',
@@ -97,7 +98,8 @@ export default {
 				this.saveOptions()
 			}, 2000)()
 		},
-		saveOptions() {
+		async saveOptions() {
+			await confirmPassword()
 			const req = {
 				values: {
 					client_id: this.state.client_id,
