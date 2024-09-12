@@ -1,78 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.x-dev@">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="lib/Command/StartImport.php">
-    <UndefinedClass occurrences="1">
-      <code>Command</code>
+    <UndefinedClass>
+      <code><![CDATA[Command]]></code>
     </UndefinedClass>
-    <MixedArgument occurrences="1">
-      <code>$input-&gt;getArgument('user_id')</code>
-    </MixedArgument>
   </file>
   <file src="lib/Controller/ConfigController.php">
-    <DeprecatedMethod occurrences="3">
-      <code>getAppValue</code>
-      <code>getAppValue</code>
-      <code>setAppValue</code>
+    <DeprecatedMethod>
+      <code><![CDATA[getAppValue]]></code>
+      <code><![CDATA[getAppValue]]></code>
+      <code><![CDATA[setAppValue]]></code>
     </DeprecatedMethod>
-    <MixedArgument occurrences="1">
-      <code>$info['name']['display_name']</code>
+    <MixedArgument>
+      <code><![CDATA[$info['name']['display_name']]]></code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$data['user_name']</code>
+    <MixedAssignment>
+      <code><![CDATA[$data['user_name']]]></code>
     </MixedAssignment>
   </file>
   <file src="lib/Controller/DropboxAPIController.php">
-    <DeprecatedMethod occurrences="2">
-      <code>getAppValue</code>
-      <code>getAppValue</code>
+    <DeprecatedMethod>
+      <code><![CDATA[getAppValue]]></code>
+      <code><![CDATA[getAppValue]]></code>
     </DeprecatedMethod>
   </file>
   <file src="lib/Service/DropboxAPIService.php">
-    <MixedInferredReturnType occurrences="2">
-      <code>array{access_token?: string, refresh_token?: string, account_id?: string, uid?: string, error_description?: string, error?: string, email?: string}</code>
-      <code>array{error?:string}</code>
+    <MixedInferredReturnType>
+      <code><![CDATA[array{access_token?: string, refresh_token?: string, account_id?: string, uid?: string, error_description?: string, error?: string, email?: string}]]></code>
+      <code><![CDATA[array{error?:string}]]></code>
     </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="2">
-      <code>json_decode($body, true)</code>
-      <code>json_decode($body, true)</code>
+    <MixedReturnStatement>
+      <code><![CDATA[json_decode($body, true)]]></code>
+      <code><![CDATA[json_decode($body, true)]]></code>
     </MixedReturnStatement>
   </file>
   <file src="lib/Service/DropboxStorageAPIService.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$resource === false</code>
-    </DocblockTypeContradiction>
-    <DeprecatedMethod occurrences="2">
-      <code>getAppValue</code>
-      <code>getAppValue</code>
+    <DeprecatedMethod>
+      <code><![CDATA[getAppValue]]></code>
+      <code><![CDATA[getAppValue]]></code>
     </DeprecatedMethod>
-    <InvalidArgument occurrences="1">
-      <code>$entry</code>
+    <InvalidArgument>
+      <code><![CDATA[$entry]]></code>
     </InvalidArgument>
-    <InvalidArrayOffset occurrences="1">
-      <code>$params['cursor']</code>
+    <InvalidArrayOffset>
+      <code><![CDATA[$params['cursor']]]></code>
     </InvalidArrayOffset>
-    <InvalidReturnStatement occurrences="1">
-      <code>$result</code>
-    </InvalidReturnStatement>
-    <MixedAssignment occurrences="1">
-      <code>$entry</code>
+    <MixedAssignment>
+      <code><![CDATA[$entry]]></code>
     </MixedAssignment>
-    <MoreSpecificReturnType occurrences="1">
-      <code>array{nbDownloaded: int, targetPath: string, finished: bool, totalSeen: int}|array{error: non-empty-string}</code>
+    <MoreSpecificReturnType>
+      <code><![CDATA[array{nbDownloaded: int, targetPath: string, finished: bool, totalSeen: int}|array{error: non-empty-string}]]></code>
     </MoreSpecificReturnType>
-    <PossiblyUndefinedArrayOffset occurrences="1">
-      <code>$result['totalSeen']</code>
+    <PossiblyUndefinedArrayOffset>
+      <code><![CDATA[$result['totalSeen']]]></code>
     </PossiblyUndefinedArrayOffset>
   </file>
   <file src="lib/Settings/Admin.php">
-    <DeprecatedMethod occurrences="2">
-      <code>getAppValue</code>
-      <code>getAppValue</code>
+    <DeprecatedMethod>
+      <code><![CDATA[getAppValue]]></code>
+      <code><![CDATA[getAppValue]]></code>
     </DeprecatedMethod>
   </file>
   <file src="lib/Settings/Personal.php">
-    <DeprecatedMethod occurrences="1">
-      <code>getAppValue</code>
+    <DeprecatedMethod>
+      <code><![CDATA[getAppValue]]></code>
     </DeprecatedMethod>
   </file>
 </files>
