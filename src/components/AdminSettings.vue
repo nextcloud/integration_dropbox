@@ -103,15 +103,12 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_dropbox/admin-config')
 			axios.put(url, req)
-				.then((response) => {
+				.then(response => {
 					showSuccess(t('integration_dropbox', 'Dropbox admin options saved'))
 				})
-				.catch((error) => {
-					showError(
-						t('integration_dropbox', 'Failed to save Dropbox admin options')
-						+ ': ' + error.response?.request?.responseText
-					)
-					console.debug(error)
+				.catch(error => {
+					showError(t('integration_dropbox', 'Failed to save Dropbox admin options'))
+					console.error(error)
 				})
 				.then(() => {
 				})
