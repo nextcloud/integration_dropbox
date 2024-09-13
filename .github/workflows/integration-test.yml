@@ -117,12 +117,12 @@ jobs:
           cat > du-sh.expected.txt <<- EOM
           1.6G	data/admin/files/Dropbox import/
           EOM
-          echo CHECK "du -shc data/admin/files/Dropbox\ import/*"
-          du -shc data/admin/files/Dropbox\ import/*
+          echo CHECK "du -shc --apparent-size data/admin/files/Dropbox\ import/*"
+          du -shc --apparent-size data/admin/files/Dropbox\ import/*
           echo CHECK "md5sum data/admin/files/Dropbox\ import/*"
           md5sum data/admin/files/Dropbox\ import/*
           echo END CHECKS
-          du -sh data/admin/files/Dropbox\ import/ | diff du-sh.expected.txt -
+          du -sh --apparent-size data/admin/files/Dropbox\ import/ | diff du-sh.expected.txt -
 
       - name: Show log on failure
         working-directory: server/
