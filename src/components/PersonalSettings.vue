@@ -1,10 +1,13 @@
 <template>
-	<div v-if="state.client_id" id="dropbox_prefs" class="section">
+	<div id="dropbox_prefs" class="section">
 		<h2>
 			<DropboxIcon />
 			{{ t('integration_dropbox', 'Dropbox data migration') }}
 		</h2>
-		<div class="dropbox-content">
+		<NcNoteCard v-if="!isAdminConfigured" type="info">
+			{{ t('integration_dropbox', 'Your administrator didn\'t configure this integration yet.') }}
+		</NcNoteCard>
+		<div v-else class="dropbox-content">
 			<h3>{{ t('integration_dropbox', 'Authentication') }}</h3>
 			<div v-if="!connected">
 				<br>
@@ -123,13 +126,15 @@ import KeyIcon from 'vue-material-design-icons/Key.vue'
 
 import DropboxIcon from './icons/DropboxIcon.vue'
 
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+import NcNoteCard from '@nextcloud/vue/dist/Components/NcNoteCard.js'
+
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { delay, humanFileSize } from '../utils.js'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 
 export default {
 	name: 'PersonalSettings',
@@ -137,6 +142,7 @@ export default {
 	components: {
 		DropboxIcon,
 		NcButton,
+		NcNoteCard,
 		OpenInNewIcon,
 		PencilIcon,
 		CloseIcon,
@@ -166,6 +172,9 @@ export default {
 	},
 
 	computed: {
+		isAdminConfigured() {
+			return this.state.client_id !== '' && this.state.has_client_secret === true
+		},
 		connected() {
 			return (this.state.user_name && this.state.user_name !== '') || this.state.account_id || this.state.email
 		},
@@ -196,6 +205,8 @@ export default {
 	methods: {
 		onLogoutClick() {
 			this.state.user_name = ''
+			this.state.email = null
+			this.state.account_id = null
 			this.saveOptions({ user_name: this.state.user_name })
 		},
 		onAccessCodeInput() {
@@ -209,16 +220,12 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_dropbox/config')
 			axios.put(url, req)
-				.then((response) => {
+				.then(response => {
 					showSuccess(t('integration_dropbox', 'Dropbox options saved'))
 				})
-				.catch((error) => {
-					showError(
-						t('integration_dropbox', 'Failed to save Dropbox options')
-						+ ': ' + error.response?.request?.responseText
-					)
-				})
-				.then(() => {
+				.catch(error => {
+					showError(t('integration_dropbox', 'Failed to save Dropbox options'))
+					console.error(error)
 				})
 		},
 		saveAccessCode() {
@@ -231,7 +238,7 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_dropbox/access-code')
 			axios.put(url, req)
-				.then((response) => {
+				.then(response => {
 					showSuccess(t('integration_dropbox', 'Successfully connected to Dropbox!'))
 					this.state.user_name = response.data.user_name
 					this.state.email = response.data.email
@@ -240,12 +247,10 @@ export default {
 					this.codeFailed = false
 					this.getStorageInfo()
 				})
-				.catch((error) => {
+				.catch(error => {
 					this.codeFailed = true
-					showError(
-						t('integration_dropbox', 'Failed to connect to Dropbox')
-						+ ': ' + error.response?.request?.responseText
-					)
+					showError(t('integration_dropbox', 'Failed to connect to Dropbox'))
+					console.error(error)
 				})
 				.then(() => {
 					this.codeLoading = false
@@ -254,24 +259,20 @@ export default {
 		getStorageInfo() {
 			const url = generateUrl('/apps/integration_dropbox/storage-size')
 			axios.get(url)
-				.then((response) => {
+				.then(response => {
 					if (response.data?.usageInStorage) {
 						this.storageSize = response.data.usageInStorage
 					}
 				})
-				.catch((error) => {
-					showError(
-						t('integration_dropbox', 'Failed to get Dropbox storage information')
-						+ ': ' + error.response?.request?.responseText
-					)
-				})
-				.then(() => {
+				.catch(error => {
+					showError(t('integration_dropbox', 'Failed to get Dropbox storage information'))
+					console.error(error)
 				})
 		},
 		getDropboxImportValues(launchLoop = false) {
 			const url = generateUrl('/apps/integration_dropbox/import-files-info')
 			axios.get(url)
-				.then((response) => {
+				.then(response => {
 					if (response.data && Object.keys(response.data).length > 0) {
 						this.lastImportError = response.data.last_import_error
 						this.importJobRunning = response.data.dropbox_import_running
@@ -286,10 +287,8 @@ export default {
 						}
 					}
 				})
-				.catch((error) => {
+				.catch(error => {
 					console.debug(error)
-				})
-				.then(() => {
 				})
 		},
 		onImportDropbox() {
@@ -299,20 +298,14 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_dropbox/import-files')
 			axios.get(url, req)
-				.then((response) => {
+				.then(response => {
 					const targetPath = response.data.targetPath
-					showSuccess(
-						t('integration_dropbox', 'Starting importing files in {targetPath} directory', { targetPath })
-					)
+					showSuccess(t('integration_dropbox', 'Starting importing files in {targetPath} directory', { targetPath }))
 					this.getDropboxImportValues(true)
 				})
-				.catch((error) => {
-					showError(
-						t('integration_dropbox', 'Failed to start importing Dropbox storage')
-						+ ': ' + error.response?.request?.responseText
-					)
-				})
-				.then(() => {
+				.catch(error => {
+					showError(t('integration_dropbox', 'Failed to start importing Dropbox storage'))
+					console.error(error)
 				})
 		},
 		onCancelDropboxImport() {
@@ -327,12 +320,10 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_dropbox/config')
 			axios.put(url, req)
-				.then((response) => {
+				.then(response => {
 				})
-				.catch((error) => {
+				.catch(error => {
 					console.debug(error)
-				})
-				.then(() => {
 				})
 		},
 		onOutputChange() {
@@ -347,7 +338,7 @@ export default {
 				},
 				false,
 				'httpd/unix-directory',
-				true
+				true,
 			)
 		},
 		myHumanFileSize(bytes, approx = false, si = false, dp = 1) {

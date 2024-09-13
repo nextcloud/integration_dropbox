@@ -4,24 +4,24 @@
 			<DropboxIcon class="icon" />
 			{{ t('integration_dropbox', 'Dropbox integration') }}
 		</h2>
-		<p class="settings-hint">
-			{{ t('integration_dropbox', 'Leave all fields empty to use default Nextcloud Dropbox OAuth app.') }}
-			{{ t('integration_dropbox', 'If you want your Nextcloud users to authenticate to Dropbox using your own Dropbox OAuth app, create one in Dropbox.') }}
-		</p>
-		<a href="https://www.dropbox.com/developers/apps" class="external" target="_blank">
-			{{ t('integration_dropbox', 'Dropbox developer settings') }}
-		</a>
-		<br><br>
-		<p class="settings-hint">
-			{{ t('integration_dropbox', 'Make sure your give those permissions to your app:') }}
-		</p>
-		<p class="settings-hint">
-			<strong>account_info.read - files.metadata.read - files.content.read</strong>
-		</p>
-		<p class="settings-hint">
-			{{ t('integration_dropbox', 'No need to add any redirect URI.') }}
-			{{ t('integration_dropbox', 'Then set the app key and app secret below.') }}
-		</p>
+		<NcNoteCard type="info">
+			<p>
+				{{ t('integration_dropbox', 'If you want your Nextcloud users to authenticate to Dropbox using your Dropbox OAuth app, create one in Dropbox.') }}
+			</p>
+			<a href="https://www.dropbox.com/developers/apps" class="external" target="_blank">
+				{{ t('integration_dropbox', 'Dropbox developer settings') }}
+			</a>
+			<p>
+				{{ t('integration_dropbox', 'Make sure your give those permissions to your app:') }}
+			</p>
+			<p>
+				<strong>account_info.read - files.metadata.read - files.content.read</strong>
+			</p>
+			<p>
+				{{ t('integration_dropbox', 'No need to add any redirect URI.') }}
+				{{ t('integration_dropbox', 'Then set the app key and app secret below.') }}
+			</p>
+		</NcNoteCard>
 		<div id="dropbox-content">
 			<div class="line">
 				<label for="dropbox-client-id">
@@ -58,11 +58,14 @@ import KeyIcon from 'vue-material-design-icons/Key.vue'
 
 import DropboxIcon from './icons/DropboxIcon.vue'
 
+import NcNoteCard from '@nextcloud/vue/dist/Components/NcNoteCard.js'
+
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { delay } from '../utils.js'
 import { showSuccess, showError } from '@nextcloud/dialogs'
+import { confirmPassword } from '@nextcloud/password-confirmation'
 
 export default {
 	name: 'AdminSettings',
@@ -70,6 +73,7 @@ export default {
 	components: {
 		DropboxIcon,
 		KeyIcon,
+		NcNoteCard,
 	},
 
 	props: [],
@@ -94,7 +98,8 @@ export default {
 				this.saveOptions()
 			}, 2000)()
 		},
-		saveOptions() {
+		async saveOptions() {
+			await confirmPassword()
 			const req = {
 				values: {
 					client_id: this.state.client_id,
@@ -103,15 +108,12 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_dropbox/admin-config')
 			axios.put(url, req)
-				.then((response) => {
+				.then(response => {
 					showSuccess(t('integration_dropbox', 'Dropbox admin options saved'))
 				})
-				.catch((error) => {
-					showError(
-						t('integration_dropbox', 'Failed to save Dropbox admin options')
-						+ ': ' + error.response?.request?.responseText
-					)
-					console.debug(error)
+				.catch(error => {
+					showError(t('integration_dropbox', 'Failed to save Dropbox admin options'))
+					console.error(error)
 				})
 				.then(() => {
 				})

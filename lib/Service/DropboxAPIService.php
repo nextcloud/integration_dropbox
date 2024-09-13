@@ -39,7 +39,8 @@ class DropboxAPIService {
 		private IL10N $l10n,
 		private IConfig $config,
 		private INotificationManager $notificationManager,
-		IClientService $clientService) {
+		IClientService $clientService,
+	) {
 		$this->client = $clientService->newClient();
 	}
 
@@ -116,7 +117,7 @@ class DropboxAPIService {
 				}
 				return json_decode($body, true);
 			}
-		} catch (ServerException | ClientException $e) {
+		} catch (ServerException|ClientException $e) {
 			$response = $e->getResponse();
 			if ($response->getStatusCode() === 401) {
 				$this->logger->info('Trying to REFRESH the access token', ['app' => $this->appName]);
@@ -185,7 +186,7 @@ class DropboxAPIService {
 			}
 
 			return ['success' => true];
-		} catch (ServerException | ClientException $e) {
+		} catch (ServerException|ClientException $e) {
 			$response = $e->getResponse();
 			if ($response->getStatusCode() === 401) {
 				if ($try > 3) {
@@ -215,7 +216,7 @@ class DropboxAPIService {
 		} catch (ConnectException $e) {
 			$this->logger->warning('Dropbox API connection error : '.$e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
-		} catch (Exception | Throwable $e) {
+		} catch (Exception|Throwable $e) {
 			$this->logger->warning('Dropbox API connection error : '.$e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
 		}

@@ -21,20 +21,15 @@ use OCP\IConfig;
 
 class ImportDropboxJob extends QueuedJob {
 
-	/** @var DropboxStorageAPIService */
-	private $service;
-
 	/**
 	 * A QueuedJob to partially import dropbox files and launch following job
-	 *
 	 */
 	public function __construct(
 		ITimeFactory $timeFactory,
-		DropboxStorageAPIService $service,
+		private DropboxStorageAPIService $service,
 		private IConfig $config
 	) {
 		parent::__construct($timeFactory);
-		$this->service = $service;
 	}
 
 	/**
@@ -45,7 +40,7 @@ class ImportDropboxJob extends QueuedJob {
 		$userId = $argument['user_id'];
 		try {
 			$this->service->importDropboxJob($userId);
-		} catch(\Exception|\Throwable $e) {
+		} catch (\Exception|\Throwable $e) {
 			$this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', $e->getMessage());
 		}
 	}

@@ -16,6 +16,8 @@ use OCA\Dropbox\Service\DropboxAPIService;
 
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\PasswordConfirmationRequired;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\IConfig;
 
@@ -35,11 +37,11 @@ class ConfigController extends Controller {
 
 	/**
 	 * set config values
-	 * @NoAdminRequired
 	 *
 	 * @param array<string,string> $values
 	 * @return DataResponse
 	 */
+	#[NoAdminRequired]
 	public function setConfig(array $values): DataResponse {
 		if ($this->userId === null) {
 			return new DataResponse([], Http::STATUS_BAD_REQUEST);
@@ -63,6 +65,7 @@ class ConfigController extends Controller {
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'user_name');
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'uid');
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'account_id');
+			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'email');
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'token');
 			$this->config->deleteUserValue($this->userId, Application::APP_ID, 'refresh_token');
 		}
@@ -75,6 +78,7 @@ class ConfigController extends Controller {
 	 * @param array<string,string> $values
 	 * @return DataResponse
 	 */
+	#[PasswordConfirmationRequired]
 	public function setAdminConfig(array $values): DataResponse {
 		foreach ($values as $key => $value) {
 			$this->config->setAppValue(Application::APP_ID, $key, $value);
@@ -83,23 +87,20 @@ class ConfigController extends Controller {
 	}
 
 	/**
-	 * @NoAdminRequired
-	 *
 	 * @param string $code
 	 * @return DataResponse
 	 */
+	#[NoAdminRequired]
 	public function submitAccessCode(string $code = ''): DataResponse {
 		if ($this->userId === null) {
 			return new DataResponse([], Http::STATUS_BAD_REQUEST);
 		}
 		if ($code === '') {
 			$message = $this->l->t('Invalid access code');
-			return new DataResponse($message, 400);
+			return new DataResponse($message, Http::STATUS_BAD_REQUEST);
 		}
-		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id', Application::DEFAULT_DROPBOX_CLIENT_ID);
-		$clientID = $clientID ?: Application::DEFAULT_DROPBOX_CLIENT_ID;
-		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret', Application::DEFAULT_DROPBOX_CLIENT_SECRET);
-		$clientSecret = $clientSecret ?: Application::DEFAULT_DROPBOX_CLIENT_SECRET;
+		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
+		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret');
 
 		$result = $this->dropboxAPIService->requestOAuthAccessToken($clientID, $clientSecret, [
 			'grant_type' => 'authorization_code',
@@ -123,6 +124,9 @@ class ConfigController extends Controller {
 			if (isset($result['email'])) {
 				$this->config->setUserValue($this->userId, Application::APP_ID, 'email', $result['email']);
 				$data['email'] = $result['email'];
+			} elseif (isset($info['email'])) {
+				$this->config->setUserValue($this->userId, Application::APP_ID, 'email', $info['email']);
+				$data['email'] = $info['email'];
 			}
 			if (isset($info['name'], $info['name']['display_name'])) {
 				$this->config->setUserValue($this->userId, Application::APP_ID, 'user_name', $info['name']['display_name']);
@@ -135,6 +139,6 @@ class ConfigController extends Controller {
 		}
 
 		$message = $result['error_description'] ?? $result['error'] ?? 'missing token or refresh token';
-		return new DataResponse($message, 400);
+		return new DataResponse($message, Http::STATUS_BAD_REQUEST);
 	}
 }

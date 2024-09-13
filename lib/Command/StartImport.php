@@ -9,7 +9,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class StartImport extends Command {
-	public function __construct(private DropboxStorageAPIService $dropboxStorageAPIService) {
+	public function __construct(
+		private DropboxStorageAPIService $dropboxStorageAPIService,
+	) {
 		parent::__construct();
 	}
 
@@ -27,14 +29,14 @@ class StartImport extends Command {
 	/**
 	 * Execute the command
 	 *
-	 * @param InputInterface  $input
+	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 *
 	 * @return int
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		try {
-			$this->dropboxStorageAPIService->importDropboxJob($input->getArgument('user_id'));
+			$this->dropboxStorageAPIService->startImportDropbox($input->getArgument('user_id'));
 		} catch (\Exception $ex) {
 			$output->writeln('<error>Failed to start import</error>');
 			$output->writeln($ex->getMessage());

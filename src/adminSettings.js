@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 /**
  * Nextcloud - dropbox
  *
@@ -12,14 +10,8 @@
  */
 
 import Vue from 'vue'
-import './bootstrap.js'
 import AdminSettings from './components/AdminSettings.vue'
+Vue.mixin({ methods: { t, n } })
 
-// eslint-disable-next-line
-'use strict'
-
-// eslint-disable-next-line
-new Vue({
-	el: '#dropbox_prefs',
-	render: h => h(AdminSettings),
-})
+const View = Vue.extend(AdminSettings)
+new View().$mount('#dropbox_prefs')

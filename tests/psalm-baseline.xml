@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="lib/Command/StartImport.php">
+    <UndefinedClass>
+      <code><![CDATA[Command]]></code>
+    </UndefinedClass>
+  </file>
+  <file src="lib/Controller/ConfigController.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$info['email']]]></code>
+      <code><![CDATA[$info['name']]]></code>
+      <code><![CDATA[$info['name']]]></code>
+    </InvalidArrayOffset>
+  </file>
+  <file src="lib/Service/DropboxStorageAPIService.php">
+    <InvalidArgument>
+      <code><![CDATA[$entry]]></code>
+    </InvalidArgument>
+    <InvalidArrayOffset>
+      <code><![CDATA[$params['cursor']]]></code>
+      <code><![CDATA[$result['cursor']]]></code>
+      <code><![CDATA[$result['entries']]]></code>
+      <code><![CDATA[$result['has_more']]]></code>
+      <code><![CDATA[$result['used']]]></code>
+    </InvalidArrayOffset>
+  </file>
+</files>
