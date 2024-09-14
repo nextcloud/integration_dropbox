@@ -12,8 +12,6 @@
     "Dropbox integration" : "Intégration avec Dropbox",
     "Import Dropbox data in Nextcloud" : "Importer les données Dropbox dans Nextcloud",
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "L'intégration avec Dropbox vous permet d'importer automatiquement vos fichiers Dropbox dans Nextcloud.",
-    "Leave all fields empty to use default Nextcloud Dropbox OAuth app." : "Laissez tous les champs vides pour utiliser l'application OAuth Dropbox Nextcloud par défaut.",
-    "If you want your Nextcloud users to authenticate to Dropbox using your own Dropbox OAuth app, create one in Dropbox." : "Si vous voulez que vos utilisateurs Nextcloud s'authentifient sur Dropbox en utilisant votre propre application OAuth Dropbox, créez-en une dans Dropbox.",
     "Dropbox developer settings" : "Paramètres développeur pour Dropbox",
     "Make sure your give those permissions to your app:" : "Assurez-vous de donner les permissions suivantes à votre application :",
     "No need to add any redirect URI." : "Nul besoin d'ajouter une URI de redirection.",

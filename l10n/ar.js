@@ -14,8 +14,6 @@ OC.L10N.register(
     "Dropbox integration" : "مُكاملة dropbox",
     "Import Dropbox data in Nextcloud" : "إستيراد بيانات dropbox إلى نكست كلاود",
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "يتيح لك تكامل Dropbox استيراد ملفات Dropbox تلقائيًا إلى نكست كلاود.",
-    "Leave all fields empty to use default Nextcloud Dropbox OAuth app." : "اترك جميع الحقول فارغة لاستخدام تطبيق Nextcloud Dropbox OAuth الافتراضي.",
-    "If you want your Nextcloud users to authenticate to Dropbox using your own Dropbox OAuth app, create one in Dropbox." : "إذا كنت تريد أن يقوم مستخدمو Nextcloud بالمصادقة على Dropbox باستخدام تطبيق Dropbox OAuth الخاص بك، فقم بإنشاء واحد في Dropbox.",
     "Dropbox developer settings" : "إعدادات مُطوِّرِي Dropbox",
     "Make sure your give those permissions to your app:" : "تأكد من منح تلك الأذونات لتطبيقك",
     "No need to add any redirect URI." : "لا حاجة لإضافة أي عنوان لإعادة التوجيه redirect URI.",

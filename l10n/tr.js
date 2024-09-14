@@ -14,8 +14,6 @@ OC.L10N.register(
     "Dropbox integration" : "Dropbox bütünleştirmesi",
     "Import Dropbox data in Nextcloud" : "Dropbox verilerini Nextcloud içine aktar",
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "Dropbox bütünleştirmesi, Dropbox dosyalarınızı otomatik olarak Nextcloud içine aktarmanızı sağlar.",
-    "Leave all fields empty to use default Nextcloud Dropbox OAuth app." : "Varsayılan Nextcloud Dropbox OAuth uygulamasını kullanmak için tüm alanları boş bırakın.",
-    "If you want your Nextcloud users to authenticate to Dropbox using your own Dropbox OAuth app, create one in Dropbox." : "Nextcloud kullanıcılarınızın kendi Dropbox OAuth uygulamanızı kullanarak Dropbox üzerinden kimlik doğrulaması yapmasını istiyorsanız bir Dropbox uygulaması oluşturun.",
     "Dropbox developer settings" : "Dropbox geliştirici ayarları",
     "Make sure your give those permissions to your app:" : "Uygulamanıza şu izinleri verdiğinizden emin olun:",
     "No need to add any redirect URI." : "Herhangi bir yönlendirme adresi eklenmesine gerek yok.",

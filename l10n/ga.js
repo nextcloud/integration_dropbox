@@ -14,8 +14,6 @@ OC.L10N.register(
     "Dropbox integration" : "Comhtháthú Dropbox",
     "Import Dropbox data in Nextcloud" : "Iompórtáil sonraí Dropbox i Nextcloud",
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "Ligeann comhtháthú Dropbox duit do chuid comhad Dropbox a allmhairiú go huathoibríoch i Nextcloud.",
-    "Leave all fields empty to use default Nextcloud Dropbox OAuth app." : "Fág gach réimse folamh chun an aip réamhshocraithe Nextcloud Dropbox OAuth a úsáid.",
-    "If you want your Nextcloud users to authenticate to Dropbox using your own Dropbox OAuth app, create one in Dropbox." : "Más mian leat d’úsáideoirí Nextcloud a fhíordheimhniú chuig Dropbox ag baint úsáide as d’aip Dropbox OAuth féin, cruthaigh ceann i Dropbox.",
     "Dropbox developer settings" : "Socruithe forbróir Dropbox",
     "Make sure your give those permissions to your app:" : "Cinntigh go dtugann tú na ceadanna sin do d’aip:",
     "No need to add any redirect URI." : "Ní gá aon URI atreoraithe a chur leis.",
