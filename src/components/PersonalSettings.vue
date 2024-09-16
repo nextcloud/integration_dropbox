@@ -5,7 +5,7 @@
 			{{ t('integration_dropbox', 'Dropbox data migration') }}
 		</h2>
 		<NcNoteCard v-if="!isAdminConfigured" type="info">
-			{{ t('integration_dropbox', 'Your administrator didn\'t configure this integration yet.') }}
+			{{ t('integration_dropbox', 'Your administrator has not yet configured this integration.') }}
 		</NcNoteCard>
 		<div v-else class="dropbox-content">
 			<h3>{{ t('integration_dropbox', 'Authentication') }}</h3>
