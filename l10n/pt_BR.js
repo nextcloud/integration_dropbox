@@ -14,6 +14,7 @@ OC.L10N.register(
     "Dropbox integration" : "Integração Dropbox",
     "Import Dropbox data in Nextcloud" : "Importe dados do Dropbox para o Nextcloud",
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "Integração Dropbox permite que você importe automaticamente seus arquivos Dropbox para o Nextcloud",
+    "If you want your Nextcloud users to authenticate to Dropbox using your Dropbox OAuth app, create one in Dropbox." : "Se você deseja que seus usuários do Nextcloud se autentiquem no Dropbox usando seu aplicativo Dropbox OAuth, crie um no Dropbox.",
     "Dropbox developer settings" : "Configurações de desenvolvedor Dropbox",
     "Make sure your give those permissions to your app:" : "Tenha certeza que tem as seguintes permissões na sua aplicação:",
     "No need to add any redirect URI." : "Não é necessário adicionar qualquer redirecionador URI.",

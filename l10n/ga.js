@@ -26,7 +26,6 @@ OC.L10N.register(
     "Dropbox admin options saved" : "Roghanna riaracháin Dropbox sábháilte",
     "Failed to save Dropbox admin options" : "Theip ar shábháil roghanna riaracháin Dropbox",
     "Dropbox data migration" : "Aistriú sonraí Dropbox",
-    "Your administrator didn't configure this integration yet." : "Níor chumraigh do riarthóir an comhtháthú seo fós.",
     "Authentication" : "Fíordheimhniú",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Má tá trioblóid agat le fíordheimhniú, iarr ar do riarthóir Nextcloud socruithe riaracháin Dropbox a sheiceáil.",
     "Connect to Dropbox to get an access code" : "Ceangail le Dropbox chun cód rochtana a fháil",
