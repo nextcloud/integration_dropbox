@@ -24,6 +24,7 @@
     "Dropbox admin options saved" : "تمّ حفظ خيارات مشرف Dropbox",
     "Failed to save Dropbox admin options" : "فشل في حفظ خيارات مشرف Dropbox",
     "Dropbox data migration" : "مُكاملة بيانات Dropbox",
+    "Your administrator has not yet configured this integration." : "لم يقم مشرفك بعدُ بتهيئة هذه المكاملة.",
     "Authentication" : "المصادقة",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "إذا كنت تواجه مشكلة في المصادقة، فاطلب من مشرف نكست كلاود التحقق من إعدادات مشرف Dropbox.",
     "Connect to Dropbox to get an access code" : "إتّصل بـ Dropbox للحصول على رمز الوصول",
