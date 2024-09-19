@@ -26,6 +26,7 @@ OC.L10N.register(
     "Dropbox admin options saved" : "Dropbox admin options saved",
     "Failed to save Dropbox admin options" : "Failed to save Dropbox admin options",
     "Dropbox data migration" : "Dropbox data migration",
+    "Your administrator has not yet configured this integration." : "Your administrator has not yet configured this integration.",
     "Authentication" : "Authentication",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings.",
     "Connect to Dropbox to get an access code" : "Connect to Dropbox to get an access code",
