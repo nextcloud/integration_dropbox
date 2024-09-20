@@ -26,6 +26,7 @@ OC.L10N.register(
     "Dropbox admin options saved" : "Dropbox yönetici ayarları kaydedildi",
     "Failed to save Dropbox admin options" : "Dropbox yönetici ayarları kaydedilemedi",
     "Dropbox data migration" : "Dropbox verileri aktarımı",
+    "Your administrator has not yet configured this integration." : "Yöneticiniz henüz bu bütünleştirmeyi yapılandırmamış.",
     "Authentication" : "Kimlik doğrulama",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Kimlik doğrulama sorunu yaşıyorsanız Nextcloud yöneticinizden Dropbox yönetici ayarlarını denetlemesini isteyin.",
     "Connect to Dropbox to get an access code" : "Bir erişim kodu almak için Dropbox bağlantısı kurun",
