@@ -3,7 +3,7 @@
     "Dropbox" : "Dropbox",
     "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["%nرملفات تم استيرادها من المخزن السحابي دروبوكس","%n ملف تم استيراده من المخزن السحابي دروبوكس","%n ملفات تم استيرادها من المخزن السحابي دروبوكس","%n ملفات تم استيرادها من المخزن السحابي دروبوكس","%n ملفات تم استيرادها من المخزن السحابي دروبوكس","%n ملف تمّ استيرادها من المخزن السحابي Dropbox"],
     "Bad HTTP method" : "دالة HTTP  غير صحيحة",
-    "Bad credentials" : "حيثيّات الدخول credentials غير صحيحة",
+    "Bad credentials" : "بيانات تسجيل الدخول غير صحيحة",
     "Token is not valid anymore. Impossible to refresh it." : "الأَمَارَة token لم تعد صالحة بعد الآن. و يستحيل تحديثها",
     "Could not access file due to failed authentication." : "تعذّر الوصول إلي الملف نتيجة فشل المصادقة.",
     "OAuth access token refused" : "أمَاَرَة token مرفوضة",
