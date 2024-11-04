@@ -44,7 +44,7 @@ OC.L10N.register(
     "Dropbox import process will begin soon" : "El proceso de importación Dropbox comenzará pronto",
     "Dropbox options saved" : "Opciones de Dropbox guardadas",
     "Failed to save Dropbox options" : "Fallo al guardar las opciones de Dropbox",
-    "Successfully connected to Dropbox!" : "¡Conectado exitósamente a Dropbox!",
+    "Successfully connected to Dropbox!" : "¡Se ha conectado correctamente a Dropbox!",
     "Failed to connect to Dropbox" : "Fallo al conectarse a Dropbox",
     "Failed to get Dropbox storage information" : "Fallo al obtener la información del almacenamiento Dropbox",
     "Starting importing files in {targetPath} directory" : "Comenzando la importación de archivos en el directorio {targetPath}",
