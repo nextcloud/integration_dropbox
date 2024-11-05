@@ -45,23 +45,16 @@ jobs:
           repository: nextcloud/server
           ref: ${{ matrix.server-versions }}
 
-      - name: Checkout app
-        uses: actions/checkout@v3
-        with:
-          path: server/apps/${{ env.APP_NAME }}
-
       - name: Set up php
         uses: shivammathur/setup-php@c5fc0d8281aba02c7fda07d3a70cc5371548067d # v2
         with:
           php-version: ${{ matrix.php-versions }}
           coverage: none
           ini-file: development
+          # https://docs.nextcloud.com/server/stable/admin_manual/installation/source_installation.html#prerequisites-for-manual-installation
+          extensions: bz2, ctype, curl, dom, fileinfo, gd, iconv, intl, json, libxml, mbstring, openssl, pcntl, posix, session, simplexml, xmlreader, xmlwriter, zip, zlib, mysql, pdo_mysql
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install dependencies
-        working-directory: server/apps/${{ env.APP_NAME }}
-        run: composer i
 
       - name: Install nextcloud
         working-directory: server/
@@ -69,16 +62,7 @@ jobs:
           git submodule update --init
           php occ maintenance:install --verbose --admin-user admin --admin-pass admin
 
-      - name: Install app
-        working-directory: server/
-        run: |
-          php occ app:enable integration_dropbox
-
-      - name: Run Nextcloud
-        working-directory: server/
-        run: php -S localhost:8080 &
-
-      - name: Prepare config
+      - name: Prepare config (will be encrypted by migration)
         working-directory: server/
         env:
           DROPBOX_CONFIG: ${{ secrets.DROPBOX_CONFIG }}
@@ -94,6 +78,28 @@ jobs:
           sqlite3 data/owncloud.db "INSERT INTO oc_appconfig  ( appid, configkey, configvalue) VALUES ('integration_dropbox', 'client_id', '$OAUTH_CLIENT_ID');"
           sqlite3 data/owncloud.db "INSERT INTO oc_appconfig  ( appid, configkey, configvalue) VALUES ('integration_dropbox', 'client_secret', '$OAUTH_CLIENT_SECRET');"
 
+      - name: Checkout app
+        uses: actions/checkout@v3
+        with:
+          path: server/apps/${{ env.APP_NAME }}
+
+      - name: Install dependencies
+        working-directory: server/apps/${{ env.APP_NAME }}
+        run: composer i
+
+      - name: Install app
+        working-directory: server/
+        run: |
+          php occ app:enable integration_dropbox -vvv
+          
+          # for good measure
+          sed -i '$d' config/config.php && echo "  'debug' => true," >> config/config.php && echo ");" >> config/config.php
+          php occ migrations:execute integration_dropbox 030002Date20241021105515
+
+      - name: Run Nextcloud
+        working-directory: server/
+        run: php -S localhost:8080 &
+
       - name: Run import
         working-directory: server/
         run: |
@@ -103,6 +109,7 @@ jobs:
           du -shc data/admin/files/Dropbox\ import/*
 
       - name: Check import result
+        if: always()
         working-directory: server/
         run: |
           sqlite3 data/owncloud.db "SELECT * from oc_preferences where configkey = 'nb_imported_files';" > result.txt

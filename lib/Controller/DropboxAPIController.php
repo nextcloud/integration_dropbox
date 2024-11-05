@@ -13,6 +13,7 @@ namespace OCA\Dropbox\Controller;
 
 use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\Service\DropboxStorageAPIService;
+use OCA\Dropbox\Service\SecretService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
@@ -33,12 +34,13 @@ class DropboxAPIController extends Controller {
 		private IConfig $config,
 		private DropboxStorageAPIService $dropboxStorageApiService,
 		private ?string $userId,
+		private SecretService $secretService,
 	) {
 		parent::__construct($appName, $request);
-		$this->accessToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'token');
-		$this->refreshToken = $this->config->getUserValue($this->userId, Application::APP_ID, 'refresh_token');
-		$this->clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
-		$this->clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret');
+		$this->accessToken = $this->secretService->getEncryptedUserValue($this->userId, 'token');
+		$this->refreshToken = $this->secretService->getEncryptedUserValue($this->userId, 'refresh_token');
+		$this->clientID = $this->secretService->getEncryptedAppValue('client_id');
+		$this->clientSecret = $this->secretService->getEncryptedAppValue('client_secret');
 	}
 
 	/**

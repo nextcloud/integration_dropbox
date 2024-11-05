@@ -3,16 +3,16 @@
 namespace OCA\Dropbox\Settings;
 
 use OCA\Dropbox\AppInfo\Application;
+use OCA\Dropbox\Service\SecretService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Services\IInitialState;
-use OCP\IConfig;
 
 use OCP\Settings\ISettings;
 
 class Admin implements ISettings {
 
 	public function __construct(
-		private IConfig $config,
+		private SecretService $secretService,
 		private IInitialState $initialStateService,
 	) {
 	}
@@ -21,12 +21,12 @@ class Admin implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm(): TemplateResponse {
-		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
-		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret');
+		$clientID = $this->secretService->getEncryptedAppValue('client_id');
+		$clientSecret = $this->secretService->getEncryptedAppValue('client_secret');
 
 		$adminConfig = [
 			'client_id' => $clientID,
-			'client_secret' => $clientSecret
+			'client_secret' => $clientSecret !== '' ? 'dummySecret' : ''
 		];
 		$this->initialStateService->provideInitialState('admin-config', $adminConfig);
 		return new TemplateResponse(Application::APP_ID, 'adminSettings');

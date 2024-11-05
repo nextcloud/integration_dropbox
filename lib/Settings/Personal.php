@@ -3,6 +3,7 @@
 namespace OCA\Dropbox\Settings;
 
 use OCA\Dropbox\AppInfo\Application;
+use OCA\Dropbox\Service\SecretService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Services\IInitialState;
 use OCP\Files\IRootFolder;
@@ -18,7 +19,9 @@ class Personal implements ISettings {
 		private IRootFolder $root,
 		private IUserManager $userManager,
 		private IInitialState $initialStateService,
-		private string $userId) {
+		private string $userId,
+		private SecretService $secretService,
+	) {
 	}
 
 	/**
@@ -31,8 +34,8 @@ class Personal implements ISettings {
 		$outputDir = $this->config->getUserValue($this->userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 
 		// for OAuth
-		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
-		$hasClientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret') !== '';
+		$clientID = $this->secretService->getEncryptedAppValue('client_id');
+		$hasClientSecret = $this->secretService->getEncryptedAppValue('client_secret') !== '';
 
 		// get free space
 		$userFolder = $this->root->getUserFolder($this->userId);

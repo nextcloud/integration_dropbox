@@ -29,52 +29,20 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 class DropboxStorageAPIService {
-	/**
-	 * @var string
-	 */
-	private $appName;
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-	/**
-	 * @var IRootFolder
-	 */
-	private $root;
-	/**
-	 * @var IConfig
-	 */
-	private $config;
-	/**
-	 * @var IJobList
-	 */
-	private $jobList;
-	/**
-	 * @var DropboxAPIService
-	 */
-	private $dropboxApiService;
-	/**
-	 * @var UserScopeService
-	 */
-	private $userScopeService;
 
 	/**
 	 * Service to make requests to Dropbox API
 	 */
-	public function __construct(string $appName,
-		LoggerInterface $logger,
-		IRootFolder $root,
-		IConfig $config,
-		IJobList $jobList,
-		UserScopeService $userScopeService,
-		DropboxAPIService $dropboxApiService) {
-		$this->appName = $appName;
-		$this->logger = $logger;
-		$this->root = $root;
-		$this->config = $config;
-		$this->jobList = $jobList;
-		$this->dropboxApiService = $dropboxApiService;
-		$this->userScopeService = $userScopeService;
+	public function __construct(
+		private string $appName,
+		private LoggerInterface $logger,
+		private IRootFolder $root,
+		private IConfig $config,
+		private IJobList $jobList,
+		private UserScopeService $userScopeService,
+		private DropboxAPIService $dropboxApiService,
+		private SecretService $secretService,
+	) {
 	}
 
 	/**
@@ -151,10 +119,10 @@ class DropboxStorageAPIService {
 		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_running', '1');
 		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_job_last_start', strval($nowTs));
 
-		$accessToken = $this->config->getUserValue($userId, Application::APP_ID, 'token');
-		$refreshToken = $this->config->getUserValue($userId, Application::APP_ID, 'refresh_token');
-		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
-		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret');
+		$accessToken = $this->secretService->getEncryptedUserValue($userId, 'token');
+		$refreshToken = $this->secretService->getEncryptedUserValue($userId, 'refresh_token');
+		$clientID = $this->secretService->getEncryptedAppValue('client_id');
+		$clientSecret = $this->secretService->getEncryptedAppValue('client_secret');
 		// import batch of files
 		$targetPath = $this->config->getUserValue($userId, Application::APP_ID, 'output_dir', '/Dropbox import');
 		$targetPath = $targetPath ?: '/Dropbox import';
