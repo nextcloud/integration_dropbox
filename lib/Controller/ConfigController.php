@@ -14,13 +14,14 @@ namespace OCA\Dropbox\Controller;
 use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\Service\DropboxAPIService;
 
+use OCA\Dropbox\Service\SecretService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\PasswordConfirmationRequired;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\IConfig;
 
+use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IRequest;
 
@@ -29,6 +30,7 @@ class ConfigController extends Controller {
 		string $appName,
 		IRequest $request,
 		private IConfig $config,
+		private SecretService $secretService,
 		private IL10N $l,
 		private DropboxAPIService $dropboxAPIService,
 		private ?string $userId) {
@@ -80,8 +82,12 @@ class ConfigController extends Controller {
 	 */
 	#[PasswordConfirmationRequired]
 	public function setAdminConfig(array $values): DataResponse {
+		// currently: client_id and client_secret
 		foreach ($values as $key => $value) {
-			$this->config->setAppValue(Application::APP_ID, $key, $value);
+			if ($key === 'client_secret' && $value === 'dummySecret') {
+				continue;
+			}
+			$this->secretService->setEncryptedAppValue($key, $value);
 		}
 		return new DataResponse(1);
 	}
@@ -99,8 +105,8 @@ class ConfigController extends Controller {
 			$message = $this->l->t('Invalid access code');
 			return new DataResponse($message, Http::STATUS_BAD_REQUEST);
 		}
-		$clientID = $this->config->getAppValue(Application::APP_ID, 'client_id');
-		$clientSecret = $this->config->getAppValue(Application::APP_ID, 'client_secret');
+		$clientID = $this->secretService->getEncryptedAppValue('client_id');
+		$clientSecret = $this->secretService->getEncryptedAppValue('client_secret');
 
 		$result = $this->dropboxAPIService->requestOAuthAccessToken($clientID, $clientSecret, [
 			'grant_type' => 'authorization_code',
@@ -108,9 +114,9 @@ class ConfigController extends Controller {
 		], 'POST');
 		if (isset($result['access_token'], $result['refresh_token'])) {
 			$accessToken = $result['access_token'];
-			$this->config->setUserValue($this->userId, Application::APP_ID, 'token', $accessToken);
+			$this->secretService->setEncryptedUserValue($this->userId, 'token', $accessToken);
 			$refreshToken = $result['refresh_token'];
-			$this->config->setUserValue($this->userId, Application::APP_ID, 'refresh_token', $refreshToken);
+			$this->secretService->setEncryptedUserValue($this->userId, 'refresh_token', $refreshToken);
 			$data = [];
 			// get user information
 			$info = $this->dropboxAPIService->request(

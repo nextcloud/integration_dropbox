@@ -19,7 +19,6 @@ use GuzzleHttp\Exception\ServerException;
 use OCA\Dropbox\AppInfo\Application;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
-use OCP\IConfig;
 use OCP\IL10N;
 use OCP\Notification\IManager as INotificationManager;
 
@@ -37,7 +36,7 @@ class DropboxAPIService {
 		private string $appName,
 		private LoggerInterface $logger,
 		private IL10N $l10n,
-		private IConfig $config,
+		private SecretService $secretService,
 		private INotificationManager $notificationManager,
 		IClientService $clientService,
 	) {
@@ -129,7 +128,7 @@ class DropboxAPIService {
 				if (isset($result['access_token'])) {
 					$this->logger->info('Dropbox access token successfully refreshed', ['app' => $this->appName]);
 					$accessToken = $result['access_token'];
-					$this->config->setUserValue($userId, Application::APP_ID, 'token', $accessToken);
+					$this->secretService->setEncryptedUserValue($userId, 'token', $accessToken);
 					// retry the request with new access token
 					return $this->request($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $endPoint, $params, $method);
 				} else {
@@ -203,7 +202,7 @@ class DropboxAPIService {
 				if (isset($result['access_token'])) {
 					$this->logger->info('Dropbox access token successfully refreshed', ['app' => $this->appName]);
 					$accessToken = $result['access_token'];
-					$this->config->setUserValue($userId, Application::APP_ID, 'token', $accessToken);
+					$this->secretService->setEncryptedUserValue($userId, 'token', $accessToken);
 					// retry the request with new access token
 					return $this->downloadFile($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $resource, $fileId, $try + 1);
 				} else {
