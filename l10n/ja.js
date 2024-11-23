@@ -2,6 +2,7 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Dropbox" : "Dropbox",
+    "Bad HTTP method" : "不正なHTTPメソッド",
     "Bad credentials" : "不正な資格情報",
     "Token is not valid anymore. Impossible to refresh it." : "トークンは無効です。更新できません。",
     "OAuth access token refused" : "OAuth アクセストークンが拒否されました",
