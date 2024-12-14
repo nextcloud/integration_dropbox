@@ -39,7 +39,7 @@ OC.L10N.register(
     "Dropbox storage size: {formSize}" : "Dropbox 儲存空間大小：{formSize}",
     "Import Dropbox files" : "導入 Dropbox 檔案",
     "Your Dropbox storage is bigger than your remaining space left ({formSpace})" : "您的 Dropbox 儲存大於剩餘空間（{formSpace}）",
-    "Import job is currently running" : "導入作業當前正在運行",
+    "Import job is currently running" : "導入作業目前正在運行",
     "An error occured during the import: {error}" : "匯入時發生錯誤：{error}",
     "Cancel Dropbox files import" : "取消 Dropbox 檔案導入",
     "Your Dropbox storage is empty" : "您的 Dropbox 儲存空間是空的",
