@@ -31,7 +31,7 @@ OC.L10N.register(
     "Connect to Dropbox to get an access code" : "زىيارەت كودىغا ئېرىشىش ئۈچۈن Dropbox غا ئۇلاڭ",
     "Dropbox access code" : "Dropbox زىيارەت كودى",
     "Access code" : "زىيارەت كودى",
-    "Connected as {user} ({email})" : "{ئىشلەتكۈچى} ({ئېلېكترونلۇق خەت}) قىلىپ ئۇلاندى",
+    "Connected as {user} ({email})" : "{user} ({email} خەت}) قىلىپ ئۇلاندى",
     "Disconnect from Dropbox" : "Dropbox دىن ئۈزۈڭ",
     "Dropbox storage" : "Dropbox ساقلاش",
     "Import directory" : "مۇندەرىجە ئەكىرىڭ",
@@ -39,7 +39,7 @@ OC.L10N.register(
     "Import Dropbox files" : "Dropbox ھۆججىتىنى ئەكىرىڭ",
     "Your Dropbox storage is bigger than your remaining space left ({formSpace})" : "Dropbox ساقلاش بوشلۇقىڭىز قالغان بوشلۇقتىن چوڭ ({formSpace})",
     "Import job is currently running" : "ھازىر ئىمپورت خىزمىتى ئىجرا بولۇۋاتىدۇ",
-    "An error occured during the import: {error}" : "ئىمپورت جەريانىدا خاتالىق كۆرۈلدى: {خاتالىق}",
+    "An error occured during the import: {error}" : "ئىمپورت جەريانىدا خاتالىق كۆرۈلدى: {error}",
     "Cancel Dropbox files import" : "Dropbox ھۆججەتلىرىنى ئىمپورت قىلىشنى ئەمەلدىن قالدۇرۇڭ",
     "Your Dropbox storage is empty" : "Dropbox ساقلاش بوشلۇقىڭىز قۇرۇق",
     "Dropbox import process will begin soon" : "Dropbox ئىمپورت قىلىش جەريانى پات يېقىندا باشلىنىدۇ",
@@ -51,6 +51,6 @@ OC.L10N.register(
     "Starting importing files in {targetPath} directory" : "ھۆججەتلەرنى {targetPath} مۇندەرىجىسىگە ئەكىرىشنى باشلاش",
     "Failed to start importing Dropbox storage" : "Dropbox ساقلاشنى ئىمپورتلاشنى باشلىمىدى",
     "Choose where to write imported files" : "ئىمپورت قىلىنغان ھۆججەتلەرنى قەيەرگە يېزىشنى تاللاڭ",
-    "Last Dropbox import job at {date}" : "ئەڭ ئاخىرقى Dropbox ئىمپورت خىزمىتى {چېسلا}"
+    "Last Dropbox import job at {date}" : "ئەڭ ئاخىرقى Dropbox ئىمپورت خىزمىتى {date}"
 },
 "nplurals=2; plural=(n != 1);");
