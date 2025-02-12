@@ -1,5 +1,6 @@
 { "translations": {
     "Dropbox" : "Dropbox",
+    "Bad HTTP method" : "Dårlig HTTP-metode",
     "Bad credentials" : "Forkerte legitimationsoplysninger",
     "Connected accounts" : "Forbundne konti",
     "App key" : "App nøgle",
