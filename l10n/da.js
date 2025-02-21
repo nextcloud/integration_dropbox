@@ -2,7 +2,7 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Dropbox" : "Dropbox",
-    "Bad HTTP method" : "Dårlig HTTP-metode",
+    "Bad HTTP method" : "Dårlig HTTP metode",
     "Bad credentials" : "Forkerte legitimationsoplysninger",
     "Connected accounts" : "Forbundne konti",
     "App key" : "App nøgle",
