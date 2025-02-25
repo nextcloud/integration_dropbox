@@ -1,3 +1,7 @@
+<!--
+  - SPDX-FileCopyrightText: 2020 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 # Dropbox integration into Nextcloud
 
 🧊 Dropbox integration allows you to automatically import your Dropbox files into Nextcloud.
