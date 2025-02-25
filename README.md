@@ -4,6 +4,8 @@
 -->
 # Dropbox integration into Nextcloud
 
+[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/integration_dropbox)](https://api.reuse.software/info/github.com/nextcloud/integration_dropbox)
+
 🧊 Dropbox integration allows you to automatically import your Dropbox files into Nextcloud.
 
 ## 🔧 Configuration
