@@ -32,8 +32,7 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: [ '8.1' ]
-        #server-versions: [ 'stable30', 'stable29', 'stable28' ]
-        server-versions: [ 'stable30' ]
+        server-versions: [ 'stable30', 'stable31' ]
 
     name: Integration test
 
@@ -120,7 +119,12 @@ jobs:
           admin|integration_dropbox|importing_dropbox|0
           admin|integration_dropbox|last_import_error|
           EOM
-          diff result.expected.txt result.txt
+          cat > result.nc31.expected.txt <<- EOM
+          admin|integration_dropbox|nb_imported_files|0|0|0|0|
+          admin|integration_dropbox|importing_dropbox|0|0|0|0|
+          admin|integration_dropbox|last_import_error||0|0|0|
+          EOM
+          diff result.expected.txt result.txt || diff result.nc31.expected.txt result.txt
           cat > du-sh.expected.txt <<- EOM
           1.6G	data/admin/files/Dropbox import/
           EOM
