@@ -28,7 +28,7 @@ OC.L10N.register(
     "Dropbox data migration" : "Dropbox-Datenmigration",
     "Your administrator has not yet configured this integration." : "Deine Administration hat diese Integration noch nicht eingerichtet.",
     "Authentication" : "Authentifizierung",
-    "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Wenn du Probleme bei der Authentifizierung hast, bitte deinen  Nextcloud-Administrator, die Dropbox-Admin-Einstellungen zu überprüfen.",
+    "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Wenn du Probleme bei der Authentifizierung hast, bitte deine Nextcloud-Administration, die Dropbox-Admin-Einstellungen zu überprüfen.",
     "Connect to Dropbox to get an access code" : "Mit Dropbox verbinden um einen Zugriffscode zu erhalten",
     "Dropbox access code" : "Dropbox Zugriffscode",
     "Access code" : "Zugriffscode",
