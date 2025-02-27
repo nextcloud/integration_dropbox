@@ -12,12 +12,12 @@ OC.L10N.register(
     "Data migration" : "Μετεγκατάσταση δεδομένων",
     "Dropbox integration" : "Ενσωμάτωση Dropbox",
     "Import Dropbox data in Nextcloud" : "Εισαγωγή δεδομένων από Dropbox στο Nextcloud",
+    "Dropbox admin options saved" : "Οι επιλογές διαχειριστή του Dropbox αποθηκεύτηκαν",
     "App key" : "Κλειδί εφαρμογής",
     "App secret" : "Μυστικό εφαρμογής",
-    "Dropbox admin options saved" : "Οι επιλογές διαχειριστή του Dropbox αποθηκεύτηκαν",
-    "Authentication" : "Πιστοποίηση",
-    "Import directory" : "Εισαγωγή καταλόγου",
     "Starting importing files in {targetPath} directory" : "Έναρξη εισαγωγής αρχείων στον κατάλογο {targetPath}",
-    "Choose where to write imported files" : "Επιλέξτε πού να γράψετε τα εισαγόμενα αρχεία"
+    "Choose where to write imported files" : "Επιλέξτε πού να γράψετε τα εισαγόμενα αρχεία",
+    "Authentication" : "Πιστοποίηση",
+    "Import directory" : "Εισαγωγή καταλόγου"
 },
 "nplurals=2; plural=(n != 1);");

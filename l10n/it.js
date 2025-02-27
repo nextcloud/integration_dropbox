@@ -10,10 +10,10 @@ OC.L10N.register(
     "Data migration" : "Migrazione dei dati",
     "App key" : "Chiave applicazione",
     "App secret" : "Segreto applicazione",
+    "Starting importing files in {targetPath} directory" : "Avvio dell'importazione file nella cartella {targetPath}",
+    "Choose where to write imported files" : "Scegli dove scrivere i file importati",
     "Authentication" : "Autenticazione",
     "Connected as {user} ({email})" : "Connesso come {user} ({email})",
-    "Import directory" : "Cartella di importazione",
-    "Starting importing files in {targetPath} directory" : "Avvio dell'importazione file nella cartella {targetPath}",
-    "Choose where to write imported files" : "Scegli dove scrivere i file importati"
+    "Import directory" : "Cartella di importazione"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

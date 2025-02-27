@@ -10,10 +10,10 @@ OC.L10N.register(
     "Data migration" : "Preselitev podatkov",
     "App key" : "Programski ključ",
     "App secret" : "Skrivni programski ključ",
+    "Starting importing files in {targetPath} directory" : "Začeto je uvažanje datotek v mapo {targetPath}.",
+    "Choose where to write imported files" : "Izbor mesta za shranjevanje uvoženih datotek",
     "Authentication" : "Overitev",
     "Import directory" : "Uvozi mapo",
-    "Import job is currently running" : "Trenutno poteka opravilo uvažanja podatkov",
-    "Starting importing files in {targetPath} directory" : "Začeto je uvažanje datotek v mapo {targetPath}.",
-    "Choose where to write imported files" : "Izbor mesta za shranjevanje uvoženih datotek"
+    "Import job is currently running" : "Trenutno poteka opravilo uvažanja podatkov"
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");

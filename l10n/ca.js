@@ -9,12 +9,12 @@ OC.L10N.register(
     "Data migration" : "Migració de dades",
     "App key" : "Clau de l'aplicació",
     "App secret" : "Secret de l'aplicació",
+    "Starting importing files in {targetPath} directory" : "S'està iniciant la importació de fitxers al directori {targetPath}",
     "Authentication" : "Autenticació",
     "Dropbox access code" : "Codi d'accés de Dropbox",
     "Access code" : "Codi d'accés",
     "Connected as {user} ({email})" : "S'ha connectat com a {user} ({email})",
     "Import directory" : "Carpeta d'importació",
-    "Starting importing files in {targetPath} directory" : "S'està iniciant la importació de fitxers al directori {targetPath}",
     "_{amount} file imported_::_{amount} files imported_" : ["{amount} fitxer importat","{amount} fitxers importats"]
 },
 "nplurals=2; plural=(n != 1);");

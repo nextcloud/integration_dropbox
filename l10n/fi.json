@@ -13,6 +13,14 @@
     "Dropbox developer settings" : "Dropbox-kehittäjäasetukset",
     "App key" : "Sovellusavain",
     "App secret" : "Sovellussalaisuus",
+    "Last Dropbox import job at {date}" : "Viimeisin Dropbox-tuonti {date}",
+    "Dropbox import process will begin soon" : "Dropbox-tuonti alkaa pian",
+    "Dropbox options saved" : "Dropbox-asetukset tallennettu",
+    "Failed to save Dropbox options" : "Dropbox-valintojen tallentaminen epäonnistui",
+    "Successfully connected to Dropbox!" : "Yhdistetty Dropboxiin!",
+    "Failed to connect to Dropbox" : "Yhdistäminen Dropboxiin epäonnistui",
+    "Starting importing files in {targetPath} directory" : "Aloitetaan tiedostojen tuonti kohteeseen {targetPath}",
+    "Choose where to write imported files" : "Valitse, mihin tiedostot tuodaan",
     "Authentication" : "Tunnistautuminen",
     "Connect to Dropbox to get an access code" : "Yhdistä Dropboxiin saadaksesi pääsykoodin",
     "Dropbox access code" : "Dropboxin pääsykoodi",
@@ -26,14 +34,6 @@
     "Import job is currently running" : "Tuontityö on meneillään",
     "Cancel Dropbox files import" : "Peruuta Dropbox-tiedostojen tuonti",
     "Your Dropbox storage is empty" : "Dropbox-tallennustilasi on tyhjä",
-    "Dropbox import process will begin soon" : "Dropbox-tuonti alkaa pian",
-    "Dropbox options saved" : "Dropbox-asetukset tallennettu",
-    "Failed to save Dropbox options" : "Dropbox-valintojen tallentaminen epäonnistui",
-    "Successfully connected to Dropbox!" : "Yhdistetty Dropboxiin!",
-    "Failed to connect to Dropbox" : "Yhdistäminen Dropboxiin epäonnistui",
-    "Starting importing files in {targetPath} directory" : "Aloitetaan tiedostojen tuonti kohteeseen {targetPath}",
-    "Choose where to write imported files" : "Valitse, mihin tiedostot tuodaan",
-    "_{amount} file imported_::_{amount} files imported_" : ["{amount} tiedosto tuotu","{amount} tiedostoa tuotu"],
-    "Last Dropbox import job at {date}" : "Viimeisin Dropbox-tuonti {date}"
+    "_{amount} file imported_::_{amount} files imported_" : ["{amount} tiedosto tuotu","{amount} tiedostoa tuotu"]
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

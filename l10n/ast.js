@@ -4,7 +4,7 @@ OC.L10N.register(
     "Data migration" : "Migración de los datos",
     "App key" : "Clave d'aplicación",
     "App secret" : "Secretu d'aplicación",
-    "Authentication" : "Autenticación",
-    "Failed to save Dropbox options" : "Nun se puen guardar la configuración de Dropbox"
+    "Failed to save Dropbox options" : "Nun se puen guardar la configuración de Dropbox",
+    "Authentication" : "Autenticación"
 },
 "nplurals=2; plural=(n != 1);");

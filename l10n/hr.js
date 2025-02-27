@@ -9,10 +9,10 @@ OC.L10N.register(
     "Data migration" : "Migracija podataka",
     "App key" : "Ključ aplikacije",
     "App secret" : "Tajna aplikacije",
+    "Starting importing files in {targetPath} directory" : "Početak uvoza datoteka u direktorij {targetPath}",
+    "Choose where to write imported files" : "Odaberite gdje želite zapisivati uvezene datoteke",
     "Authentication" : "Autentifikacija",
     "Connected as {user} ({email})" : "Povezan kao {user} ({email})",
-    "Import directory" : "Uvezi direktorij",
-    "Starting importing files in {targetPath} directory" : "Početak uvoza datoteka u direktorij {targetPath}",
-    "Choose where to write imported files" : "Odaberite gdje želite zapisivati uvezene datoteke"
+    "Import directory" : "Uvezi direktorij"
 },
 "nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;");
