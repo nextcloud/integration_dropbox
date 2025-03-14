@@ -4,7 +4,7 @@ OC.L10N.register(
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Nederīgs HTTP pieprasījuma veids",
     "Bad credentials" : "Nederīgi pieteikšanās dati",
-    "Connected accounts" : "Savienotie konti",
+    "Connected accounts" : "Sasaistītie konti",
     "App key" : "Lietotnes atslēga",
     "Authentication" : "Autentifikācija"
 },
