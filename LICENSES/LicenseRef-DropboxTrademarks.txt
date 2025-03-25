@@ -1,0 +1,91 @@
+Dropbox Branding Guidelines
+
+Dropbox’s trademarks and brand are intellectual property owned by Dropbox and are an important and valuable asset.  We thank you for helping us protect it by using it properly.  These guidelines, which may be updated periodically, are intended to help understand how to correctly use the Dropbox name and our logos.  If you have any questions about these guidelines, please contact brand@dropbox.com.
+
+By using Dropbox brand materials (e.g., Dropbox names, logos, screenshots, etc.), you agree to the Dropbox Terms of Service, these Dropbox branding guidelines, and all Dropbox rules and policies, as may be updated from time to time. You also acknowledge that Dropbox is the sole owner of Dropbox trademarks, promise not to interfere with Dropbox's rights in them, and acknowledge that goodwill derived from their use accrues only to Dropbox. Dropbox may review use of the brand materials at any time and reserves the right to terminate or modify any use.
+
+
+Trademarks and Brand Usage
+
+Please don't use our brand materials in ways that may be confusing, misleading, or suggest a sponsorship, endorsement, or affiliation with Dropbox. For example, your name and logo should be more prominent than the Dropbox name or logo.
+
+Please don’t make any edits or changes to our brand materials. For our word marks, always use the proper spelling and avoid typos, including making our mark plural or possessive, or adding other words, punctuation, symbols, or numbers.  Always use our word marks as proper (i.e., capitalized) adjectives, not a noun or a verb.
+
+The Dropbox logo is a universal signature we use across all our communications. For the Dropbox logo, as well as any of our other logos, we want them to be instantly recognizable, so consistency is important—please don’t edit, change, distort, recolor, rotate, deconstruct, stretch, reconfigure, or otherwise modify them in any way.
+Advertising, Promotional, and Sales Materials
+
+Please check in with us before using our brand materials on websites, products, packaging, manuals, or for other commercial or product use. It's ok to say in text "works with Dropbox" or "compatible with Dropbox" (as long as it's true!).
+Education and Instruction (books, guides, publications, and conferences)
+
+You can use our brand materials for educational and instructional purposes, but please remember that it shouldn't be confusing or misleading, or suggest our sponsorship or affiliation. We generally don't allow use of our logos or screenshots on book covers, for example.
+
+Also remember to include this statement (or something like it) in your printed materials: "(Title) is not affiliated with or otherwise sponsored by Dropbox, Inc."
+
+
+Products, Websites, Names, and Logos
+
+Please don’t use our name as part of your company or service name, website name, trade name, or product name.  Don’t use our logo or incorporate our logo into yours.  Don’t use a domain name containing “Dropbox” or any confusingly similar words.
+
+
+Functional Uses (UIs/Buttons)
+
+Developers using our API can use brand materials in accordance with our Developer Branding Guidelines (https://www.dropbox.com/developers/reference/branding-guide).
+
+
+Linking to Dropbox
+
+If you use Dropbox and want to use our logo to link to our site, you can use our logo if it meets the rest of these guidelines.  For example, “we use Dropbox! [linked logo or link near logo]” or “here’s a photo set (hosted on Dropbox).”
+
+
+Merchandise
+
+While we make lots of t-shirts with our logo on them, we don’t generally allow third parties to make, sell, or give away anything with our brand materials on it.
+
+A copy can be found at https://www.dropbox.com/branding
+
+---
+
+Developer branding guide
+
+We're excited that you're integrating Dropbox into your app! You'll need to follow these guidelines for us to approve your app for production status, and your app must continue to comply with these guidelines as well as our general branding guidelines, which may be updated periodically, after it's been approved.
+Naming your app
+
+You'll need to give us a name for your app:
+
+* Be creative :) But, the name shouldn't include the word "Dropbox" or any Dropbox product names.
+* It can't begin with "drop", be similar to Dropbox in sound or spelling, or otherwise refer to Dropbox (for example, don’t use "DBX" or "DB" or "DfB").
+* It should be the same as or include the name of your app.
+* If you're using the Dropbox Business API, we recommend adding "for Business" to distinguish your business app name from your single‐user app name.
+
+Above all, your app name may not confuse or mislead users into thinking your app is affiliated or associated with Dropbox. For example, only use "for Dropbox" when it's necessary to distinguish your Dropbox-specific app from your other apps; your brand should stand alone wherever possible.
+Providing your logo
+
+We'll also need your app's logo as part of the production application process:
+
+* It shouldn't include or look similar to any Dropbox logo or other Dropbox-related imagery.
+* It shouldn't include the word "Dropbox" or other words that suggest a connection to Dropbox.
+* It should be recognizably similar, if not identical, to your app logo as used elsewhere.
+
+Your app's logo is shown to users on the app authorization page, as well as on their linked apps list. By submitting your app logo to Dropbox, you give us permission to use it in this way.
+Keep current
+
+Please keep your app name, app logo, website, contact info, and other important information up to date in the App Console and your account settings. This will provide a consistent and accurate experience for your users, and help us reach you if there's a problem with your app.
+Referencing Dropbox in your app
+
+You may only use the Dropbox name and logo in your app to identify or direct a user to a Dropbox integration or functionality. For example, you may use a Dropbox logo and "Save to Dropbox" text on a button to prompt a user to save a file to Dropbox. Please do not use the Dropbox name or any Dropbox logo for any other purpose other than as specified in these guidelines, unless you have received written approval from brand@dropbox.com.
+
+You may only use the approved logos, available here. Remember that you may not copy or imitate the look and feel of Dropbox products. All uses of Dropbox, the Dropbox logo, and any other trademarks must comply as applicable with Dropbox's branding guidelines.
+Referencing Dropbox in your marketing
+
+You may use the Dropbox name and logo in marketing for your app as long as you follow our Dropbox branding guidelines and this additional guidance:
+
+* Don't suggest that there's a partnership or that Dropbox endorses your app. For example, you can say "we're developers on the Dropbox API" or "API developers," but not "we partner with Dropbox" or "API partners."
+* You may only use the Dropbox brand or Dropbox logo to indicate compatibility with Dropbox.
+* Don't use the Dropbox brand repeatedly or as a prominent brand in your marketing. Focus on your app name and app logo — it's your app after all!
+* If you'll be doing marketing that includes the Dropbox brand or Dropbox logo, particularly in print or broadcast, please submit a written request for approval to brand@dropbox.com.
+
+Have feedback or more questions?
+
+This is a living document, and we want to work on it collaboratively with the Dropbox developer community. The document will be updated from time to time, and you are required to stay in compliance with this document at all times. Please feel free to contact us with any questions or comments.
+
+A copy can be found at https://www.dropbox.com/developers/reference/branding-guide

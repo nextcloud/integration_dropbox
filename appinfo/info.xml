@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
+<!--
+  - SPDX-FileCopyrightText: 2020 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 <info>
     <id>integration_dropbox</id>
     <name>Dropbox integration</name>
     <summary>Import Dropbox data in Nextcloud</summary>
     <description><![CDATA[Dropbox integration allows you to automatically import your Dropbox files into Nextcloud.]]></description>
-    <version>3.0.3</version>
+    <version>3.1.0</version>
     <licence>agpl</licence>
     <author>Julien Veyssier</author>
     <namespace>Dropbox</namespace>
@@ -16,7 +20,7 @@
     <bugs>https://github.com/nextcloud/integration_dropbox/issues</bugs>
     <screenshot>https://github.com/nextcloud/integration_dropbox/raw/master/img/screenshot1.jpg</screenshot>
     <dependencies>
-        <nextcloud min-version="28" max-version="30"/>
+        <nextcloud min-version="28" max-version="31"/>
     </dependencies>
     <commands>
         <command>OCA\Dropbox\Command\StartImport</command>

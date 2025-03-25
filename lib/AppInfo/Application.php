@@ -1,10 +1,8 @@
 <?php
+
 /**
- * Nextcloud - Dropbox
- *
- *
- * @author Julien Veyssier <eneiluj@posteo.net>
- * @copyright Julien Veyssier 2020
+ * SPDX-FileCopyrightText: 2020 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
 namespace OCA\Dropbox\AppInfo;

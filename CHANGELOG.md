@@ -1,8 +1,23 @@
+<!--
+  - SPDX-FileCopyrightText: 2020 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 # Change Log
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [3.1.0] - 2024-11-11
+
+### New
+
+- Add support for Nextcloud 31
+
+### Fixed
+
+- Fix(l10n): Update translations from Transifex
+
 
 ## [3.0.3] - 2024-11-11
 

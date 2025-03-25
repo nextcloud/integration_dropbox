@@ -15,11 +15,11 @@ OC.L10N.register(
     "Dropbox developer settings" : "Настройки разработчика Dropbox",
     "App key" : "Ключ приложения",
     "App secret" : "Секретный ключ ",
+    "Starting importing files in {targetPath} directory" : "Начало импорта файлов в каталог {targetPath}",
+    "Choose where to write imported files" : "Выберите, куда сохранять импортированные файлы",
     "Authentication" : "Аутентификация",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Если у вас возникли проблемы с аутентификацией, попросите администратора Nextcloud проверить настройки администратора Dropbox.",
     "Connected as {user} ({email})" : "Подключено как {user} ({email})",
-    "Import directory" : "Каталог импорта",
-    "Starting importing files in {targetPath} directory" : "Начало импорта файлов в каталог {targetPath}",
-    "Choose where to write imported files" : "Выберите, куда сохранять импортированные файлы"
+    "Import directory" : "Каталог импорта"
 },
 "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);");

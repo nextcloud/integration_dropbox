@@ -10,10 +10,10 @@ OC.L10N.register(
     "Data migration" : "Gegevensmigratie",
     "App key" : "App key",
     "App secret" : "App secret",
+    "Starting importing files in {targetPath} directory" : "Beginnen met importeren bestanden in {targetPath} directory",
+    "Choose where to write imported files" : "Kies waar geïmporteerde bestanden moeten worden weggeschreven",
     "Authentication" : "Authenticatie",
     "Connected as {user} ({email})" : "Verbonden als {user} ({email})",
-    "Import directory" : "Importdirectory",
-    "Starting importing files in {targetPath} directory" : "Beginnen met importeren bestanden in {targetPath} directory",
-    "Choose where to write imported files" : "Kies waar geïmporteerde bestanden moeten worden weggeschreven"
+    "Import directory" : "Importdirectory"
 },
 "nplurals=2; plural=(n != 1);");
