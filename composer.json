@@ -1,6 +1,6 @@
 {
 	"require": {
-		"php": ">=8.0"
+		"php": ">=8.1"
 	},
 	"scripts": {
 		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
@@ -20,7 +20,7 @@
 	},
 	"config": {
 		"platform": {
-			"php": "8.0"
+			"php": "8.1"
 		}
 	}
 }
