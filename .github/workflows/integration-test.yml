@@ -35,13 +35,13 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: [ '8.1' ]
-        server-versions: [ 'stable30', 'stable31' ]
+        server-versions: [ 'master', 'stable31', 'stable30' ]
 
     name: Integration test
 
     steps:
       - name: Checkout nextcloud
-        uses: actions/checkout@v3
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           path: server
           repository: nextcloud/server
@@ -81,7 +81,7 @@ jobs:
           sqlite3 data/owncloud.db "INSERT INTO oc_appconfig  ( appid, configkey, configvalue) VALUES ('integration_dropbox', 'client_secret', '$OAUTH_CLIENT_SECRET');"
 
       - name: Checkout app
-        uses: actions/checkout@v3
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           path: server/apps/${{ env.APP_NAME }}
 
