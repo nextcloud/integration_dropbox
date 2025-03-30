@@ -12,10 +12,9 @@
     </MissingOverrideAttribute>
   </file>
   <file src="lib/Command/StartImport.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function configure() {]]></code>
-      <code><![CDATA[protected function execute(InputInterface $input, OutputInterface $output): int {]]></code>
-    </MissingOverrideAttribute>
+    <UndefinedClass>
+      <code><![CDATA[Command]]></code>
+    </UndefinedClass>
   </file>
   <file src="lib/Controller/ConfigController.php">
     <InvalidArrayOffset>
