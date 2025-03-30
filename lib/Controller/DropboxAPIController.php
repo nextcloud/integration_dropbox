@@ -25,7 +25,8 @@ class DropboxAPIController extends Controller {
 	private string $clientID;
 	private string $clientSecret;
 
-	public function __construct(string $appName,
+	public function __construct(
+		string $appName,
 		IRequest $request,
 		private IConfig $config,
 		private DropboxStorageAPIService $dropboxStorageApiService,
