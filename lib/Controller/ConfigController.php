@@ -29,7 +29,8 @@ class ConfigController extends Controller {
 		private SecretService $secretService,
 		private IL10N $l,
 		private DropboxAPIService $dropboxAPIService,
-		private ?string $userId) {
+		private ?string $userId,
+	) {
 		parent::__construct($appName, $request);
 	}
 

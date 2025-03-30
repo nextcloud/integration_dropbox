@@ -132,7 +132,7 @@ class DropboxAPIService {
 					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . ($result['error'] ?? '')];
 				}
 			}
-			$this->logger->warning('Dropbox API error : '.$e->getMessage(), ['app' => $this->appName]);
+			$this->logger->warning('Dropbox API error : ' . $e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
 		}
 	}
@@ -186,7 +186,7 @@ class DropboxAPIService {
 			if ($response->getStatusCode() === 401) {
 				if ($try > 3) {
 					// impossible to refresh the token
-					$this->logger->info('Received the following response upon trying to download a file: '. $response->getBody()->getContents());
+					$this->logger->info('Received the following response upon trying to download a file: ' . $response->getBody()->getContents());
 					return ['error' => $this->l10n->t('Could not access file due to failed authentication.')];
 				}
 				$this->logger->info('Trying to REFRESH the access token', ['app' => $this->appName]);
@@ -206,13 +206,13 @@ class DropboxAPIService {
 					return ['error' => $this->l10n->t('Token is not valid anymore. Impossible to refresh it.') . ' ' . ($result['error'] ?? '')];
 				}
 			}
-			$this->logger->warning('Dropbox API error : '.$e->getMessage(), ['app' => $this->appName]);
+			$this->logger->warning('Dropbox API error : ' . $e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
 		} catch (ConnectException $e) {
-			$this->logger->warning('Dropbox API connection error : '.$e->getMessage(), ['app' => $this->appName]);
+			$this->logger->warning('Dropbox API connection error : ' . $e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
 		} catch (Exception|Throwable $e) {
-			$this->logger->warning('Dropbox API connection error : '.$e->getMessage(), ['app' => $this->appName]);
+			$this->logger->warning('Dropbox API connection error : ' . $e->getMessage(), ['app' => $this->appName]);
 			return ['error' => $e->getMessage()];
 		}
 	}
@@ -229,7 +229,7 @@ class DropboxAPIService {
 			$url = 'https://api.dropboxapi.com/oauth2/token';
 			$options = [
 				'headers' => [
-					'Authorization' => 'Basic '. base64_encode($clientID. ':' . $clientSecret),
+					'Authorization' => 'Basic ' . base64_encode($clientID . ':' . $clientSecret),
 					'User-Agent' => 'Nextcloud Dropbox integration'
 				],
 			];
@@ -266,7 +266,7 @@ class DropboxAPIService {
 				return json_decode($body, true);
 			}
 		} catch (ClientException $e) {
-			$this->logger->warning('Dropbox OAuth error : '.$e->getMessage(), ['app' => $this->appName]);
+			$this->logger->warning('Dropbox OAuth error : ' . $e->getMessage(), ['app' => $this->appName]);
 			$result = ['error' => $e->getMessage()];
 
 			$response = $e->getResponse();

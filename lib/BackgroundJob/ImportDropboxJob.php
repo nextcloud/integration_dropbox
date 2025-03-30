@@ -22,7 +22,7 @@ class ImportDropboxJob extends QueuedJob {
 	public function __construct(
 		ITimeFactory $timeFactory,
 		private DropboxStorageAPIService $service,
-		private IConfig $config
+		private IConfig $config,
 	) {
 		parent::__construct($timeFactory);
 	}

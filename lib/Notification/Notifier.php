@@ -22,7 +22,8 @@ class Notifier implements INotifier {
 		protected IFactory $factory,
 		protected IUserManager $userManager,
 		protected INotificationManager $notificationManager,
-		protected IURLGenerator $url) {
+		protected IURLGenerator $url,
+	) {
 	}
 
 	/**
