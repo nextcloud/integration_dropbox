@@ -2,6 +2,9 @@ OC.L10N.register(
     "integration_dropbox",
     {
     "Dropbox" : "Dropbox",
+    "Bad HTTP method" : "Vigane HTTP-meetod",
+    "Bad credentials" : "Vale kasutajanimi, salasõna või tunnusluba",
+    "Connected accounts" : "Ühendatud kasutajakontod",
     "App key" : "Rakenduse võti",
     "App secret" : "Rakenduse salasõna",
     "Authentication" : "Autentimine"
