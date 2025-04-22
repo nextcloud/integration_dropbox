@@ -4,6 +4,7 @@ OC.L10N.register(
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Dårlig HTTP metode",
     "Bad credentials" : "Forkerte legitimationsoplysninger",
+    "OAuth access token refused" : "OAuth adgang token nægtet",
     "Connected accounts" : "Forbundne konti",
     "App key" : "App nøgle",
     "App secret" : "App hemmelighed",
