@@ -8,6 +8,7 @@ OC.L10N.register(
     "Data migration" : "Uhamishaji wa data ",
     "Starting importing files in {targetPath} directory" : "Imeanza kuingiza faili katika {targetPath}saraka",
     "Choose where to write imported files" : "Chagua mahali pa kuandika faili zilizoingizwa",
+    "Authentication" : "Uthibitisho",
     "Import directory" : "Ingiza saraka",
     "Import job is currently running" : "Kazi ya uingizaji inafanya kazi sasa"
 },
