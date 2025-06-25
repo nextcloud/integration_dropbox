@@ -47,7 +47,7 @@ OC.L10N.register(
     "Import Dropbox files" : "Dropbox fájlok importálása",
     "Import job is currently running" : "Az importálási feladat jelenleg fut",
     "An error occured during the import: {error}" : "Hiba történt az importálás során: {error}",
-    "Cancel Dropbox files import" : "Dropbox fájl import megszakítás",
+    "Cancel Dropbox files import" : "Dropbox fájlok importálásának megszakítása",
     "Your Dropbox storage is empty" : "A Dropbox tárhely üres",
     "_{amount} file imported_::_{amount} files imported_" : ["{amount} fájl importálva","{amount} fájl importálva"]
 },
