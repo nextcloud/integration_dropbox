@@ -4,6 +4,7 @@ OC.L10N.register(
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Vigane HTTP-meetod",
     "Bad credentials" : "Vale kasutajanimi, salasõna või tunnusluba",
+    "OAuth access token refused" : "OAuthi tunnusluba pole õige.",
     "Connected accounts" : "Ühendatud kasutajakontod",
     "App key" : "Rakenduse võti",
     "App secret" : "Rakenduse salasõna",
