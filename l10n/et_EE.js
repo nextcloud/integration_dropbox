@@ -8,6 +8,8 @@ OC.L10N.register(
     "Connected accounts" : "Ühendatud kasutajakontod",
     "App key" : "Rakenduse võti",
     "App secret" : "Rakenduse salasõna",
-    "Authentication" : "Autentimine"
+    "Choose where to write imported files" : "Vali, kuhu soovid salvestada imporditud failid",
+    "Authentication" : "Autentimine",
+    "Import directory" : "Impordi kaust"
 },
 "nplurals=2; plural=(n != 1);");
