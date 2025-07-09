@@ -6,6 +6,8 @@ OC.L10N.register(
     "OAuth access token refused" : "Ufikiaji wa token za OAuth umekataliwa",
     "Connected accounts" : "Akaunti zilizounganishwa",
     "Data migration" : "Uhamishaji wa data ",
+    "App key" : "App key",
+    "App secret" : "App secret",
     "Starting importing files in {targetPath} directory" : "Imeanza kuingiza faili katika {targetPath}saraka",
     "Choose where to write imported files" : "Chagua mahali pa kuandika faili zilizoingizwa",
     "Authentication" : "Uthibitisho",
