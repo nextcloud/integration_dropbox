@@ -121,12 +121,12 @@
 
 <script>
 import InformationOutlineIcon from 'vue-material-design-icons/InformationOutline.vue'
-import CheckIcon from 'vue-material-design-icons/Check.vue'
+import CheckIcon from 'vue-material-design-icons/CheckOutline.vue'
 import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
-import PencilIcon from 'vue-material-design-icons/Pencil.vue'
-import CloseIcon from 'vue-material-design-icons/Close.vue'
-import FolderIcon from 'vue-material-design-icons/Folder.vue'
-import KeyIcon from 'vue-material-design-icons/Key.vue'
+import PencilIcon from 'vue-material-design-icons/PencilOutline.vue'
+import CloseIcon from 'vue-material-design-icons/CloseOutline.vue'
+import FolderIcon from 'vue-material-design-icons/FolderOutline.vue'
+import KeyIcon from 'vue-material-design-icons/KeyOutline.vue'
 
 import DropboxIcon from './icons/DropboxIcon.vue'
 
