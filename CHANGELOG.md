@@ -8,6 +8,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0] - 2025-07-10
+
+### Breaking changes
+
+- Drop support for Nextcloud < 30
+
+### New
+
+- Add support for Nextcloud 32
+
+### Changed
+
+- Use outline-style icons where possible
+
+### Fixed
+
+- Fix(l10n): Update translations from Transifex
+
 ## [3.1.0] - 2024-11-11
 
 ### New
