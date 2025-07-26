@@ -6,6 +6,7 @@ OC.L10N.register(
     "Bad credentials" : "Погані облікові дані",
     "OAuth access token refused" : "Токен доступу OAuth відхилено",
     "Connected accounts" : "Підключені облікові записи",
+    "Data migration" : "Перенесення даних",
     "App key" : "Ключ застосунку",
     "App secret" : "Секретний ключ застосунку",
     "Authentication" : "Авторизація",
