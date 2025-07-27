@@ -11,6 +11,7 @@ OC.L10N.register(
     "Starting importing files in {targetPath} directory" : "Imeanza kuingiza faili katika {targetPath}saraka",
     "Choose where to write imported files" : "Chagua mahali pa kuandika faili zilizoingizwa",
     "Authentication" : "Uthibitisho",
+    "Connected as {user} ({email})" : "Connected as {user} ({email})",
     "Import directory" : "Ingiza saraka",
     "Import job is currently running" : "Kazi ya uingizaji inafanya kazi sasa"
 },
