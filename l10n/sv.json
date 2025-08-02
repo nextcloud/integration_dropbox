@@ -1,13 +1,31 @@
 { "translations": {
+    "Invalid access code" : "Ogiltig åtkomstkod",
     "Dropbox" : "Dropbox",
     "Bad HTTP method" : "Felaktig HTTP-metod",
     "Bad credentials" : "Ogiltiga inloggningsuppgifter",
     "OAuth access token refused" : "OAuth-token avvisades",
     "Connected accounts" : "Anslutna konton",
     "Data migration" : "Datamigrering",
+    "Dropbox integration" : "Dropbox-integration",
     "App key" : "Appnyckel",
+    "Your Dropbox application key" : "Din programnyckel för Dropbox",
     "App secret" : "Apphemlighet",
+    "Your Dropbox application secret" : "Din programhemlighet för Dropbox",
+    "Successfully connected to Dropbox!" : "Ansluten till Dropbox!",
+    "Failed to connect to Dropbox" : "Misslyckades med att ansluta till Dropbox",
+    "Choose where to write imported files" : "Välj var importerade filer ska skrivas",
     "Authentication" : "Autentisering",
-    "Connected as {user} ({email})" : "Ansluten som {user} ({email})"
+    "Connect to Dropbox to get an access code" : "Anslut till Dropbox för att få en åtkomstkod",
+    "Dropbox access code" : "Åtkomstkod för Dropbox",
+    "Access code" : "Åtkomstkod",
+    "Connected as {user} ({email})" : "Ansluten som {user} ({email})",
+    "Disconnect from Dropbox" : "Koppla från Dropbox",
+    "Dropbox storage" : "Dropbox-lagring",
+    "Import directory" : "Importera katalog",
+    "Dropbox storage size: {formSize}" : "Storlek för Dropbox-lagring: {formSize}",
+    "Import Dropbox files" : "Importera Dropbox-filer",
+    "Cancel Dropbox files import" : "Avbryt import av Dropbox-filer",
+    "Your Dropbox storage is empty" : "Din Dropbox-lagring är tom",
+    "_{amount} file imported_::_{amount} files imported_" : ["{amount} fil importerad","{amount} filer importerade"]
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
