@@ -6,6 +6,7 @@ OC.L10N.register(
     "Bad credentials" : "Forkerte legitimationsoplysninger",
     "OAuth access token refused" : "OAuth adgangsnøgle afvist",
     "Connected accounts" : "Forbundne konti",
+    "Data migration" : "Datamigration",
     "App key" : "App nøgle",
     "App secret" : "App hemmelighed",
     "Authentication" : "Godkendelse",
