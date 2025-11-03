@@ -1,13 +1,22 @@
 { "translations": {
     "Dropbox" : "Dropbox",
+    "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["%n fail on imporditud Dropboxi andmeruumist.","%n faili on imporditud Dropboxi andmeruumist."],
     "Bad HTTP method" : "Vigane HTTP-meetod",
     "Bad credentials" : "Vale kasutajanimi, salasõna või tunnusluba",
     "OAuth access token refused" : "OAuthi tunnusluba pole õige.",
     "Connected accounts" : "Ühendatud kasutajakontod",
     "App key" : "Rakenduse võti",
+    "Your Dropbox application key" : "Sinu Dropboxi rakenduse võti",
     "App secret" : "Rakenduse salasõna",
+    "Your Dropbox application secret" : "Sinu Dropboxi rakenduse saladus",
     "Choose where to write imported files" : "Vali, kuhu soovid salvestada imporditud failid",
     "Authentication" : "Autentimine",
-    "Import directory" : "Impordi kaust"
+    "Import directory" : "Impordikaust",
+    "Dropbox storage size: {formSize}" : "Dropboxi andmeruumi maht: {formSize}",
+    "Import Dropbox files" : "Impordi Drpboxi faile",
+    "An error occured during the import: {error}" : "Importimisel tekkis viga: {error}",
+    "Cancel Dropbox files import" : "Katkesta Dropboxi failide import",
+    "Your Dropbox storage is empty" : "Sinu Dropboxi andmeruum on tühi",
+    "_{amount} file imported_::_{amount} files imported_" : ["{amount} fail on imporditud","{amount} faili on imporditud"]
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
