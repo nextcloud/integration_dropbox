@@ -11,7 +11,7 @@ OC.L10N.register(
     "OAuth access token refused" : "OAuth-Zugriffstoken abgelehnt",
     "Connected accounts" : "Verbundene Konten",
     "Data migration" : "Datenmigration",
-    "Dropbox integration" : "Dropbox-Integration",
+    "Dropbox integration" : "Dropbox-Einbindung",
     "Import Dropbox data in Nextcloud" : "Dropbox-Daten nach Nextcloud importieren",
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "Mit der Dropbox-Integration können Sie Ihre Dropbox-Dateien automatisch in Nextcloud importieren.",
     "Dropbox admin options saved" : "Dropbox Administrationseinstellungen gespeichert",
