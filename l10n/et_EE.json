@@ -5,6 +5,7 @@
     "Bad credentials" : "Vale kasutajanimi, salasõna või tunnusluba",
     "OAuth access token refused" : "OAuthi tunnusluba pole õige.",
     "Connected accounts" : "Ühendatud kasutajakontod",
+    "Data migration" : "Andmete ümbertõstmine",
     "App key" : "Rakenduse võti",
     "Your Dropbox application key" : "Sinu Dropboxi rakenduse võti",
     "App secret" : "Rakenduse salasõna",
