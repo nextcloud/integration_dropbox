@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Invalid access code" : "زىيارەت كودى ئىناۋەتسىز",
     "Dropbox" : "Dropbox",
+    "_%n file was imported from Dropbox storage._::_%n files were imported from Dropbox storage._" : ["Dropbox ساقلىغۇچتىن %n ھۆججەت كىرگۈزۈلدى","Dropbox ساقلىغۇچتىن %n ھۆججەت كىرگۈزۈلدى"],
     "Bad HTTP method" : "ناچار HTTP ئۇسۇلى",
     "Bad credentials" : "ناچار كىنىشكا",
     "Token is not valid anymore. Impossible to refresh it." : "توكەن كۈچكە ئىگە ئەمەس. ئۇنى يېڭىلاش مۇمكىن ئەمەس.",
@@ -51,6 +52,7 @@ OC.L10N.register(
     "Import job is currently running" : "ھازىر ئىمپورت خىزمىتى ئىجرا بولۇۋاتىدۇ",
     "An error occured during the import: {error}" : "ئىمپورت جەريانىدا خاتالىق كۆرۈلدى: {error}",
     "Cancel Dropbox files import" : "Dropbox ھۆججەتلىرىنى ئىمپورت قىلىشنى ئەمەلدىن قالدۇرۇڭ",
-    "Your Dropbox storage is empty" : "Dropbox ساقلاش بوشلۇقىڭىز قۇرۇق"
+    "Your Dropbox storage is empty" : "Dropbox ساقلاش بوشلۇقىڭىز قۇرۇق",
+    "_{amount} file imported_::_{amount} files imported_" : ["{amount} ھۆججەت كىرگۈزۈلدى","{amount} ھۆججەت كىرگۈزۈلدى"]
 },
 "nplurals=2; plural=(n != 1);");
