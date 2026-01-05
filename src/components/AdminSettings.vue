@@ -8,61 +8,60 @@
 			<DropboxIcon class="icon" />
 			{{ t('integration_dropbox', 'Dropbox integration') }}
 		</h2>
-		<NcNoteCard type="info">
-			<p>
+		<div id="dropbox-content">
+			<NcNoteCard type="info">
 				{{ t('integration_dropbox', 'If you want your Nextcloud users to authenticate to Dropbox using your Dropbox OAuth app, create one in Dropbox.') }}
-			</p>
-			<a href="https://www.dropbox.com/developers/apps" class="external" target="_blank">
-				{{ t('integration_dropbox', 'Dropbox developer settings') }}
-			</a>
-			<p>
+				<br>
+				<a href="https://www.dropbox.com/developers/apps" class="external" target="_blank">
+					{{ t('integration_dropbox', 'Dropbox developer settings') }}
+				</a>
+				<br>
 				{{ t('integration_dropbox', 'Make sure your give those permissions to your app:') }}
-			</p>
-			<p>
+				<br>
 				<strong>account_info.read - files.metadata.read - files.content.read</strong>
-			</p>
-			<p>
+				<br>
 				{{ t('integration_dropbox', 'No need to add any redirect URI.') }}
 				{{ t('integration_dropbox', 'Then set the app key and app secret below.') }}
-			</p>
-		</NcNoteCard>
-		<div id="dropbox-content">
-			<div class="line">
-				<label for="dropbox-client-id">
-					<KeyIcon :size="20" class="icon" />
-					{{ t('integration_dropbox', 'App key') }}
-				</label>
-				<input id="dropbox-client-id"
-					v-model="state.client_id"
-					type="password"
-					:readonly="readonly"
-					:placeholder="t('integration_dropbox', 'Your Dropbox application key')"
-					@input="onInput"
-					@focus="readonly = false">
-			</div>
-			<div class="line">
-				<label for="dropbox-client-secret">
-					<KeyIcon :size="20" class="icon" />
-					{{ t('integration_dropbox', 'App secret') }}
-				</label>
-				<input id="dropbox-client-secret"
-					v-model="state.client_secret"
-					type="password"
-					:readonly="readonly"
-					:placeholder="t('integration_dropbox', 'Your Dropbox application secret')"
-					@input="onInput"
-					@focus="readonly = false">
-			</div>
+			</NcNoteCard>
+			<NcTextField
+				v-model="state.client_id"
+				type="password"
+				:label="t('integration_dropbox', 'App key')"
+				:placeholder="t('integration_dropbox', 'Your Dropbox application key')"
+				:readonly="readonly"
+				:show-trailing-button="!!state.client_id"
+				@trailing-button-click="state.client_id = ''; onInput()"
+				@focus="readonly = false"
+				@update:model-value="onInput">
+				<template #icon>
+					<KeyOutlineIcon :size="20" />
+				</template>
+			</NcTextField>
+			<NcTextField
+				v-model="state.client_secret"
+				type="password"
+				:label="t('integration_dropbox', 'App secret')"
+				:placeholder="t('integration_dropbox', 'Your Dropbox application secret')"
+				:readonly="readonly"
+				:show-trailing-button="!!state.client_secret"
+				@trailing-button-click="state.client_secret = ''; onInput()"
+				@focus="readonly = false"
+				@update:model-value="onInput">
+				<template #icon>
+					<KeyOutlineIcon :size="20" />
+				</template>
+			</NcTextField>
 		</div>
 	</div>
 </template>
 
 <script>
-import KeyIcon from 'vue-material-design-icons/KeyOutline.vue'
+import KeyOutlineIcon from 'vue-material-design-icons/KeyOutline.vue'
 
 import DropboxIcon from './icons/DropboxIcon.vue'
 
 import NcNoteCard from '@nextcloud/vue/components/NcNoteCard'
+import NcTextField from '@nextcloud/vue/components/NcTextField'
 
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
@@ -76,8 +75,9 @@ export default {
 
 	components: {
 		DropboxIcon,
-		KeyIcon,
+		KeyOutlineIcon,
 		NcNoteCard,
+		NcTextField,
 	},
 
 	props: [],
@@ -128,33 +128,18 @@ export default {
 
 <style scoped lang="scss">
 #dropbox_prefs {
-	#dropbox-content{
-		margin-left: 40px;
-	}
-
-	h2,
-	.line,
-	.settings-hint {
+	h2 {
 		display: flex;
 		align-items: center;
-		.icon {
-			margin-right: 4px;
-		}
+		justify-content: start;
+		gap: 8px;
 	}
-
-	h2 .icon {
-		margin-right: 8px;
-	}
-
-	.line {
-		> label {
-			width: 300px;
-			display: flex;
-			align-items: center;
-		}
-		> input {
-			width: 250px;
-		}
+	#dropbox-content{
+		margin-left: 40px;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		max-width: 800px;
 	}
 }
 </style>
