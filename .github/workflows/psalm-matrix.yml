@@ -56,10 +56,12 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up php${{ matrix.php-versions }}
+      #- name: Set up php${{ matrix.php-versions }}
+      - name: Set up php8.2
         uses: shivammathur/setup-php@cf4cade2721270509d5b1c766ab3549210a39a2a # v2.33.0
         with:
-          php-version: ${{ matrix.php-versions }}
+          #php-version: ${{ matrix.php-versions }}
+          php-version: 8.2
           extensions: bz2, ctype, curl, dom, fileinfo, gd, iconv, intl, json, libxml, mbstring, openssl, pcntl, posix, session, simplexml, xmlreader, xmlwriter, zip, zlib, sqlite, pdo_sqlite
           coverage: none
           ini-file: development
