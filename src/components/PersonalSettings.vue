@@ -130,8 +130,8 @@ import KeyIcon from 'vue-material-design-icons/KeyOutline.vue'
 
 import DropboxIcon from './icons/DropboxIcon.vue'
 
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
-import NcNoteCard from '@nextcloud/vue/dist/Components/NcNoteCard.js'
+import NcButton from '@nextcloud/vue/components/NcButton'
+import NcNoteCard from '@nextcloud/vue/components/NcNoteCard'
 
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
