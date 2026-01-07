@@ -8,20 +8,16 @@
 			<DropboxIcon />
 			{{ t('integration_dropbox', 'Dropbox data migration') }}
 		</h2>
-		<NcNoteCard v-if="!isAdminConfigured" type="info">
-			{{ t('integration_dropbox', 'Your administrator has not yet configured this integration.') }}
-		</NcNoteCard>
+		<div v-if="!isAdminConfigured" class="dropbox-content">
+			<NcNoteCard type="info">
+				{{ t('integration_dropbox', 'Your administrator has not yet configured this integration.') }}
+			</NcNoteCard>
+		</div>
 		<div v-else class="dropbox-content">
-			<h3>{{ t('integration_dropbox', 'Authentication') }}</h3>
 			<div v-if="!connected">
-				<br>
-				<p class="settings-hint">
-					<span v-if="codeFailed" class="line">
-						<InformationOutlineIcon />
-						{{ t('integration_dropbox', 'If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings.') }}
-					</span>
-				</p>
-				<br>
+				<NcNoteCard v-if="codeFailed" type="info">
+					{{ t('integration_dropbox', 'If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings.') }}
+				</NcNoteCard>
 				<a target="_blank"
 					:href="oauthUrl">
 					<NcButton :class="{ loading: codeLoading }"
@@ -32,20 +28,18 @@
 						{{ t('integration_dropbox', 'Connect to Dropbox to get an access code') }}
 					</NcButton>
 				</a>
-				<br><br>
-				<div class="line">
-					<label for="dropbox-code">
-						<KeyIcon />
-						{{ t('integration_dropbox', 'Dropbox access code') }}
-					</label>
-					<input id="dropbox-code"
-						v-model="accessCode"
-						type="text"
-						:class="{ loading: codeLoading }"
-						:disabled="codeLoading === true"
-						:placeholder="t('integration_dropbox', 'Access code')"
-						@input="onAccessCodeInput">
-				</div>
+				<br>
+				<NcTextField
+					v-model="accessCode"
+					:label="t('integration_dropbox', 'Dropbox access code')"
+					:placeholder="t('integration_dropbox', 'Access code')"
+					:class="{ loading: codeLoading }"
+					:disabled="codeLoading === true"
+					@update:model-value="onAccessCodeInput">
+					<template #icon>
+						<KeyOutlineIcon :size="20" />
+					</template>
+				</NcTextField>
 			</div>
 			<div v-else>
 				<div class="line">
@@ -120,18 +114,18 @@
 </template>
 
 <script>
-import InformationOutlineIcon from 'vue-material-design-icons/InformationOutline.vue'
 import CheckIcon from 'vue-material-design-icons/Check.vue'
 import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
 import PencilIcon from 'vue-material-design-icons/PencilOutline.vue'
 import CloseIcon from 'vue-material-design-icons/Close.vue'
 import FolderIcon from 'vue-material-design-icons/FolderOutline.vue'
-import KeyIcon from 'vue-material-design-icons/KeyOutline.vue'
+import KeyOutlineIcon from 'vue-material-design-icons/KeyOutline.vue'
 
 import DropboxIcon from './icons/DropboxIcon.vue'
 
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
-import NcNoteCard from '@nextcloud/vue/dist/Components/NcNoteCard.js'
+import NcButton from '@nextcloud/vue/components/NcButton'
+import NcNoteCard from '@nextcloud/vue/components/NcNoteCard'
+import NcTextField from '@nextcloud/vue/components/NcTextField'
 
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
@@ -147,13 +141,13 @@ export default {
 		DropboxIcon,
 		NcButton,
 		NcNoteCard,
+		NcTextField,
 		OpenInNewIcon,
 		PencilIcon,
 		CloseIcon,
 		FolderIcon,
-		KeyIcon,
+		KeyOutlineIcon,
 		CheckIcon,
-		InformationOutlineIcon,
 	},
 
 	props: [],
@@ -354,17 +348,19 @@ export default {
 
 <style scoped lang="scss">
 #dropbox_prefs {
-
 	h2 {
 		display: flex;
 		align-items: center;
-		span {
-			margin-right: 8px;
-		}
+		justify-content: start;
+		gap: 8px
 	}
 
 	.dropbox-content {
 		margin-left: 40px;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		max-width: 800px;
 
 		h3 {
 			font-weight: bold;
