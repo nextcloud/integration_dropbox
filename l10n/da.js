@@ -9,7 +9,6 @@ OC.L10N.register(
     "Data migration" : "Datamigrering",
     "App key" : "App nøgle",
     "App secret" : "App hemmelighed",
-    "Authentication" : "Godkendelse",
     "Connected as {user} ({email})" : "Forbundet som {user} ({email})"
 },
 "nplurals=2; plural=(n != 1);");

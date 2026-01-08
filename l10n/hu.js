@@ -35,7 +35,6 @@ OC.L10N.register(
     "Failed to start importing Dropbox storage" : "Nem sikerült a Dropbox tárhelyből történő importálás elindítása",
     "Choose where to write imported files" : "Válassza ki az importált fájlok helyét",
     "Dropbox data migration" : "Dropbox adatmigráció",
-    "Authentication" : "Hitelesítés",
     "Connect to Dropbox to get an access code" : "Kapcsolódjon a Dropboxhoz, hogy megkapja a hozzáférési kódot",
     "Dropbox access code" : "Dropbox hozzáférési kód",
     "Access code" : "Hozzáférési kód",

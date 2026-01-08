@@ -37,7 +37,6 @@ OC.L10N.register(
     "Choose where to write imported files" : "Επιλέξτε πού να γράψετε τα εισαγόμενα αρχεία",
     "Dropbox data migration" : "Μετεγκατάσταση δεδομένων Dropbox",
     "Your administrator has not yet configured this integration." : "Ο διαχειριστής σας δεν έχει ρυθμίσει ακόμα αυτή την ενσωμάτωση.",
-    "Authentication" : "Πιστοποίηση",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Εάν έχετε προβλήματα με την πιστοποίηση, ζητήστε από τον διαχειριστή του Nextcloud να ελέγξει τις ρυθμίσεις διαχειριστή Dropbox.",
     "Connect to Dropbox to get an access code" : "Συνδεθείτε στο Dropbox για να λάβετε έναν κωδικό πρόσβασης",
     "Dropbox access code" : "Κωδικός πρόσβασης Dropbox",

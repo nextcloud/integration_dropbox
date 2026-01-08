@@ -14,7 +14,6 @@
     "Starting importing files in {targetPath} directory" : "Почеток на увоз на датотеки во папката {targetPath}",
     "Choose where to write imported files" : "Избери каде да ги увезете датотеките",
     "Dropbox data migration" : "Мигрирање на податоци од Dropbox ",
-    "Authentication" : "Автентикација",
     "Connect to Dropbox to get an access code" : "Поврзи се на Dropbox за пристапен код",
     "Dropbox access code" : "Dropbox код за пристап",
     "Connected as {user} ({email})" : "Поврзан како {user} ({email})",

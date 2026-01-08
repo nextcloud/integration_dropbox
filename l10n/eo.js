@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Dropbox" : "Dropbox",
     "App key" : "Aplikaĵa ŝlosilo",
-    "App secret" : "Aplikaĵosekreto",
-    "Authentication" : "Aŭtentigo"
+    "App secret" : "Aplikaĵosekreto"
 },
 "nplurals=2; plural=(n != 1);");

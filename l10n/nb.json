@@ -33,7 +33,6 @@
     "Failed to start importing Dropbox storage" : "Kunne ikke begynne å importere Dropbox-lagring",
     "Choose where to write imported files" : "Velg hvor du vil skrive importerte filer",
     "Dropbox data migration" : "Dropbox-datamigrering",
-    "Authentication" : "Autentisering",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Hvis du har problemer med å autentisere, kan du be Nextcloud-administratoren om å sjekke administratorinnstillingene for Dropbox.",
     "Connect to Dropbox to get an access code" : "Koble til Dropbox for å få en aksesskode",
     "Dropbox access code" : "Dropbox-aksesskode",

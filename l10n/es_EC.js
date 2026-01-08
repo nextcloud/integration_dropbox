@@ -35,7 +35,6 @@ OC.L10N.register(
     "Failed to start importing Dropbox storage" : "Error al iniciar la importación del almacenamiento de Dropbox",
     "Choose where to write imported files" : "Elige dónde escribir los archivos importados",
     "Dropbox data migration" : "Migración de datos de Dropbox",
-    "Authentication" : "Autenticación",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Si tienes problemas para autenticarte, pídele al administrador de Nextcloud que verifique la configuración de administración de Dropbox.",
     "Connect to Dropbox to get an access code" : "Conéctate a Dropbox para obtener un código de acceso",
     "Dropbox access code" : "Código de acceso de Dropbox",

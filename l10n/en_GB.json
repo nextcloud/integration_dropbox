@@ -35,7 +35,6 @@
     "Choose where to write imported files" : "Choose where to write imported files",
     "Dropbox data migration" : "Dropbox data migration",
     "Your administrator has not yet configured this integration." : "Your administrator has not yet configured this integration.",
-    "Authentication" : "Authentication",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings.",
     "Connect to Dropbox to get an access code" : "Connect to Dropbox to get an access code",
     "Dropbox access code" : "Dropbox access code",

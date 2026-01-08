@@ -12,7 +12,6 @@ OC.L10N.register(
     "App secret" : "Tajny klucz aplikacji",
     "Starting importing files in {targetPath} directory" : "Rozpoczynam importowanie plików w katalogu {targetPath}",
     "Choose where to write imported files" : "Wybierz, gdzie zapisać zaimportowane pliki",
-    "Authentication" : "Uwierzytelnienie",
     "Connected as {user} ({email})" : "Połączono jako {user} ({email})",
     "Import directory" : "Importuj katalog"
 },

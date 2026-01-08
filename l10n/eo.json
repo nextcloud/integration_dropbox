@@ -1,7 +1,6 @@
 { "translations": {
     "Dropbox" : "Dropbox",
     "App key" : "Aplikaĵa ŝlosilo",
-    "App secret" : "Aplikaĵosekreto",
-    "Authentication" : "Aŭtentigo"
+    "App secret" : "Aplikaĵosekreto"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

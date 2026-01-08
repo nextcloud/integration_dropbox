@@ -15,7 +15,6 @@
     "App secret" : "Секретный ключ ",
     "Starting importing files in {targetPath} directory" : "Начало импорта файлов в каталог {targetPath}",
     "Choose where to write imported files" : "Выберите, куда сохранять импортированные файлы",
-    "Authentication" : "Аутентификация",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Если у вас возникли проблемы с аутентификацией, попросите администратора Nextcloud проверить настройки администратора Dropbox.",
     "Connected as {user} ({email})" : "Подключено как {user} ({email})",
     "Import directory" : "Каталог импорта",

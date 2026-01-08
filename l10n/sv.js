@@ -16,7 +16,6 @@ OC.L10N.register(
     "Successfully connected to Dropbox!" : "Ansluten till Dropbox!",
     "Failed to connect to Dropbox" : "Misslyckades med att ansluta till Dropbox",
     "Choose where to write imported files" : "Välj var importerade filer ska skrivas",
-    "Authentication" : "Autentisering",
     "Connect to Dropbox to get an access code" : "Anslut till Dropbox för att få en åtkomstkod",
     "Dropbox access code" : "Åtkomstkod för Dropbox",
     "Access code" : "Åtkomstkod",

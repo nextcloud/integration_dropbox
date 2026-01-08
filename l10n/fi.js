@@ -23,7 +23,6 @@ OC.L10N.register(
     "Failed to connect to Dropbox" : "Yhdistäminen Dropboxiin epäonnistui",
     "Starting importing files in {targetPath} directory" : "Aloitetaan tiedostojen tuonti kohteeseen {targetPath}",
     "Choose where to write imported files" : "Valitse, mihin tiedostot tuodaan",
-    "Authentication" : "Tunnistautuminen",
     "Connect to Dropbox to get an access code" : "Yhdistä Dropboxiin saadaksesi pääsykoodin",
     "Dropbox access code" : "Dropboxin pääsykoodi",
     "Access code" : "Pääsykoodi",

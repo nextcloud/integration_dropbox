@@ -7,7 +7,6 @@ OC.L10N.register(
     "OAuth access token refused" : "Token-ul OAuth a fost refuzat",
     "Connected accounts" : "Conturile conectate",
     "App key" : "Cheie aplicație",
-    "App secret" : "Secret aplicație",
-    "Authentication" : "Autentificare"
+    "App secret" : "Secret aplicație"
 },
 "nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));");

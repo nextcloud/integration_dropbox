@@ -35,7 +35,6 @@
     "Choose where to write imported files" : "Изаберите где желите да увезете фајлове",
     "Dropbox data migration" : "Миграција Dropbox података",
     "Your administrator has not yet configured this integration." : "Ваш администратор још увек није конфигурисао ову интеграцију.",
-    "Authentication" : "Провера идентитета",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Ако имате проблама са аутентификацијом, замолите свог Nextcloud администратора да провери Dropbox админ подешавања.",
     "Connect to Dropbox to get an access code" : "Повежите се са Dropbox да добијете приступни кôд",
     "Dropbox access code" : "Dropbox приступни кôд",

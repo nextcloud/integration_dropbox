@@ -11,7 +11,6 @@ OC.L10N.register(
     "Data migration" : "数据迁移",
     "App key" : "App key",
     "App secret" : "应用程序 secret",
-    "Authentication" : "身份认证",
     "Connected as {user} ({email})" : "连接为 {user} ({email})",
     "Import directory" : "导入文件夹"
 },

@@ -13,7 +13,6 @@ OC.L10N.register(
     "App secret" : "Rakenduse salasõna",
     "Your Dropbox application secret" : "Sinu Dropboxi rakenduse saladus",
     "Choose where to write imported files" : "Vali, kuhu soovid salvestada imporditud failid",
-    "Authentication" : "Autentimine",
     "Import directory" : "Impordikaust",
     "Dropbox storage size: {formSize}" : "Dropboxi andmeruumi maht: {formSize}",
     "Import Dropbox files" : "Impordi Drpboxi faile",

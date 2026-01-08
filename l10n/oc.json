@@ -1,6 +1,5 @@
 { "translations": {
     "Bad credentials" : "Marrits identificants",
-    "Connected accounts" : "Comptes connectats",
-    "Authentication" : "Autentificacion"
+    "Connected accounts" : "Comptes connectats"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }

@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Dropbox" : "Dropbox",
     "App key" : "Proqram açarı",
-    "App secret" : "Proqram sirri",
-    "Authentication" : "Autentifikasiya"
+    "App secret" : "Proqram sirri"
 },
 "nplurals=2; plural=(n != 1);");

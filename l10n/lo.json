@@ -35,7 +35,6 @@
     "Choose where to write imported files" : "ເລືອກບ່ອນທີ່ຈະບັນທຶກໄຟລ໌ທີ່ນຳເຂົ້າ",
     "Dropbox data migration" : "ການຍ້າຍຂໍ້ມູນ Dropbox",
     "Your administrator has not yet configured this integration." : "ຜູ້ເບິ່ງແຍງລະບົບຂອງທ່ານຍັງບໍ່ທັນໄດ້ຕັ້ງຄ່າການເຊື່ອມໂຍງນີ້.",
-    "Authentication" : "ການຢືນຢັນຕົວຕົນ",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "ຖ້າທ່ານມີບັນຫາໃນການຢືນຢັນຕົວຕົນ, ໃຫ້ຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບ Nextcloud ຂອງທ່ານເພື່ອກວດສອບການຕັ້ງຄ່າຜູ້ເບິ່ງແຍງລະບົບ Dropbox.",
     "Connect to Dropbox to get an access code" : "ເຊື່ອມຕໍ່ກັບ Dropbox ເພື່ອຮັບລະຫັດເຂົ້າເຖິງ",
     "Dropbox access code" : "ລະຫັດເຂົ້າເຖິງ Dropbox",

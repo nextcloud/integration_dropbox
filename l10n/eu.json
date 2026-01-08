@@ -33,7 +33,6 @@
     "Failed to start importing Dropbox storage" : "Ezin izan da Dropbox biltegia inportatzen hasi",
     "Choose where to write imported files" : "Aukeratu non idatzi inportatutako fitxategiak",
     "Dropbox data migration" : "Dropbox datu migrazioa",
-    "Authentication" : "Autentifikazioa",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Autentifikatzeko arazoak baldin badauzkazu, galdegin zure Nextcloud administratzaileari Dropbox administratzaile ezarpenak begiratzeko.",
     "Connect to Dropbox to get an access code" : "Konektatu Dropboxekin, atzitzeko kode bat lortzeko.",
     "Dropbox access code" : "Dropbox sarbide-kodea",

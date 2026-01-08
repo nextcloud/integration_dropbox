@@ -37,7 +37,6 @@ OC.L10N.register(
     "Choose where to write imported files" : "選擇寫入導入檔案的位置",
     "Dropbox data migration" : "Dropbox 數據轉移",
     "Your administrator has not yet configured this integration." : "您的管理員尚未配置此整合。",
-    "Authentication" : "驗證",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "若您無法通過身份驗證，請要求您的 Nextcloud 管理員檢查 Dropbox 管理設定。",
     "Connect to Dropbox to get an access code" : "連線至 Dropbox 以取得存取代碼",
     "Dropbox access code" : "Dropbox 存取代碼",

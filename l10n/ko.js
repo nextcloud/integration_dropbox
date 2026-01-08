@@ -8,7 +8,6 @@ OC.L10N.register(
     "Connected accounts" : "계정 연결됨",
     "App key" : "앱 키",
     "App secret" : "앱 비밀 값",
-    "Authentication" : "인증",
     "Connected as {user} ({email})" : "{user} ({email})(으)로 연결됨"
 },
 "nplurals=1; plural=0;");

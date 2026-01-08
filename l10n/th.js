@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Dropbox" : "Dropbox",
     "App key" : "คีย์แอป",
-    "App secret" : "ข้อมูลลับแอป",
-    "Authentication" : "การตรวจสอบสิทธิ์"
+    "App secret" : "ข้อมูลลับแอป"
 },
 "nplurals=1; plural=0;");

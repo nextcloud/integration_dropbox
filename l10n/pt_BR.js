@@ -37,7 +37,6 @@ OC.L10N.register(
     "Choose where to write imported files" : "Escolha onde gravar os arquivos importados",
     "Dropbox data migration" : "Migração de dados Dropbox",
     "Your administrator has not yet configured this integration." : "Seu administrador ainda não configurou esta integração.",
-    "Authentication" : "Autenticação",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Se estiver com problemas de autenticação, solicite ao seu administrador Nextcloud para validar as configurações administrativas do Dropbox",
     "Connect to Dropbox to get an access code" : "Conecte ao Dropbox para obter o código de acesso",
     "Dropbox access code" : "Código de acesso Dropbox",

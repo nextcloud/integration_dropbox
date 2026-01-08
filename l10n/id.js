@@ -7,7 +7,6 @@ OC.L10N.register(
     "OAuth access token refused" : "Token akses OAuth ditolak",
     "Connected accounts" : "Akun terhubung",
     "App key" : "Kunci Apl",
-    "App secret" : "Rahasia Apl",
-    "Authentication" : "Otentikasi"
+    "App secret" : "Rahasia Apl"
 },
 "nplurals=1; plural=0;");

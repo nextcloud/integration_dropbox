@@ -35,7 +35,6 @@
     "Choose where to write imported files" : "Chagua mahali pa kuandika faili zilizoingizwa",
     "Dropbox data migration" : "Uhamishaji wa data ya Dropbox",
     "Your administrator has not yet configured this integration." : "Msimamizi wako bado hajasanidi muunganisho huu.",
-    "Authentication" : "Uthibitisho",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Ikiwa unatatizika kuthibitisha, muulize msimamizi wako wa Nextcloud aangalie mipangilio ya msimamizi wa Dropbox.",
     "Connect to Dropbox to get an access code" : "Unganisha kwenye Dropbox ili upate msimbo wa ufikiaji",
     "Dropbox access code" : "Nambari ya ufikiaji ya Dropbox",

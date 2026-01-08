@@ -35,7 +35,6 @@
     "Choose where to write imported files" : "Vyberte kam zapísať importované súbory",
     "Dropbox data migration" : "Migrácia dáť Dropbox",
     "Your administrator has not yet configured this integration." : "Váš administrátor ešte nenastavil túto integráciu.",
-    "Authentication" : "Autentifikácia",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Ak máte problémy s autentifikáciou, požiadajte svojho správcu Nextcloud, aby skontroloval nastavenia administrátora aplikácie Dropbox.",
     "Connect to Dropbox to get an access code" : "Pripojiť k Dropboxu pre získanie prístupového Tokenu",
     "Dropbox access code" : "Prístupový kód Dropbox",

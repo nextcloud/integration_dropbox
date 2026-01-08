@@ -5,7 +5,6 @@ OC.L10N.register(
     "Bad HTTP method" : "Nederīgs HTTP pieprasījuma veids",
     "Bad credentials" : "Nederīgi pieteikšanās dati",
     "Connected accounts" : "Sasaistītie konti",
-    "App key" : "Lietotnes atslēga",
-    "Authentication" : "Autentifikācija"
+    "App key" : "Lietotnes atslēga"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);");

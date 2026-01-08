@@ -16,7 +16,6 @@ OC.L10N.register(
     "Successfully connected to Dropbox!" : "Sėkmingai prisijungta prie „Dropbox“!",
     "Failed to connect to Dropbox" : "Nepavyko prisijungti prie „Dropbox“",
     "Starting importing files in {targetPath} directory" : "Pradedamas failų importavimas į {targetPath} katalogą",
-    "Authentication" : "Tapatybės nustatymas",
     "Dropbox access code" : "„Dropbox“ prieigos kodas",
     "Access code" : "Prieigos kodas",
     "Connected as {user} ({email})" : "Prisijungta kaip {user} ({email})",

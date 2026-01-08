@@ -35,7 +35,6 @@
     "Choose where to write imported files" : "Виберіть, куди записувати імпортовані файли",
     "Dropbox data migration" : "Перенесення даних з Dropbox",
     "Your administrator has not yet configured this integration." : "Ваш адміністратор ще не налаштував цю інтеграцію.",
-    "Authentication" : "Авторизація",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Якщо у вас виникли проблеми з автентифікацією, попросіть адміністратора Nextcloud перевірити налаштування адміністратора Dropbox.",
     "Connect to Dropbox to get an access code" : "Підключіться до Dropbox, щоб отримати код доступу",
     "Dropbox access code" : "Код доступу до Dropbox",
