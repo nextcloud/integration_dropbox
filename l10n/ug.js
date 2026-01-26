@@ -41,7 +41,7 @@ OC.L10N.register(
     "Connect to Dropbox to get an access code" : "زىيارەت كودىغا ئېرىشىش ئۈچۈن Dropbox غا ئۇلاڭ",
     "Dropbox access code" : "Dropbox زىيارەت كودى",
     "Access code" : "زىيارەت كودى",
-    "Connected as {user} ({email})" : "{user} ({email} خەت}) قىلىپ ئۇلاندى",
+    "Connected as {user} ({email})" : "{user} ({email}) قىلىپ ئۇلاندى",
     "Disconnect from Dropbox" : "Dropbox دىن ئۈزۈڭ",
     "Dropbox storage" : "Dropbox ساقلاش",
     "Import directory" : "مۇندەرىجە ئەكىرىڭ",
