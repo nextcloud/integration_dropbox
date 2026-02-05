@@ -16,7 +16,7 @@ OC.L10N.register(
     "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "Інтеграція з Dropbox дозволяє автоматично імпортувати файли з Dropbox у Nextcloud.",
     "Dropbox admin options saved" : "Параметри адміністрування Dropbox збережено",
     "Failed to save Dropbox admin options" : "Не вдалося зберегти параметри адміністрування Dropbox",
-    "If you want your Nextcloud users to authenticate to Dropbox using your Dropbox OAuth app, create one in Dropbox." : "Якщо ви хочете, щоб користувачі Nextcloud авторизувалися в Dropbox за допомогою вашого додатка Dropbox OAuth, створіть його в Dropbox.",
+    "If you want your Nextcloud users to authenticate to Dropbox using your Dropbox OAuth app, create one in Dropbox." : "Якщо ви бажаєте, щоб користувачі Nextcloud змогли входити до Dropbox за допомогою вашого застосунку Dropbox OAuth, вам потрібно його додати у Dropbox.",
     "Dropbox developer settings" : "Налаштування розробника Dropbox",
     "Make sure your give those permissions to your app:" : "Переконайтеся, що ви надали ці дозволи своєму додатку:",
     "No need to add any redirect URI." : "Не потрібно додавати URI перенаправлення.",
