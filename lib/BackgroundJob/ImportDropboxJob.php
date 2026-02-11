@@ -12,7 +12,7 @@ use OCA\Dropbox\Service\DropboxStorageAPIService;
 use OCP\AppFramework\Utility\ITimeFactory;
 
 use OCP\BackgroundJob\QueuedJob;
-use OCP\IConfig;
+use OCP\Config\IUserConfig;
 
 class ImportDropboxJob extends QueuedJob {
 
@@ -22,7 +22,7 @@ class ImportDropboxJob extends QueuedJob {
 	public function __construct(
 		ITimeFactory $timeFactory,
 		private DropboxStorageAPIService $service,
-		private IConfig $config,
+		private IUserConfig $userConfig,
 	) {
 		parent::__construct($timeFactory);
 	}
@@ -36,7 +36,7 @@ class ImportDropboxJob extends QueuedJob {
 		try {
 			$this->service->importDropboxJob($userId);
 		} catch (\Exception|\Throwable $e) {
-			$this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', $e->getMessage());
+			$this->userConfig->setValueString($userId, Application::APP_ID, 'last_import_error', $e->getMessage(), lazy: true);
 		}
 	}
 }

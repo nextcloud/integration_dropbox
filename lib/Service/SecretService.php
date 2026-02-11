@@ -8,16 +8,16 @@
 namespace OCA\Dropbox\Service;
 
 use OCA\Dropbox\AppInfo\Application;
-use OCP\IConfig;
+use OCP\AppFramework\Services\IAppConfig;
+use OCP\Config\IUserConfig;
 use OCP\IUserManager;
 use OCP\PreConditionNotMetException;
-use OCP\Security\ICrypto;
 
 class SecretService {
 	public function __construct(
-		private IConfig $config,
+		private IAppConfig $appConfig,
+		private IUserConfig $userConfig,
 		private IUserManager $userManager,
-		private ICrypto $crypto,
 	) {
 	}
 
@@ -30,11 +30,10 @@ class SecretService {
 	 */
 	public function setEncryptedUserValue(string $userId, string $key, string $value): void {
 		if ($value === '') {
-			$this->config->setUserValue($userId, Application::APP_ID, $key, '');
+			$this->userConfig->setValueString($userId, Application::APP_ID, $key, '');
 			return;
 		}
-		$encryptedValue = $this->crypto->encrypt($value);
-		$this->config->setUserValue($userId, Application::APP_ID, $key, $encryptedValue);
+		$this->userConfig->setValueString($userId, Application::APP_ID, $key, $value, lazy: true, flags: IUserConfig::FLAG_SENSITIVE);
 	}
 
 	/**
@@ -44,11 +43,7 @@ class SecretService {
 	 * @throws \Exception
 	 */
 	public function getEncryptedUserValue(string $userId, string $key): string {
-		$storedValue = $this->config->getUserValue($userId, Application::APP_ID, $key);
-		if ($storedValue === '') {
-			return '';
-		}
-		return $this->crypto->decrypt($storedValue);
+		return $this->userConfig->getValueString($userId, Application::APP_ID, $key);
 	}
 
 	/**
@@ -57,12 +52,7 @@ class SecretService {
 	 * @return void
 	 */
 	public function setEncryptedAppValue(string $key, string $value): void {
-		if ($value === '') {
-			$this->config->setAppValue(Application::APP_ID, $key, '');
-			return;
-		}
-		$encryptedValue = $this->crypto->encrypt($value);
-		$this->config->setAppValue(Application::APP_ID, $key, $encryptedValue);
+		$this->appConfig->setAppValueString($key, $value, lazy: true, sensitive: true);
 	}
 
 	/**
@@ -71,10 +61,6 @@ class SecretService {
 	 * @throws \Exception
 	 */
 	public function getEncryptedAppValue(string $key): string {
-		$storedValue = $this->config->getAppValue(Application::APP_ID, $key);
-		if ($storedValue === '') {
-			return '';
-		}
-		return $this->crypto->decrypt($storedValue);
+		return $this->appConfig->getAppValueString($key);
 	}
 }
