@@ -122,7 +122,8 @@ jobs:
           echo CHECK "md5sum data/admin/files/Dropbox\ import/*"
           md5sum data/admin/files/Dropbox\ import/*
           echo END CHECKS
-          du -sh --apparent-size data/admin/files/Dropbox\ import/ | diff du-sh.expected.txt -
+          du -sh --apparent-size data/admin/files/Dropbox\ import/ > du-sh.result.txt
+          diff du-sh.expected.txt du-sh.result.txt
 
       - name: Show log on failure
         working-directory: server/
