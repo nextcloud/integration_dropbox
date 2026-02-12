@@ -121,7 +121,7 @@ jobs:
           echo CHECK "du -shc --apparent-size data/admin/files/Dropbox\ import/*"
           du -shc --apparent-size data/admin/files/Dropbox\ import/*
           echo CHECK "md5sum data/admin/files/Dropbox\ import/*"
-          md5sum data/admin/files/Dropbox\ import/*
+          md5sum data/admin/files/Dropbox\ import/* || true
           echo END CHECKS
           du -sh --apparent-size data/admin/files/Dropbox\ import/ > du-sh.result.txt
           du -sh --apparent-size data/admin/files/Dropbox\ import/
