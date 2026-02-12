@@ -17,6 +17,7 @@ use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\PasswordConfirmationRequired;
 use OCP\AppFramework\Http\DataResponse;
 
+use OCP\Config\IUserConfig;
 use OCP\IL10N;
 use OCP\IRequest;
 
