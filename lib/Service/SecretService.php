@@ -17,7 +17,6 @@ class SecretService {
 	public function __construct(
 		private IAppConfig $appConfig,
 		private IUserConfig $userConfig,
-		private IUserManager $userManager,
 	) {
 	}
 
