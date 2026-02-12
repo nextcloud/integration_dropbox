@@ -95,7 +95,7 @@ jobs:
         run: |
           echo $DROPBOX_CONFIG > config.json
           php occ integration_dropbox:setup $OAUTH_CLIENT_ID $OAUTH_CLIENT_SECRET
-          php occ integration_dropbox:setup-user admin "$(cat config.json | jq '.config.account_id' | sed 's/["'\'']//g')" "$(cat config.json | jq '.config.refresh_token' | sed 's/["'\'']//g')"
+          php occ integration_dropbox:setup-user admin "$(cat config.json | jq '.config.account_id' | sed 's/["'\'']//g')" "$(cat config.json | jq '.config.refresh_token' | sed 's/["'\'']//g')" "$(cat config.json | jq '.config.token' | sed 's/["'\'']//g')"
           php occ integration_dropbox:start-import admin
           for run in {1..10}; do date; echo "run $run starting"; php cron.php; ls -lh data/admin/files/Dropbox\ import/ ; echo "run $run done"; done
           date

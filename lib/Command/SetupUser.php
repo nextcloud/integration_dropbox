@@ -33,6 +33,7 @@ class SetupUser extends Command {
 			->addArgument('userId', InputArgument::REQUIRED)
 			->addArgument('accountId', InputArgument::REQUIRED)
 			->addArgument('refresh_token', InputArgument::REQUIRED)
+			->addArgument('access_token', InputArgument::REQUIRED)
 			->setDescription('Setup the client credentials');
 	}
 
@@ -48,7 +49,7 @@ class SetupUser extends Command {
 		try {
 			$this->userConfig->setValueString($input->getArgument('userId'), Application::APP_ID, 'account_id', $input->getArgument('accountId'), lazy: true);
 			$this->secretService->setEncryptedUserValue($input->getArgument('userId'), 'refresh_token', $input->getArgument('refresh_token'));
-			$this->secretService->setEncryptedUserValue($input->getArgument('userId'), 'token', 'abc');
+			$this->secretService->setEncryptedUserValue($input->getArgument('userId'), 'token', $input->getArgument('access_token'));
 		} catch (\Exception $ex) {
 			$output->writeln('<error>Failed to setup client credentials</error>');
 			$output->writeln($ex->getMessage());
