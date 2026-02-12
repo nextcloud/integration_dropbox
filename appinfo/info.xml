@@ -8,7 +8,7 @@
     <name>Dropbox integration</name>
     <summary>Import Dropbox data in Nextcloud</summary>
     <description><![CDATA[Dropbox integration allows you to automatically import your Dropbox files into Nextcloud.]]></description>
-    <version>4.1.0</version>
+    <version>4.2.0-dev.0</version>
     <licence>agpl</licence>
     <author>Julien Veyssier</author>
     <namespace>Dropbox</namespace>
@@ -20,7 +20,7 @@
     <bugs>https://github.com/nextcloud/integration_dropbox/issues</bugs>
     <screenshot>https://github.com/nextcloud/integration_dropbox/raw/master/img/screenshot1.jpg</screenshot>
     <dependencies>
-        <nextcloud min-version="30" max-version="33"/>
+        <nextcloud min-version="32" max-version="33"/>
     </dependencies>
     <commands>
         <command>OCA\Dropbox\Command\StartImport</command>
