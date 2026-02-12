@@ -34,7 +34,7 @@ class Version040200Date20260211105515 extends SimpleMigrationStep {
 	public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options) {
 		// migrate api credentials in app config
 		foreach (['client_id', 'client_secret'] as $key) {
-			$value = $this->appConfig->getAppValueString(Application::APP_ID, $key);
+			$value = $this->appConfig->getAppValueString($key);
 			if ($value === '') {
 				continue;
 			}
