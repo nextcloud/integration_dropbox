@@ -38,6 +38,7 @@ class Version040200Date20260211105515 extends SimpleMigrationStep {
 			if ($value === '') {
 				continue;
 			}
+			$this->appConfig->deleteAppValue($key);
 			$this->appConfig->setAppValueString($key, $this->crypto->decrypt($value), lazy: true, sensitive: true);
 		}
 
@@ -45,6 +46,7 @@ class Version040200Date20260211105515 extends SimpleMigrationStep {
 		foreach ($this->appConfig->getAppKeys() as $key) {
 			if (!$this->appConfig->isLazy($key)) {
 				$value = $this->appConfig->getAppValueString($key);
+				$this->appConfig->deleteAppValue($key);
 				$this->appConfig->setAppValueString($key, $value, lazy: true);
 			}
 		}
@@ -58,6 +60,7 @@ class Version040200Date20260211105515 extends SimpleMigrationStep {
 						$flags = IUserConfig::FLAG_SENSITIVE;
 						$value = $this->crypto->decrypt($value);
 					}
+					$this->userConfig->deleteUserConfig($userId, Application::APP_ID, $key);
 					$this->userConfig->setValueString($userId, Application::APP_ID, $key, $value, lazy: true, flags: $flags);
 				}
 			}
