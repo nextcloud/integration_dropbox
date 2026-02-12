@@ -10,7 +10,6 @@ namespace OCA\Dropbox\Service;
 use OCA\Dropbox\AppInfo\Application;
 use OCP\AppFramework\Services\IAppConfig;
 use OCP\Config\IUserConfig;
-use OCP\IUserManager;
 use OCP\PreConditionNotMetException;
 
 class SecretService {

@@ -44,6 +44,9 @@ class Version040200Date20260211105515 extends SimpleMigrationStep {
 
 		// Make app config entries lazy
 		foreach ($this->appConfig->getAppKeys() as $key) {
+			if (in_array($key, ['installed_version','enabled','types'], true)) {
+				continue;
+			}
 			if (!$this->appConfig->isLazy($key)) {
 				$value = $this->appConfig->getAppValueString($key);
 				$this->appConfig->deleteAppValue($key);
