@@ -115,7 +115,7 @@ jobs:
           EOM
           diff result.expected.txt result.txt
           cat > du-sh.expected.txt <<- EOM
-          1.6G	data/admin/files/Dropbox import/
+          1.5G	data/admin/files/Dropbox import/
           EOM
           echo CHECK "du -shc --apparent-size data/admin/files/Dropbox\ import/*"
           du -shc --apparent-size data/admin/files/Dropbox\ import/*
