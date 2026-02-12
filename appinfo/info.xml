@@ -24,6 +24,8 @@
     </dependencies>
     <commands>
         <command>OCA\Dropbox\Command\StartImport</command>
+        <command>OCA\Dropbox\Command\Setup</command>
+        <command>OCA\Dropbox\Command\SetupUser</command>
     </commands>
     <settings>
         <admin>OCA\Dropbox\Settings\Admin</admin>
