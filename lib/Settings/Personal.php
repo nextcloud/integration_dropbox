@@ -11,8 +11,8 @@ use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\Service\SecretService;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Services\IInitialState;
+use OCP\Config\IUserConfig;
 use OCP\Files\IRootFolder;
-use OCP\IConfig;
 use OCP\IUserManager;
 
 use OCP\Settings\ISettings;
@@ -20,7 +20,7 @@ use OCP\Settings\ISettings;
 class Personal implements ISettings {
 
 	public function __construct(
-		private IConfig $config,
+		private IUserConfig $userConfig,
 		private IRootFolder $root,
 		private IUserManager $userManager,
 		private IInitialState $initialStateService,
@@ -33,10 +33,10 @@ class Personal implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm(): TemplateResponse {
-		$email = $this->config->getUserValue($this->userId, Application::APP_ID, 'email');
-		$accountId = $this->config->getUserValue($this->userId, Application::APP_ID, 'account_id');
-		$userName = $this->config->getUserValue($this->userId, Application::APP_ID, 'user_name');
-		$outputDir = $this->config->getUserValue($this->userId, Application::APP_ID, 'output_dir', '/Dropbox import');
+		$email = $this->userConfig->getValueString($this->userId, Application::APP_ID, 'email', lazy: true);
+		$accountId = $this->userConfig->getValueString($this->userId, Application::APP_ID, 'account_id', lazy: true);
+		$userName = $this->userConfig->getValueString($this->userId, Application::APP_ID, 'user_name', lazy: true);
+		$outputDir = $this->userConfig->getValueString($this->userId, Application::APP_ID, 'output_dir', '/Dropbox import', lazy: true);
 
 		// for OAuth
 		$clientID = $this->secretService->getEncryptedAppValue('client_id');

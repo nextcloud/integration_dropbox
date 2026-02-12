@@ -12,6 +12,7 @@ use Exception;
 use OCA\Dropbox\AppInfo\Application;
 use OCA\Dropbox\BackgroundJob\ImportDropboxJob;
 use OCP\BackgroundJob\IJobList;
+use OCP\Config\IUserConfig;
 use OCP\Files\Folder;
 use OCP\Files\ForbiddenException;
 use OCP\Files\IRootFolder;
@@ -19,7 +20,6 @@ use OCP\Files\IRootFolder;
 use OCP\Files\NotFoundException;
 
 use OCP\Files\NotPermittedException;
-use OCP\IConfig;
 use OCP\Lock\LockedException;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -33,7 +33,7 @@ class DropboxStorageAPIService {
 		private string $appName,
 		private LoggerInterface $logger,
 		private IRootFolder $root,
-		private IConfig $config,
+		private IUserConfig $userConfig,
 		private IJobList $jobList,
 		private UserScopeService $userScopeService,
 		private DropboxAPIService $dropboxApiService,
@@ -67,7 +67,7 @@ class DropboxStorageAPIService {
 	 * @return array{error?: string, targetPath?: string}
 	 */
 	public function startImportDropbox(string $userId): array {
-		$targetPath = $this->config->getUserValue($userId, Application::APP_ID, 'output_dir', '/Dropbox import');
+		$targetPath = $this->userConfig->getValueString($userId, Application::APP_ID, 'output_dir', '/Dropbox import', lazy: true);
 		$targetPath = $targetPath ?: '/Dropbox import';
 		// create root folder
 		$userFolder = $this->root->getUserFolder($userId);
@@ -79,9 +79,9 @@ class DropboxStorageAPIService {
 				return ['error' => 'Impossible to create Dropbox folder'];
 			}
 		}
-		$this->config->setUserValue($userId, Application::APP_ID, 'importing_dropbox', '1');
-		$this->config->setUserValue($userId, Application::APP_ID, 'nb_imported_files', '0');
-		$this->config->setUserValue($userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0');
+		$this->userConfig->setValueString($userId, Application::APP_ID, 'importing_dropbox', '1', lazy: true);
+		$this->userConfig->setValueString($userId, Application::APP_ID, 'nb_imported_files', '0', lazy: true);
+		$this->userConfig->setValueString($userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0', lazy: true);
 
 		$this->jobList->add(ImportDropboxJob::class, ['user_id' => $userId]);
 		return ['targetPath' => $targetPath];
@@ -98,29 +98,29 @@ class DropboxStorageAPIService {
 		$this->userScopeService->setUserScope($userId);
 		$this->userScopeService->setFilesystemScope($userId);
 
-		$importingDropbox = $this->config->getUserValue($userId, Application::APP_ID, 'importing_dropbox', '0') === '1';
+		$importingDropbox = $this->userConfig->getValueString($userId, Application::APP_ID, 'importing_dropbox', '0', lazy: true) === '1';
 		if (!$importingDropbox) {
 			return;
 		}
-		$jobRunning = $this->config->getUserValue($userId, Application::APP_ID, 'dropbox_import_running', '0') === '1';
+		$jobRunning = $this->userConfig->getValueString($userId, Application::APP_ID, 'dropbox_import_running', '0', lazy: true) === '1';
 		$nowTs = (new DateTime())->getTimestamp();
 		if ($jobRunning) {
-			$lastJobStart = $this->config->getUserValue($userId, Application::APP_ID, 'dropbox_import_job_last_start');
+			$lastJobStart = $this->userConfig->getValueString($userId, Application::APP_ID, 'dropbox_import_job_last_start', lazy: true);
 			if ($lastJobStart !== '' && ($nowTs - intval($lastJobStart) < Application::IMPORT_JOB_TIMEOUT)) {
 				// last job has started less than an hour ago => we consider it can still be running
 				return;
 			}
 		}
-		$this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', '');
-		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_running', '1');
-		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_job_last_start', strval($nowTs));
+		$this->userConfig->setValueString($userId, Application::APP_ID, 'last_import_error', '', lazy: true);
+		$this->userConfig->setValueString($userId, Application::APP_ID, 'dropbox_import_running', '1', lazy: true);
+		$this->userConfig->setValueString($userId, Application::APP_ID, 'dropbox_import_job_last_start', (string)$nowTs, lazy: true);
 
 		$accessToken = $this->secretService->getEncryptedUserValue($userId, 'token');
 		$refreshToken = $this->secretService->getEncryptedUserValue($userId, 'refresh_token');
 		$clientID = $this->secretService->getEncryptedAppValue('client_id');
 		$clientSecret = $this->secretService->getEncryptedAppValue('client_secret');
 		// import batch of files
-		$targetPath = $this->config->getUserValue($userId, Application::APP_ID, 'output_dir', '/Dropbox import');
+		$targetPath = $this->userConfig->getValueString($userId, Application::APP_ID, 'output_dir', '/Dropbox import', lazy: true);
 		$targetPath = $targetPath ?: '/Dropbox import';
 
 		try {
@@ -137,7 +137,7 @@ class DropboxStorageAPIService {
 		}
 
 		// import by batch of 500 Mo
-		$alreadyImported = $this->config->getUserValue($userId, Application::APP_ID, 'nb_imported_files', '0');
+		$alreadyImported = $this->userConfig->getValueString($userId, Application::APP_ID, 'nb_imported_files', '0', lazy: true);
 		$alreadyImported = (int)$alreadyImported;
 		try {
 			$result = $this->importFiles($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $targetPath, 500000000, $alreadyImported);
@@ -147,23 +147,23 @@ class DropboxStorageAPIService {
 			];
 		}
 		if (isset($result['finished']) && $result['finished']) {
-			$this->config->setUserValue($userId, Application::APP_ID, 'importing_dropbox', '0');
-			$this->config->setUserValue($userId, Application::APP_ID, 'nb_imported_files', '0');
-			$this->config->setUserValue($userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0');
+			$this->userConfig->setValueString($userId, Application::APP_ID, 'importing_dropbox', '0', lazy: true);
+			$this->userConfig->setValueString($userId, Application::APP_ID, 'nb_imported_files', '0', lazy: true);
+			$this->userConfig->setValueString($userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0', lazy: true);
 			$this->dropboxApiService->sendNCNotification($userId, 'import_dropbox_finished', [
 				'nbImported' => $result['totalSeen'],
 				'targetPath' => $targetPath,
 			]);
 		}
 		if (isset($result['error'])) {
-			$this->config->setUserValue($userId, Application::APP_ID, 'last_import_error', $result['error']);
+			$this->userConfig->setValueString($userId, Application::APP_ID, 'last_import_error', $result['error'], lazy: true);
 		}
 		if ((!isset($result['finished']) || !$result['finished']) && !isset($result['error'])) {
 			$ts = (string)(new DateTime())->getTimestamp();
-			$this->config->setUserValue($userId, Application::APP_ID, 'last_dropbox_import_timestamp', $ts);
+			$this->userConfig->setValueString($userId, Application::APP_ID, 'last_dropbox_import_timestamp', $ts, lazy: true);
 			$this->jobList->add(ImportDropboxJob::class, ['user_id' => $userId]);
 		}
-		$this->config->setUserValue($userId, Application::APP_ID, 'dropbox_import_running', '0');
+		$this->userConfig->setValueString($userId, Application::APP_ID, 'dropbox_import_running', '0', lazy: true);
 	}
 
 	/**
@@ -219,7 +219,7 @@ class DropboxStorageAPIService {
 						$size = $this->getFile($accessToken, $refreshToken, $clientID, $clientSecret, $userId, $entry, $folder);
 						if (!is_null($size)) {
 							$nbDownloaded++;
-							$this->config->setUserValue($userId, Application::APP_ID, 'nb_imported_files', (string)($alreadyImported + $nbDownloaded));
+							$this->userConfig->setValueString($userId, Application::APP_ID, 'nb_imported_files', (string)($alreadyImported + $nbDownloaded), lazy: true);
 							$downloadedSize += $size;
 							if ($maxDownloadSize && $downloadedSize > $maxDownloadSize) {
 								return [

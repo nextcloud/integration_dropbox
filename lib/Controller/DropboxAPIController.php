@@ -15,7 +15,7 @@ use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\DataResponse;
 
-use OCP\IConfig;
+use OCP\Config\IUserConfig;
 use OCP\IRequest;
 
 class DropboxAPIController extends Controller {
@@ -28,7 +28,7 @@ class DropboxAPIController extends Controller {
 	public function __construct(
 		string $appName,
 		IRequest $request,
-		private IConfig $config,
+		private IUserConfig $userConfig,
 		private DropboxStorageAPIService $dropboxStorageApiService,
 		private ?string $userId,
 		private SecretService $secretService,
@@ -90,11 +90,11 @@ class DropboxAPIController extends Controller {
 			return new DataResponse([], Http::STATUS_BAD_REQUEST);
 		}
 		return new DataResponse([
-			'last_import_error' => $this->config->getUserValue($this->userId, Application::APP_ID, 'last_import_error', '') !== '',
-			'dropbox_import_running' => $this->config->getUserValue($this->userId, Application::APP_ID, 'dropbox_import_running') === '1',
-			'importing_dropbox' => $this->config->getUserValue($this->userId, Application::APP_ID, 'importing_dropbox') === '1',
-			'last_dropbox_import_timestamp' => (int)$this->config->getUserValue($this->userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0'),
-			'nb_imported_files' => (int)$this->config->getUserValue($this->userId, Application::APP_ID, 'nb_imported_files', '0'),
+			'last_import_error' => $this->userConfig->getValueString($this->userId, Application::APP_ID, 'last_import_error', '', lazy: true) !== '',
+			'dropbox_import_running' => $this->userConfig->getValueString($this->userId, Application::APP_ID, 'dropbox_import_running', lazy: true) === '1',
+			'importing_dropbox' => $this->userConfig->getValueString($this->userId, Application::APP_ID, 'importing_dropbox', lazy: true) === '1',
+			'last_dropbox_import_timestamp' => (int)$this->userConfig->getValueString($this->userId, Application::APP_ID, 'last_dropbox_import_timestamp', '0', lazy: true),
+			'nb_imported_files' => (int)$this->userConfig->getValueString($this->userId, Application::APP_ID, 'nb_imported_files', '0', lazy: true),
 		]);
 	}
 }

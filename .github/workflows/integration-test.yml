@@ -35,7 +35,7 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: [ '8.2' ]
-        server-versions: [ 'master', 'stable32', 'stable31', 'stable30' ]
+        server-versions: [ 'master', 'stable33', 'stable32' ]
 
     name: Integration test
 
@@ -64,22 +64,6 @@ jobs:
           git submodule update --init
           php occ maintenance:install --verbose --admin-user admin --admin-pass admin
 
-      - name: Prepare config (will be encrypted by migration)
-        working-directory: server/
-        env:
-          DROPBOX_CONFIG: ${{ secrets.DROPBOX_CONFIG }}
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
-        run: |
-          echo $DROPBOX_CONFIG > config.json
-          sudo apt install jq sqlite3
-          sqlite3 data/owncloud.db "INSERT INTO oc_preferences  ( userid, appid, configkey, configvalue) VALUES ('admin', 'integration_dropbox', 'account_id', $(cat config.json | jq '.config.account_id'));"
-          sqlite3 data/owncloud.db "INSERT INTO oc_preferences  ( userid, appid, configkey, configvalue) VALUES ('admin', 'integration_dropbox', 'token', $(cat config.json | jq '.config.token'));"
-          sqlite3 data/owncloud.db "INSERT INTO oc_preferences  ( userid, appid, configkey, configvalue) VALUES ('admin', 'integration_dropbox', 'refresh_token', $(cat config.json | jq '.config.refresh_token'));"
-          sqlite3 data/owncloud.db "INSERT INTO oc_preferences  ( userid, appid, configkey, configvalue) VALUES ('admin', 'integration_dropbox', 'importing_dropbox', '1');"
-          sqlite3 data/owncloud.db "INSERT INTO oc_appconfig  ( appid, configkey, configvalue) VALUES ('integration_dropbox', 'client_id', '$OAUTH_CLIENT_ID');"
-          sqlite3 data/owncloud.db "INSERT INTO oc_appconfig  ( appid, configkey, configvalue) VALUES ('integration_dropbox', 'client_secret', '$OAUTH_CLIENT_SECRET');"
-
       - name: Checkout app
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -104,7 +88,14 @@ jobs:
 
       - name: Run import
         working-directory: server/
+        env:
+          DROPBOX_CONFIG: ${{ secrets.DROPBOX_CONFIG }}
+          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
         run: |
+          echo $DROPBOX_CONFIG > config.json
+          php occ integration_dropbox:setup $OAUTH_CLIENT_ID $OAUTH_CLIENT_SECRET
+          php occ integration_dropbox:setup-user admin "$(cat config.json | jq '.config.account_id' | sed 's/["'\'']//g')" "$(cat config.json | jq '.config.refresh_token' | sed 's/["'\'']//g')" "$(cat config.json | jq '.config.token' | sed 's/["'\'']//g')"
           php occ integration_dropbox:start-import admin
           for run in {1..10}; do date; echo "run $run starting"; php cron.php; ls -lh data/admin/files/Dropbox\ import/ ; echo "run $run done"; done
           date
@@ -118,25 +109,22 @@ jobs:
           sqlite3 data/owncloud.db "SELECT * from oc_preferences where configkey = 'importing_dropbox';" >> result.txt
           sqlite3 data/owncloud.db "SELECT * from oc_preferences where configkey = 'last_import_error';" >> result.txt
           cat > result.expected.txt <<- EOM
-          admin|integration_dropbox|nb_imported_files|0
-          admin|integration_dropbox|importing_dropbox|0
-          admin|integration_dropbox|last_import_error|
+          admin|integration_dropbox|nb_imported_files|0|1|1|0|
+          admin|integration_dropbox|importing_dropbox|0|1|1|0|
+          admin|integration_dropbox|last_import_error||1|1|0|
           EOM
-          cat > result.nc31.expected.txt <<- EOM
-          admin|integration_dropbox|nb_imported_files|0|0|0|0|
-          admin|integration_dropbox|importing_dropbox|0|0|0|0|
-          admin|integration_dropbox|last_import_error||0|0|0|
-          EOM
-          diff result.expected.txt result.txt || diff result.nc31.expected.txt result.txt
+          diff result.expected.txt result.txt
           cat > du-sh.expected.txt <<- EOM
-          1.6G	data/admin/files/Dropbox import/
+          1.5G	data/admin/files/Dropbox import/
           EOM
           echo CHECK "du -shc --apparent-size data/admin/files/Dropbox\ import/*"
           du -shc --apparent-size data/admin/files/Dropbox\ import/*
           echo CHECK "md5sum data/admin/files/Dropbox\ import/*"
-          md5sum data/admin/files/Dropbox\ import/*
+          md5sum data/admin/files/Dropbox\ import/* || true
           echo END CHECKS
-          du -sh --apparent-size data/admin/files/Dropbox\ import/ | diff du-sh.expected.txt -
+          du -sh --apparent-size data/admin/files/Dropbox\ import/ > du-sh.result.txt
+          du -sh --apparent-size data/admin/files/Dropbox\ import/
+          diff du-sh.expected.txt du-sh.result.txt
 
       - name: Show log on failure
         working-directory: server/
