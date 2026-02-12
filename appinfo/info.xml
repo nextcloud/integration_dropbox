@@ -20,7 +20,7 @@
     <bugs>https://github.com/nextcloud/integration_dropbox/issues</bugs>
     <screenshot>https://github.com/nextcloud/integration_dropbox/raw/master/img/screenshot1.jpg</screenshot>
     <dependencies>
-        <nextcloud min-version="32" max-version="33"/>
+        <nextcloud min-version="32" max-version="34"/>
     </dependencies>
     <commands>
         <command>OCA\Dropbox\Command\StartImport</command>
