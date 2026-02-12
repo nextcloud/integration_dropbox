@@ -30,7 +30,7 @@ class SecretService {
 	 */
 	public function setEncryptedUserValue(string $userId, string $key, string $value): void {
 		if ($value === '') {
-			$this->userConfig->setValueString($userId, Application::APP_ID, $key, '');
+			$this->userConfig->setValueString($userId, Application::APP_ID, $key, '', lazy: true, flags: IUserConfig::FLAG_SENSITIVE);
 			return;
 		}
 		$this->userConfig->setValueString($userId, Application::APP_ID, $key, $value, lazy: true, flags: IUserConfig::FLAG_SENSITIVE);
@@ -43,7 +43,7 @@ class SecretService {
 	 * @throws \Exception
 	 */
 	public function getEncryptedUserValue(string $userId, string $key): string {
-		return $this->userConfig->getValueString($userId, Application::APP_ID, $key);
+		return $this->userConfig->getValueString($userId, Application::APP_ID, $key, lazy: true);
 	}
 
 	/**
@@ -61,6 +61,6 @@ class SecretService {
 	 * @throws \Exception
 	 */
 	public function getEncryptedAppValue(string $key): string {
-		return $this->appConfig->getAppValueString($key);
+		return $this->appConfig->getAppValueString($key, lazy: true);
 	}
 }
