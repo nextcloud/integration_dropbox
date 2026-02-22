@@ -1,0 +1,9 @@
+OC.L10N.register(
+    "integration_dropbox",
+    {
+    "Bad HTTP method" : "Буруу HTTP арга",
+    "Bad credentials" : "Буруу нэвтрэх мэдээлэл",
+    "App key" : "Апп түлхүүр",
+    "App secret" : "Апп нууц"
+},
+"nplurals=2; plural=(n != 1);");
