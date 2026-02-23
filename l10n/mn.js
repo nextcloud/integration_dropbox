@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Bad HTTP method" : "Буруу HTTP арга",
     "Bad credentials" : "Буруу нэвтрэх мэдээлэл",
+    "Connected accounts" : "Холбогдсон бүртгэлүүд",
     "App key" : "Апп түлхүүр",
     "App secret" : "Апп нууц"
 },
