@@ -8,6 +8,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0] - 2026-04-08
+
+### Breaking changes
+* chore: Drop nc < 32
+
+### New
+* Add support for nc 34
+* feat: migrate to vue 3 and nc/vue 9
+
+### Fixed
+* fix(Migration): Delete config keys before setting as lazy
+* fix: Fix SecretService
+* fix: Make all config keys lazy
+* fix: improve settings
+* fix(l10n): Update translations from Transifex
+
+
 ## [4.1.0] - 2025-11-12
 
 ### New
