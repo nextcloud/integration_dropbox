@@ -13,7 +13,7 @@ OC.L10N.register(
     "Data migration" : "Andmete ümbertõstmine",
     "Dropbox integration" : "Dropboxi lõiming",
     "Import Dropbox data in Nextcloud" : "Impordi Dropboxi andmeid Nextcloudi",
-    "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "Dropboxi lõiming võimaldab sul automaatselt importida Dropboxi failid Nextcloudi.",
+    "Dropbox integration allows you to automatically import your Dropbox files into Nextcloud." : "Dropboxi lõiming võimaldab sul automaatselt importida Dropboxi faile Nextcloudi.",
     "Dropbox admin options saved" : "Dropboxi haldusseadistused on salvestatud",
     "Failed to save Dropbox admin options" : "Dropboxi haldusseadistuste salvestamine ei õnnestunud",
     "If you want your Nextcloud users to authenticate to Dropbox using your Dropbox OAuth app, create one in Dropbox." : "Kui sa tahad, et sinu Nextcloudi serveri kasutajad saaksid Dropboxis kasutada Dropboxi OAuthi rakendust, siis palun loo Dropboxis selline.",

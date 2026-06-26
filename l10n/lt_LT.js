@@ -25,6 +25,7 @@ OC.L10N.register(
     "Import directory" : "Importuoti katalogą",
     "Dropbox storage size: {formSize}" : "„Dropbox“ saugyklos dydis: {formSize}",
     "Your Dropbox storage is bigger than your remaining space left ({formSpace})" : "Jūsų „Dropbox“ saugykla yra didesnė, nei jums yra likę laisvos vietos ({formSpace})",
+    "Import job is currently running" : "Šiuo metu vykdoma importavimo užduotis",
     "Your Dropbox storage is empty" : "Jūsų „Dropbox“ saugykla yra tuščia",
     "_{amount} file imported_::_{amount} files imported_" : ["Importuotas {amount} failas","Importuoti {amount} failai","Importuota {amount} failų","Importuotas {amount} failas"]
 },
