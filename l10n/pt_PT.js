@@ -6,6 +6,8 @@ OC.L10N.register(
     "Bad HTTP method" : "Método HTTP incorreto",
     "Bad credentials" : "Credenciais inválidas",
     "Token is not valid anymore. Impossible to refresh it." : "Token deixou de ser válido. Impossível atualizá-lo.",
+    "OAuth access token refused" : "Token de acesso OAuth recusado",
+    "Connected accounts" : "Contas conectadas",
     "App key" : "Chave da App",
     "App secret" : "Segredo da app"
 },
