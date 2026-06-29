@@ -4,9 +4,14 @@
     "Bad HTTP method" : "Método HTTP incorreto",
     "Bad credentials" : "Credenciais inválidas",
     "Token is not valid anymore. Impossible to refresh it." : "Token deixou de ser válido. Impossível atualizá-lo.",
+    "Could not access file due to failed authentication." : "Não foi possível acessar o arquivo devido a falha na autenticação.",
     "OAuth access token refused" : "Token de acesso OAuth recusado",
     "Connected accounts" : "Contas conectadas",
+    "Dropbox admin options saved" : "Opções administrativas do Dropbox salvas",
     "App key" : "Chave da App",
-    "App secret" : "Segredo da app"
+    "App secret" : "Segredo da app",
+    "Dropbox import process will begin soon" : "O processo de importação do Dropbox começará em breve",
+    "Failed to get Dropbox storage information" : "Falha ao coletar informação de armazenamento Dropbox",
+    "Starting importing files in {targetPath} directory" : "Iniciando a importação de arquivos na pasta {targetPath}"
 },"pluralForm" :"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }
