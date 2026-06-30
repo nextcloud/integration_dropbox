@@ -9,11 +9,21 @@ OC.L10N.register(
     "Could not access file due to failed authentication." : "Não foi possível acessar o arquivo devido a falha na autenticação.",
     "OAuth access token refused" : "Token de acesso OAuth recusado",
     "Connected accounts" : "Contas conectadas",
+    "Import Dropbox data in Nextcloud" : "Importe dados do Dropbox para o Nextcloud",
     "Dropbox admin options saved" : "Opções administrativas do Dropbox salvas",
+    "If you want your Nextcloud users to authenticate to Dropbox using your Dropbox OAuth app, create one in Dropbox." : "Se você deseja que seus usuários do Nextcloud se autentiquem no Dropbox usando seu aplicativo Dropbox OAuth, crie um no Dropbox.",
+    "No need to add any redirect URI." : "Não há necessidade de adicionar nenhum URI de redirecionamento.",
     "App key" : "Chave da App",
     "App secret" : "Segredo da app",
+    "Your Dropbox application secret" : "Seu segredo do aplicativo do Dropbox",
     "Dropbox import process will begin soon" : "O processo de importação do Dropbox começará em breve",
+    "Successfully connected to Dropbox!" : "Conectado ao Dropbox com sucesso!",
     "Failed to get Dropbox storage information" : "Falha ao coletar informação de armazenamento Dropbox",
-    "Starting importing files in {targetPath} directory" : "Iniciando a importação de arquivos na pasta {targetPath}"
+    "Starting importing files in {targetPath} directory" : "Iniciando a importação de arquivos na pasta {targetPath}",
+    "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Se estiver com problemas de autenticação, solicite ao seu administrador Nextcloud para validar as configurações administrativas do Dropbox",
+    "Connected as {user} ({email})" : "Conectado como {user} ({email})",
+    "Import directory" : "Diretório de importação",
+    "Your Dropbox storage is bigger than your remaining space left ({formSpace})" : "Seu armazenamento Dropbox é maior do que você tem disponível ({formSpace})",
+    "Your Dropbox storage is empty" : "Seu armazenamento Dropbox está vazio"
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
