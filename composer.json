@@ -1,6 +1,6 @@
 {
 	"require": {
-		"php": ">=8.1",
+		"php": ">=8.3",
 		"bamarni/composer-bin-plugin": "^1.8"
 	},
 	"scripts": {
@@ -20,7 +20,7 @@
 	},
 	"config": {
 		"platform": {
-			"php": "8.1"
+			"php": "8.3"
 		},
 		"allow-plugins": {
 			"bamarni/composer-bin-plugin": true

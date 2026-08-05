@@ -8,6 +8,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [5.0.0] - 2026-08-04
+
+### Breaking changes
+* chore: Drop nc < 35
+
+### New
+* Add support for nc 35
+
+### Fixed
+- Update dependencies
+- Update translations from Transifex
+
 ## [5.0.0] - 2026-04-08
 
 ### Breaking changes
