@@ -312,7 +312,9 @@ class DropboxStorageAPIService {
 			}
 			return null;
 		}
-		fclose($resource);
+		if (is_resource($resource)) {
+			fclose($resource);
+		}
 		if (isset($fileItem['server_modified'])) {
 			$d = new DateTime($fileItem['server_modified']);
 			$ts = $d->getTimestamp();

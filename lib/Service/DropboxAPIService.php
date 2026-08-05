@@ -159,7 +159,7 @@ class DropboxAPIService {
 					'User-Agent' => 'Nextcloud Dropbox integration',
 					'Dropbox-API-Arg' => json_encode(['path' => $fileId]),
 				],
-				'stream' => true,
+				'sink' => $resource,
 			];
 
 			$response = $this->client->post($url, $options);
@@ -168,25 +168,13 @@ class DropboxAPIService {
 			if ($respCode >= 400) {
 				return ['error' => $this->l10n->t('Bad credentials')];
 			}
-
-			$body = $response->getBody();
-			if (is_resource($body)) {
-				while (!feof($body)) {
-					// write ~5 MB chunks
-					$chunk = fread($body, 5000000);
-					fwrite($resource, $chunk);
-				}
-			} else {
-				fwrite($resource, $body);
-			}
-
 			return ['success' => true];
 		} catch (ServerException|ClientException $e) {
 			$response = $e->getResponse();
 			if ($response->getStatusCode() === 401) {
 				if ($try > 3) {
 					// impossible to refresh the token
-					$this->logger->info('Received the following response upon trying to download a file: ' . $response->getBody()->getContents());
+					$this->logger->info('Could not access file due to failed authentication.');
 					return ['error' => $this->l10n->t('Could not access file due to failed authentication.')];
 				}
 				$this->logger->info('Trying to REFRESH the access token', ['app' => $this->appName]);
