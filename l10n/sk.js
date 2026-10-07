@@ -52,6 +52,6 @@ OC.L10N.register(
     "An error occured during the import: {error}" : "Pri importovaní nastala chyba: {error}",
     "Cancel Dropbox files import" : "Zrušit importovanie súborov z Dropboxu",
     "Your Dropbox storage is empty" : "Vaše úložisko Dropbox je prázdne",
-    "_{amount} file imported_::_{amount} files imported_" : ["{amount} importovaný súbor","{amount} importované súbory","{amount} importovaných súborov","{amount} importovaných súborov"]
+    "_{amount} file imported_::_{amount} files imported_" : ["{amount} importovaný súbor","{amount} importovaných súborov","{amount} importovaných súborov","{amount} importovaných súborov"]
 },
 "nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);");
