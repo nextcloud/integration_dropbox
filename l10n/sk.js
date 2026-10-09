@@ -38,7 +38,7 @@ OC.L10N.register(
     "Dropbox data migration" : "Migrácia dáť Dropbox",
     "Your administrator has not yet configured this integration." : "Váš administrátor ešte nenastavil túto integráciu.",
     "If you have trouble authenticating, ask your Nextcloud administrator to check Dropbox admin settings." : "Ak máte problémy s autentifikáciou, požiadajte svojho správcu Nextcloud, aby skontroloval nastavenia administrátora aplikácie Dropbox.",
-    "Connect to Dropbox to get an access code" : "Pripojiť k Dropboxu pre získanie prístupového Tokenu",
+    "Connect to Dropbox to get an access code" : "Pripojiť k Dropboxu pre získanie prístupového kódu",
     "Dropbox access code" : "Prístupový kód Dropbox",
     "Access code" : "Prístupový kód",
     "Connected as {user} ({email})" : "Pripojený ako {user} ({email})",
