@@ -6,6 +6,7 @@ OC.L10N.register(
     "Bad credentials" : "Credențiale greșite",
     "OAuth access token refused" : "Token-ul OAuth a fost refuzat",
     "Connected accounts" : "Conturile conectate",
+    "Data migration" : "Migrarea datelor",
     "App key" : "Cheie aplicație",
     "App secret" : "Secret aplicație"
 },
